@@ -1,5 +1,7 @@
 {
-  "name": "UI",
-  "integrations": {},
+  "name": "test",
+  "integrations": {
+    "capacitor": {}
+  },
   "type": "angular"
 }
