@@ -12,7 +12,7 @@ const routes: Routes = [
         children: [
           {
             path: '',
-            loadChildren: () => import('../pages/profil/profil.module').then(m => m.ProfilPageModule)
+            loadChildren: () => import('../pages/tabs/profil/profil.module').then(m => m.ProfilPageModule)
           }
         ]
       },
@@ -21,7 +21,7 @@ const routes: Routes = [
         children: [
           {
             path: '',
-            loadChildren: () => import('../pages/quetes/quetes.module').then(m => m.QuetesPageModule)
+            loadChildren: () => import('../pages/tabs/quetes/quetes.module').then(m => m.QuetesPageModule)
           }
         ]
       },
@@ -30,10 +30,19 @@ const routes: Routes = [
         children: [
           {
             path: '',
-            loadChildren: () => import('../pages/parametres/parametres.module').then(m => m.ParametresPageModule)
+            loadChildren: () => import('../pages/tabs/parametres/parametres.module').then(m => m.ParametresPageModule)
           }
         ]
-      }
+      },
+      {
+        path: 'friends',
+        children: [
+          {
+            path: '',
+            loadChildren: () => import('../pages/tabs/friends/friends.module').then(m => m.FriendsPageModule)
+          }
+        ]
+      },
     ]
   }
 ];
