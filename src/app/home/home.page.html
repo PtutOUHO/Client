@@ -1,3 +1,4 @@
+<ion-content>
 <ion-tabs>
   <ion-tab-bar slot="bottom">
     <ion-tab-button tab="profil">
@@ -16,5 +17,10 @@
       <ion-icon name="accessibility-outline"></ion-icon>
       <ion-label>Amis</ion-label>
     </ion-tab-button>
+    <ion-tab-button (click)="authService.SignOut()">
+      <ion-icon name="power"></ion-icon>
+      <ion-label>Déconnexion</ion-label>
+    </ion-tab-button>
   </ion-tab-bar>
 </ion-tabs>
+</ion-content>
