@@ -1,5 +1,5 @@
 import { Component } from '@angular/core';
-import {AuthenticationService} from '../shared/authentication-service';
+import { Router } from '@angular/router';
 
 @Component({
   selector: 'app-home',
@@ -7,7 +7,12 @@ import {AuthenticationService} from '../shared/authentication-service';
   styleUrls: ['home.page.scss'],
 })
 export class HomePage {
+  public title: string = "";
 
-  constructor(public authService: AuthenticationService) {}
+  
+  constructor(private router: Router) {}
 
+  updateTitlePage(value: string): void {
+    this.title = value;
+  }
 }
