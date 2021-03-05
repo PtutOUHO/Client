@@ -35,7 +35,7 @@ const routes: Routes = [
         ]
       },
       {
-        path: 'parametres',
+        path: 'options',
         children: [
           {
             path: '',

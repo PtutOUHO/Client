@@ -24,7 +24,7 @@ const routes: Routes = [
     loadChildren: () => import('./pages/tabs/quetes/quetes.module').then( m => m.QuetesPageModule)
   },
   {
-    path: 'home/parametres',
+    path: 'home/options',
     loadChildren: () => import('./pages/tabs/parametres/parametres.module').then( m => m.ParametresPageModule)
   },
   {

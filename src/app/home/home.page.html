@@ -1,11 +1,19 @@
 <ion-header>
   <ion-toolbar class="header">
-    <div class="content-image">
-      <ion-img  (click)="updateTitlePage('accueil')" [routerLink]="['/home/accueil']" expand="full" class ="logo" src="assets/icon/logo.png"></ion-img>    
+    <div id="title">
+      <center>
+        <ion-title>{{title}}</ion-title>
+      </center>
     </div>
-    <ion-title>{{title}}</ion-title>
+    <div class="content-image">
+      <center>
+        <ion-img (click)="updateTitlePage('accueil')" [routerLink]="['/home/accueil']" expand="full" class="logo"
+          src="assets/icon/logo.png"></ion-img>
+      </center>
+    </div>
   </ion-toolbar>
 </ion-header>
+
 <ion-content>
   <ion-tabs>
     <ion-tab-bar slot="bottom">
@@ -17,9 +25,9 @@
         <ion-icon name="tennisball"></ion-icon>
         <ion-label>Quetes</ion-label>
       </ion-tab-button>
-      <ion-tab-button (click)="updateTitlePage('parametres')" tab="parametres">
+      <ion-tab-button (click)="updateTitlePage('options')" tab="options">
         <ion-icon name="settings"></ion-icon>
-        <ion-label>Parametres</ion-label>
+        <ion-label>Options</ion-label>
       </ion-tab-button>
       <ion-tab-button (click)="updateTitlePage('friends')" tab="friends">
         <ion-icon name="accessibility-outline"></ion-icon>
