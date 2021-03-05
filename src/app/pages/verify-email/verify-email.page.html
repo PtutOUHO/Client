@@ -1,0 +1,30 @@
+<ion-header>
+  <ion-toolbar>
+    <ion-buttons slot="start">
+      <ion-back-button></ion-back-button>
+    </ion-buttons>
+    <ion-title>Verification d'email</ion-title>
+  </ion-toolbar>
+</ion-header>
+
+<ion-content>
+  <ion-grid>
+    <ion-row>
+      <p>
+        Vérifiez votre boite mail et cliquez sur le lien pour verifier votre adresse email.
+      </p>
+      <br>
+      <b>
+        Pensez à vérifier vos spams
+      </b>
+      <ion-col>
+        <ion-button
+                type="submit"
+                (click)="authService.SendVerificationMail()"
+                expand="block">
+          Renvoyez l'email
+        </ion-button>
+      </ion-col>
+    </ion-row>
+  </ion-grid>
+</ion-content>

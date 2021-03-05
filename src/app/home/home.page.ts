@@ -7,17 +7,12 @@ import { Router } from '@angular/router';
   styleUrls: ['home.page.scss'],
 })
 export class HomePage {
+  public title: string = "";
+
   
-  public href: string = "";
-  page: string = 'profil';
+  constructor(private router: Router) {}
 
-  constructor(private router: Router) {
-    console.log("coucou");
+  updateTitlePage(value: string): void {
+    this.title = value;
   }
-
-  ngOnInit() {
-    this.href = this.router.url;
-    console.log(this.router.url);
-}
-
 }
