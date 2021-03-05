@@ -8,23 +8,27 @@ const routes: Routes = [
   },
   {
     path: '',
-    redirectTo: 'login',
+    redirectTo: 'home/accueil',
     pathMatch: 'full'
   },
   {
-    path: 'profil',
+    path: 'home/accueil',
+    loadChildren: () => import('./pages/tabs/accueil/accueil.module').then( m => m.AccueilPageModule)
+  },
+  {
+    path: 'home/profil',
     loadChildren: () => import('./pages/tabs/profil/profil.module').then( m => m.ProfilPageModule)
   },
   {
-    path: 'quetes',
+    path: 'home/quetes',
     loadChildren: () => import('./pages/tabs/quetes/quetes.module').then( m => m.QuetesPageModule)
   },
   {
-    path: 'parametres',
+    path: 'home/parametres',
     loadChildren: () => import('./pages/tabs/parametres/parametres.module').then( m => m.ParametresPageModule)
   },
   {
-    path: 'friends',
+    path: 'home/friends',
     loadChildren: () => import('./pages/tabs/friends/friends.module').then( m => m.FriendsPageModule)
   },
   {
@@ -39,8 +43,13 @@ const routes: Routes = [
     path: 'login',
     loadChildren: () => import('./pages/login/login.module').then( m => m.LoginPageModule)
   },
-
-
+  {
+    path: '404',
+    loadChildren: () => import('./error-page/error-page.module').then( m => m.ErrorPagePageModule)
+  },
+  //A PLACER A LA FIN
+  {path: '**', redirectTo: '/404'},
+  //A PLACER A LA FIN
 
 ];
 

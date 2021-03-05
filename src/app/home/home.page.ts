@@ -16,6 +16,8 @@ export class HomePage implements OnInit {
 ) {}
 
   ngOnInit() {
+    var pages = this.router.url.split('/');
+    this.title = pages[pages.length - 1];
     if (!this.authService.isLoggedIn()) {
       this.router.navigate(['login']);
     }

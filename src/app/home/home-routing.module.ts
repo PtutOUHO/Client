@@ -8,6 +8,15 @@ const routes: Routes = [
     component: HomePage,
     children: [
       {
+        path: 'accueil',
+        children: [
+          {
+            path: '',
+            loadChildren: () => import('../pages/tabs/accueil/accueil.module').then(m => m.AccueilPageModule)
+          }
+        ]
+      },
+      {
         path: 'profil',
         children: [
           {

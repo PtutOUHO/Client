@@ -1,3 +1,11 @@
+<ion-header>
+  <ion-toolbar class="header">
+    <div class="content-image">
+      <ion-img  (click)="updateTitlePage('accueil')" [routerLink]="['/home/accueil']" expand="full" class ="logo" src="assets/icon/logo.png"></ion-img>    
+    </div>
+    <ion-title>{{title}}</ion-title>
+  </ion-toolbar>
+</ion-header>
 <ion-content>
   <ion-tabs>
     <ion-tab-bar slot="bottom">
@@ -16,10 +24,6 @@
       <ion-tab-button (click)="updateTitlePage('friends')" tab="friends">
         <ion-icon name="accessibility-outline"></ion-icon>
         <ion-label>Amis</ion-label>
-      </ion-tab-button>
-      <ion-tab-button (click)="authService.SignOut()">
-        <ion-icon name="power"></ion-icon>
-        <ion-label>Déconnexion</ion-label>
       </ion-tab-button>
     </ion-tab-bar>
   </ion-tabs>
