@@ -1,3 +1,11 @@
 <ion-content>
-
+    <ion-row class="deco">
+        <ion-col>
+            <ion-button id="logout-button"
+                        type="submit"
+                        color="danger"
+                        (click)="authService.SignOut()">Déconnexion
+            </ion-button>
+        </ion-col>
+    </ion-row>
 </ion-content>
