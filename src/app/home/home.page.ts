@@ -22,6 +22,10 @@ export class HomePage implements OnInit {
     if (!this.authService.isLoggedIn()) {
       this.router.navigate(["login"]);
     }
+    else if (this.title == "home") {
+      this.router.navigate(["home/accueil"]);
+      this.title = "Accueil";
+    }
   }
 
   updateTitlePage(): void {

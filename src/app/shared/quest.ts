@@ -8,6 +8,6 @@ export interface Quest {
     quest_nbRp: number;
     quest_admin: string;
     quest_pseudo: string;
-    distance: number;
-    time: number;
+    quest_distance: number;
+    quest_time: number;
 }

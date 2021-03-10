@@ -20,12 +20,17 @@
 
     <ion-item lines="full">
       <ion-label class="text-form" position="floating">Nom : </ion-label>
-      <ion-input type="text" #email required></ion-input>
+      <ion-input type="text" #lastname required></ion-input>
     </ion-item>
   
     <ion-item lines="full">
       <ion-label class="text-form" position="floating">Prenom : </ion-label>
-      <ion-input type="text" #email required></ion-input>
+      <ion-input type="text" #firstname required></ion-input>
+    </ion-item>
+  
+    <ion-item lines="full">
+      <ion-label class="text-form" position="floating">Pseudo : </ion-label>
+      <ion-input type="text" #pseudo required></ion-input>
     </ion-item>
 
     <ion-item lines="full">
@@ -40,7 +45,7 @@
 
     <ion-item lines="full">
       <ion-label class="text-form" position="floating">Date de naissance : </ion-label>
-      <ion-input type="datetime-picker" required></ion-input>
+      <ion-input type="datetime-picker" #birthdate required></ion-input>
   </ion-item>
 
     <ion-row>
