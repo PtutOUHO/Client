@@ -1,28 +1,61 @@
 <ion-header>
-  <ion-toolbar>
-    <ion-buttons slot="start">
-      <ion-back-button></ion-back-button>
-    </ion-buttons>
-    <ion-title>S'inscrire</ion-title>
+  <ion-toolbar class="header">
+    <div class="content-image">
+      <center>
+        <ion-img expand="full" class="logo"
+          src="assets/icon/logo.png"></ion-img>
+      </center>
+    </div>
   </ion-toolbar>
+</ion-header>
+
+<ion-header>
+  <ion-title class="subtitle">
+    Inscriptin
+  </ion-title>
 </ion-header>
 
 <ion-content>
   <form>
+
     <ion-item lines="full">
-      <ion-label position="floating">Email</ion-label>
+      <ion-label class="text-form" position="floating">Nom : </ion-label>
+      <ion-input type="text" #email required></ion-input>
+    </ion-item>
+  
+    <ion-item lines="full">
+      <ion-label class="text-form" position="floating">Prenom : </ion-label>
       <ion-input type="text" #email required></ion-input>
     </ion-item>
 
     <ion-item lines="full">
-      <ion-label position="floating">Mot de passe</ion-label>
+      <ion-label class="text-form" position="floating">Email : </ion-label>
+      <ion-input type="text" #email required></ion-input>
+    </ion-item>
+
+    <ion-item lines="full">
+      <ion-label class="text-form" position="floating">Mot de passe : </ion-label>
       <ion-input type="password" #password required></ion-input>
     </ion-item>
 
+    <ion-item lines="full">
+      <ion-label class="text-form" position="floating">Date de naissance : </ion-label>
+      <ion-input type="datetime-picker" required></ion-input>
+  </ion-item>
+
     <ion-row>
       <ion-col>
-        <ion-button type="submit" (click)="signUp(email, password)" expand="block">Inscription</ion-button>
+        <ion-button  color="success" type="submit" (click)="signUp(email, password)" expand="block">Inscription</ion-button>
       </ion-col>
     </ion-row>
   </form>
+
+  <div class="content-logo-cup">
+      <ion-img expand="block" class="cup"
+        src="assets/icon/cup.png"></ion-img>
+  </div>
+  <p class=inscription_ps>Petit message à vous aventuriers de tout âge ! Nous vous souhaitons la bienvenue dans RunningQuest        
+  En espérant que vous trouvererai l'aventure à votre goût... Mais pas de honte-ci cela est dur !
+</p>
+
 </ion-content>

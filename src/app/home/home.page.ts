@@ -27,4 +27,6 @@ export class HomePage implements OnInit {
   updateTitlePage(value: string): void {
     this.title = value;
   }
+
+  
 }

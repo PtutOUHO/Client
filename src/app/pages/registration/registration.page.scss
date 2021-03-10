@@ -1,0 +1,91 @@
+#title {
+float: left;
+width: 50%;
+}
+
+ion-title {
+font-family: "Permanent Marker", sans-serif;
+font-size: 2em;
+padding: 0;
+position: relative;
+}
+
+.subtitle {
+font-family: "DotGothic16", sans-serif;
+font-size: 16px;
+text-align: center;
+padding-top: 15px;
+}
+
+.content-image {
+margin-left: auto;
+margin-right: auto;
+width: 40%;
+
+}
+
+.logo {
+width: 7em;
+height: auto;
+padding-top: 5px;
+
+}
+
+.cup {
+margin-left: auto;
+margin-right: auto;
+width: 4em;
+padding-top: 2.5em;
+padding-bottom: 2.5em;
+}
+
+.inscription_ps {
+font-family: "DotGothic16", sans-serif;
+font-size: 16px;
+text-align: center;
+padding-left: 1.5em;
+padding-right: 1.5em;
+
+}
+
+form {
+padding-top: 20px;
+}
+
+.text-form {
+font-family: "DotGothic16", sans-serif;
+font-size: 16px;
+}
+
+ion-button {
+    margin-top: 2.8em;
+
+}
+
+#container {
+text-align: center;
+
+position: absolute;
+left: 0;
+right: 0;
+top: 50%;
+transform: translateY(-50%);
+}
+
+#container strong {
+font-size: 20px;
+line-height: 26px;
+}
+
+#container p {
+font-size: 16px;
+line-height: 22px;
+
+color: #8c8c8c;
+
+margin: 0;
+}
+
+#container a {
+text-decoration: none;
+}

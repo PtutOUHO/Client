@@ -1,0 +1,8 @@
+@font-face {
+  font-family: 'DotGothic16';
+  font-style: normal;
+  font-weight: 400;
+  src: url(assets/DotGothic16/DotGothic16-normal-400.eot);
+  src: local('DotGothic16'), url(assets/DotGothic16/DotGothic16-normal-400.ttf) format('truetype'), url(assets/DotGothic16/DotGothic16-normal-400.woff2) format('woff2'), url(assets/DotGothic16/DotGothic16-normal-400.eot?#iefix) format('embedded-opentype'), url(assets/DotGothic16/DotGothic16-normal-400.svg#DotGothic16) format('svg'), url(assets/DotGothic16/DotGothic16-normal-400.woff) format('woff');
+}
+
