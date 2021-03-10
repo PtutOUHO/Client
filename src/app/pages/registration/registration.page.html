@@ -11,7 +11,7 @@
 
 <ion-header>
   <ion-title class="subtitle">
-    Inscriptin
+    Inscription
   </ion-title>
 </ion-header>
 
@@ -45,15 +45,10 @@
 
     <ion-item lines="full">
       <ion-label class="text-form" position="floating">Date de naissance : </ion-label>
-      <ion-input type="datetime-picker" #birthdate required></ion-input>
+      <ion-input type="date" #birthdate required></ion-input>
   </ion-item>
 
-    <ion-row>
-      <ion-col>
-        <ion-button  color="success" type="submit" (click)="signUp(email, password)" expand="block">Inscription</ion-button>
-      </ion-col>
-    </ion-row>
-        <ion-button type="submit" (click)="signUp(email, password, firstname, lastname, pseudo, birthdate)" expand="block">Inscription</ion-button>
+      <ion-button color="success" type="submit" (click)="signUp(email, password, firstname, lastname, pseudo, birthdate)" expand="block">Inscription</ion-button>
   </form>
 
   <div class="content-logo-cup">
