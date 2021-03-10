@@ -89,16 +89,38 @@ export class AuthenticationService {
     }
 
     // Store user in localStorage
-    SetUserData(user) {
+/*  SetUserData(user) {
         const userRef: AngularFirestoreDocument<any> = this.afStore.doc(`users/${user.uid}`);
         const userData: User = {
             uid: user.uid,
             email: user.email,
-            displayName: user.displayName,
-            photoURL: user.photoURL,
-            emailVerified: user.emailVerified
+            firstname: user.firstname,
+            lastname: user.lastname,
+            pseudo: user.pseudo,
+            date_inscription: user.date_inscription
         };
         return userRef.set(userData, {
+            merge: true
+        });
+    }
+*/
+
+    //Méthodes universelles
+    SetUser(uid, email, firstname, lastname, pseudo, birthdate, inscription_date) {
+        const user: User = {
+            uid: uid,
+            email: email,
+            firstname: firstname,
+            lastname: lastname,
+            pseudo: pseudo,
+            birthdate: birthdate,
+            inscription_date: inscription_date
+        };
+        return this.SetUserData(user);
+    }
+    SetUserData(user) {
+        const userRef: AngularFirestoreDocument<any> = this.afStore.doc(`users/${user.uid}`);
+        return userRef.set(user, {
             merge: true
         });
     }

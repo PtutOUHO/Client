@@ -24,12 +24,15 @@ export class LoginPage implements OnInit {
   logIn(email, password) {
     this.authService.SignIn(email.value, password.value)
         .then((res) => {
+          setTimeout(() => {
+            
           if (this.authService.isEmailVerified) {
             this.router.navigate(['home/accueil']);
           } else {
             window.alert('Email is not verified');
             return false;
           }
+          }, 10)
         }).catch((error) => {
       window.alert(error.message);
     });
