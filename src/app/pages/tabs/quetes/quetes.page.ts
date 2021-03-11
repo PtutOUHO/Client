@@ -1,23 +1,21 @@
-import { Component, OnInit } from '@angular/core';
-import {AuthenticationService} from '../../../shared/authentication-service';
-import {Router} from '@angular/router';
+import { Component, OnInit } from "@angular/core";
+import { Router } from "@angular/router";
+import { AuthenticationService } from "../../../shared/authentication-service";
 
 @Component({
-  selector: 'app-quetes',
-  templateUrl: './quetes.page.html',
-  styleUrls: ['./quetes.page.scss'],
+  selector: "app-quetes",
+  templateUrl: "./quetes.page.html",
+  styleUrls: ["./quetes.page.scss"],
 })
 export class QuetesPage implements OnInit {
-
+  test : any;
   constructor(
-      public authService: AuthenticationService,
-      public router: Router
-  ) { }
+    public authService: AuthenticationService,
+    public router: Router
+  ) {}
 
   ngOnInit() {
-    if (!this.authService.isLoggedIn()) {
-      this.router.navigate(['login']);
-    }
+    
+    this.test = this.authService.testSetQuest();
   }
-
 }
