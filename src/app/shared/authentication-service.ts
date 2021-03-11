@@ -37,18 +37,6 @@ export class AuthenticationService {
     return this.ngFireAuth.auth.signInWithEmailAndPassword(email, password);
   }
 
-  SaveUserData() {
-    const uid: string = JSON.parse(localStorage.getItem("user")).uid;
-    const doc =  this.afStore.doc(`users/${uid}`).toString();
-    
-    console.log(doc);
-    //const userRef = this.afStore.doc("users/$" + uid).valueChanges;
-    //return userRef;
-    //${JSON.parse(localStorage.getItem("user")).uid}
-
-    //  localStorage.setItem("userData", userRef.);
-  }
-
   // Register user with email/password
   RegisterUser(email, password) {
     return this.ngFireAuth.auth.createUserWithEmailAndPassword(email, password);
@@ -153,10 +141,6 @@ export class AuthenticationService {
     return userRef.set(user, {
       merge: true,
     });
-  }
-
-  testSetQuest() {
-    return this.SaveUserData();
   }
 
   // Sign-out

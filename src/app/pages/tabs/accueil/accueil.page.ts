@@ -6,10 +6,11 @@ import { Component, OnInit } from '@angular/core';
   styleUrls: ['./accueil.page.scss'],
 })
 export class AccueilPage implements OnInit {
-
+  public userData: any;
   constructor() { }
 
   ngOnInit() {
+    this.userData = JSON.parse(localStorage.getItem('userData'));
   }
 
 }

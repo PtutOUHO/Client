@@ -15,7 +15,5 @@ export class QuetesPage implements OnInit {
   ) {}
 
   ngOnInit() {
-    
-    this.test = this.authService.testSetQuest();
   }
 }
