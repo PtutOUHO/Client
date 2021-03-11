@@ -1,6 +1,26 @@
+<ion-header>
+  <ion-toolbar class="header">
+    <div class="content-image">
+      <center>
+        <ion-img expand="full" class="logo"
+          src="assets/icon/logo.png"></ion-img>
+      </center>
+    </div>
+  </ion-toolbar>
+</ion-header>
+
+<ion-header>
+  <ion-title class="subtitle">
+    Page Introuvable
+  </ion-title>
+</ion-header>
+
 <ion-content>
   <center>
-    <ion-img id="logo" src="assets/error/404.gif"></ion-img>
-    <ion-router-link href="/login">Retour</ion-router-link>
+    <div class="content-text">
+      <p class="inscription_ps">Runner vous vous etes égaré de votre route mais pas de panique vous pouvez vernir à l'accueil grâce à ce boutton !</p>
+    </div>
+    <ion-img id="logo-404" src="assets/error/404.gif"></ion-img>
+    <ion-button [routerLink]="['/home']" expand="full">Accueil</ion-button>
   </center>
 </ion-content>
