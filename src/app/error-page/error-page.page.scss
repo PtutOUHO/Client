@@ -1,5 +1,71 @@
-#logo {
-    margin-top: 150px;
-  width: 80%;
+#title {
+  float: left;
+  width: 50%;
+  }
+  
+  ion-title {
+  font-family: "Permanent Marker", sans-serif;
+  font-size: 2em;
+  padding: 0;
+  position: relative;
+  }
+  
+  .subtitle {
+  font-family: "DotGothic16", sans-serif;
+  font-size: 16px;
+  text-align: center;
+  padding-top: 15px;
+  padding-bottom: 30px;
+  }
+  
+  .content-image {
+  margin-left: auto;
+  margin-right: auto;
+  width: 40%;
+  
+  }
+  
+  .logo {
+  width: 7em;
   height: auto;
+  padding-top: 5px;
+  
+  }
+
+  #logo-404 {
+  width: 70%;
+  height: auto;
+  padding-bottom: 15px;
+  padding-top: 15px;
+  }
+  
+  .cup {
+  margin-left: auto;
+  margin-right: auto;
+  width: 4em;
+  padding-top: 2em;
+  padding-bottom: 2em;
+  }
+  
+  .inscription_ps {
+  font-family: "DotGothic16", sans-serif;
+  font-size: 16px;
+  text-align: center;
+  padding-left: 1.5em;
+  padding-right: 1.5em;
+  
+  }
+  
+  form {
+  padding-top: 20px;
+  }
+  
+  .text-form {
+  font-family: "DotGothic16", sans-serif;
+  font-size: 16px;
+  }
+
+  ion-button {
+    margin-top: 2em;
+    width: 70%;
 }
