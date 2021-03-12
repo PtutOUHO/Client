@@ -7,31 +7,30 @@
 <ion-content>
 <form>
     <ion-item lines="full">
-            <ion-label class="text-form" position="floating">Nom : {{last_name}} </ion-label>
-            <ion-input type="text" required></ion-input>
+            <ion-label class="text-form" position="floating">Nom :  </ion-label>
+            <ion-input type="text" placeholder="{{userData.lastname}}" required></ion-input>
         </ion-item>
 
         <ion-item lines="full">
-            <ion-label class="text-form" position="floating">Prenom : {{first_name}} </ion-label>
-            <ion-input type="text" required></ion-input>
+            <ion-label class="text-form" position="floating">Prenom :  </ion-label>
+            <ion-input type="text" placeholder="{{userData.firstname}}" required></ion-input>
         </ion-item>
 
         <ion-item lines="full">
-            <ion-label class="text-form" position="floating">Pseudonyme : {{pesudo}} </ion-label>
-            <ion-input type="text" required></ion-input>
+            <ion-label class="text-form" position="floating">Pseudonyme :  </ion-label>
+            <ion-input type="text" placeholder="{{userData.pseudo}}" required></ion-input>
         </ion-item>
 
         <ion-item lines="full">
-            <ion-label class="text-form" position="floating">Email : {{mail}} </ion-label>
-            <ion-input type="text" #email required></ion-input>
+            <ion-label class="text-form" position="floating">Email :  </ion-label>
+            <ion-input type="text" placeholder="{{userData.email}}" #email required></ion-input>
         </ion-item>
 
         <ion-item lines="full">
-            <ion-label class="text-form" position="floating">Date de naissance : {{date_born}} </ion-label>
-            <ion-input type="date" required></ion-input>
+            <ion-label class="text-form" position="floating">Date de naissance :  </ion-label>
+            <ion-input type="date" value="{{userData.birthdate}}" required></ion-input>
         </ion-item>
     </form>
-
     <ion-title>
         Statistiques 
     </ion-title>

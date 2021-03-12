@@ -11,7 +11,7 @@ import {
   styleUrls: ["home.page.scss"],
 })
 export class HomePage implements OnInit {
-  public user: any;
+  public userData: any;
   title = '';
 
   constructor(
@@ -31,8 +31,7 @@ export class HomePage implements OnInit {
       this.router.navigate(["home/accueil"]);
       this.title = "Accueil";
     }
-    this.user = this.GetUserData();
-    localStorage.setItem('userData', this.user);
+    this.GetUserData();
   }
 
   updateTitlePage(): void {
@@ -44,19 +43,8 @@ export class HomePage implements OnInit {
 
   GetUserData() {
     const uid: string = JSON.parse(localStorage.getItem("user")).uid;
-    //const doc = this.afStore.doc(`users/${uid}`);
-    //const userRef = this.afStore.doc("users/$" + uid).valueChanges;
-    //return userRef;
-    //${JSON.parse(localStorage.getItem("user")).uid}
-    /* this.afStore.collection('users').doc(uid).ref.get().then((doc) => {
-      console.log(doc.data);
-    }); */
-
-    /*   this.afStore.collection('users').doc("MyOAAInyeMVpbm1sSEdGMfzwfTu1").valueChanges().subscribe(data=>{
-      return data;
-  }) */
-    return this.afStore.collection("users").doc(uid).valueChanges();
-    //  localStorage.setItem("userData", userRef.);
+    const test: string = "";
+    this.afStore.collection("users").doc(uid).valueChanges().subscribe((data : string)=>{ localStorage.setItem("userData", JSON.stringify(data));});
   }
   
 }
