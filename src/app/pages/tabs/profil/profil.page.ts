@@ -15,7 +15,6 @@ export class ProfilPage implements OnInit {
 
   ngOnInit() {
     this.userData = JSON.parse(localStorage.getItem('userData'))
-    this.test = "20122000";
   }
 
 }
