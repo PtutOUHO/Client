@@ -19,7 +19,7 @@
   <ion-grid>
 
     <ion-row class="content-message">
-      <p class=inscription_ps>Vérifiez votre boite mail et cliquez sur le lien pour verifier votre adresse email.<br>Pensez à vérifier vos spams.
+      <p class=inscription_ps>Vérifiez votre boîte mail et cliquez sur le lien pour vérifier votre adresse email.<br>Pensez à vérifier vos spams.
       </p>
       <div class="content-image-email">
         <center>
@@ -34,6 +34,9 @@
                 expand="block">
           Renvoyez l'email
         </ion-button>
+        <p class=inscription_ps> Une fois votre email vérifié appuyez sur le boutton accueil pour commencer votre aventure ! 
+        </p>
+        <ion-button [routerLink]="['/home']" expand="full">Accueil</ion-button>
       </ion-col>
     </ion-row>
   </ion-grid>
