@@ -16,6 +16,10 @@ const routes: Routes = [
     loadChildren: () => import('./pages/tabs/accueil/accueil.module').then( m => m.AccueilPageModule)
   },
   {
+    path: 'home/map',
+    loadChildren: () => import('./pages/map/map.module').then(m => m.MapPageModule)
+  },
+  {
     path: 'home/profil',
     loadChildren: () => import('./pages/tabs/profil/profil.module').then( m => m.ProfilPageModule)
   },
@@ -47,9 +51,10 @@ const routes: Routes = [
     path: '404',
     loadChildren: () => import('./error-page/error-page.module').then( m => m.ErrorPagePageModule)
   },
-  //A PLACER A LA FIN
+  // A PLACER A LA FIN
   {path: '**', redirectTo: '/404'},
-  //A PLACER A LA FIN
+
+  // A PLACER A LA FIN
 
 ];
 

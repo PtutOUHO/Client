@@ -7,14 +7,14 @@ import {Router} from '@angular/router';
   styleUrls: ['./profil.page.scss'],
 })
 export class ProfilPage implements OnInit {
-  public userData : any;
-  public test : Date;
+  public userData: any;
+  public test: Date;
   constructor(
       public router: Router
   ) { }
 
   ngOnInit() {
-    this.userData = JSON.parse(localStorage.getItem('userData'))
+    this.userData = JSON.parse(localStorage.getItem('userData'));
   }
 
 }

@@ -17,6 +17,15 @@ const routes: Routes = [
         ]
       },
       {
+        path: 'map',
+        children: [
+          {
+            path: '',
+            loadChildren: () => import('../pages/map/map.module').then(m => m.MapPageModule)
+          }
+        ]
+      },
+      {
         path: 'profil',
         children: [
           {
