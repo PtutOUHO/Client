@@ -37,6 +37,9 @@ export class LoginPage implements OnInit {
       window.alert(error.message);
     });
   }
+  
+  ngOnDestroy() {
+  }
 
   goToRegisterPage() {
       this.router.navigate(['registration']);
