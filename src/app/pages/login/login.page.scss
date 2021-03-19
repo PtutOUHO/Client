@@ -1,1 +1,33 @@
+#title {
+    float: left;
+    width: 50%;
+}
 
+ion-title {
+    font-family: "Permanent Marker", sans-serif;
+    font-size: 2em;
+    padding: 0;
+    position: relative;
+}
+
+.subtitle {
+    font-family: "DotGothic16", sans-serif;
+    font-size: 1.5em;
+    text-align: center;
+    padding-top: 15px;
+    padding-bottom: 15px;
+}
+
+.content-image {
+    margin-left: auto;
+    margin-right: auto;
+    width: 40%;
+
+}
+
+.logo {
+    width: 7em;
+    height: auto;
+    padding-top: 5px;
+
+}

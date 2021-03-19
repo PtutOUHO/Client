@@ -30,5 +30,8 @@ export class RegistrationPage implements OnInit {
       window.alert(error.message);
     });
   }
+  
+  ngOnDestroy() {
+  }
 
 }

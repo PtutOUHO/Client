@@ -1,18 +1,22 @@
-import { Component, OnInit } from "@angular/core";
+import { Component, OnDestroy, OnInit } from "@angular/core";
 import { AuthenticationService } from "../shared/authentication-service";
 import { Router } from "@angular/router";
 import {
   AngularFirestore,
 } from "@angular/fire/firestore";
+import { LoginPage } from "../pages/login/login.page";
+import { RegistrationPage } from "../pages/registration/registration.page";
 
 @Component({
   selector: "app-home",
   templateUrl: "home.page.html",
   styleUrls: ["home.page.scss"],
 })
-export class HomePage implements OnInit {
+export class HomePage implements OnInit, OnDestroy {
   public userData: any;
   title = '';
+  login: LoginPage;
+  register: RegistrationPage;
 
   constructor(
     public afStore: AngularFirestore,
@@ -28,10 +32,15 @@ export class HomePage implements OnInit {
       this.router.navigate(["login"]);
     }
     else if (this.title == "home") {
+      this.login.ngOnDestroy();
+      this.register.ngOnDestroy();
       this.router.navigate(["home/accueil"]);
       this.title = "Accueil";
     }
     this.GetUserData();
+  }  
+
+  ngOnDestroy() {
   }
 
   updateTitlePage(): void {

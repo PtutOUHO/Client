@@ -1,16 +1,25 @@
 <ion-header>
-  <ion-toolbar>
-    <ion-buttons slot="start">
-    </ion-buttons>
-    <ion-title>Se connecter</ion-title>
+  <ion-toolbar class="header">
+    <div class="content-image">
+      <center>
+        <ion-img expand="full" class="logo"
+          src="assets/icon/logo.png"></ion-img>
+      </center>
+    </div>
   </ion-toolbar>
+</ion-header>
+
+<ion-header>
+  <ion-title class="subtitle">
+    Se connecter
+  </ion-title>
 </ion-header>
 
 <ion-content>
   <form>
     <ion-item lines="full">
       <ion-label position="floating">Email</ion-label>
-      <ion-input type="text" #email required></ion-input>
+      <ion-input type="email" #email required></ion-input>
     </ion-item>
 
     <ion-item lines="full">

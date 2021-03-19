@@ -1,6 +1,7 @@
-import { Component, OnInit } from '@angular/core';
-import { Router } from '@angular/router';
-import { AuthenticationService } from '../../../shared/authentication-service';
+import { Component, HostListener, OnInit } from "@angular/core";
+import { Router } from "@angular/router";
+import { AuthenticationService } from "../../../shared/authentication-service";
+import { HomePage } from '../../../home/home.page';
 
 @Component({
   selector: 'app-parametres',
@@ -17,6 +18,6 @@ export class ParametresPage implements OnInit {
 
   SignOut() {
     this.authService.SignOut();
-    this.home.title = "Accueil";
+    this.home.ngOnDestroy();
   }
 }
