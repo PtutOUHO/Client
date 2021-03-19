@@ -16,7 +16,7 @@ export class ProfilPage implements OnInit {
   ) {}
 
   ngOnInit() {
-    this.userData = JSON.parse(localStorage.getItem('userData'))
+    this.userData = JSON.parse(localStorage.getItem('userData'));
   }
 
   resetPassword() {

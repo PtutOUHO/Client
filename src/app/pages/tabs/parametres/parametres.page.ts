@@ -4,20 +4,20 @@ import { AuthenticationService } from "../../../shared/authentication-service";
 import { HomePage } from '../../../home/home.page';
 
 @Component({
-  selector: "app-parametres",
-  templateUrl: "./parametres.page.html",
-  styleUrls: ["./parametres.page.scss"],
+  selector: 'app-parametres',
+  templateUrl: './parametres.page.html',
+  styleUrls: ['./parametres.page.scss'],
 })
 export class ParametresPage implements OnInit {
   constructor(
     public home: HomePage, 
     public authService: AuthenticationService,
-    public router: Router
   ) {}
 
   ngOnInit() {}
 
   SignOut() {
     this.authService.SignOut();
+    this.home.ngOnDestroy();
   }
 }
