@@ -1,3 +1,19 @@
 <ion-content>
-    Bienvenue {{ userData.firstname }} {{ userData.lastname }} sur RunningQuest!
+    <ion-row>
+        <ion-col>
+            <ion-item lines="full">
+                <ion-label class="text-form">
+                    Bienvenue {{ userData.firstname + ' ' + userData.lastname }} sur RunningQuest !
+                </ion-label>
+            </ion-item>
+        </ion-col>
+    </ion-row>
+
+    <div class="container">
+        <ion-button id="map-button"
+                    type="submit"
+                    (click)="displayMap()">
+            Voir ma position
+        </ion-button>
+    </div>
 </ion-content>
