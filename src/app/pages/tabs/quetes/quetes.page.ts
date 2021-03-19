@@ -12,7 +12,14 @@ export class QuetesPage implements OnInit {
   constructor(
     public authService: AuthenticationService,
     public router: Router
+
   ) {}
+
+  public lists = [
+    {
+      name: 'poulet',
+    }
+  ];
 
   ngOnInit() {
   }
