@@ -1,6 +1,7 @@
 import { Component, OnInit } from '@angular/core';
 import { Router } from '@angular/router';
 import {AuthenticationService} from '../../shared/authentication-service';
+import { ToastrService } from 'ngx-toastr'
 
 @Component({
   selector: 'app-registration',
@@ -12,7 +13,8 @@ export class RegistrationPage implements OnInit {
 
   constructor(
       public authService: AuthenticationService,
-      public router: Router
+      public router: Router,
+      private toastr: ToastrService
   ) { }
 
   ngOnInit(){
@@ -21,6 +23,7 @@ export class RegistrationPage implements OnInit {
     }}
 
   signUp(email, password, firstname, lastname, pseudo, birthdate){
+    this.toastr.success('Inscription réussite', 'Email de vérification envoyé ! ', { timeOut : 5500 }) // Le message reste 5,5 secondes
     this.authService.RegisterUser(email.value, password.value)
         .then((res) => {
           this.authService.SetUser(res.user.uid, email.value, firstname.value, lastname.value, pseudo.value, birthdate.value, new Date());
