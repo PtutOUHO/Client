@@ -20,6 +20,10 @@ const routes: Routes = [
     loadChildren: () => import('./pages/map/map.module').then(m => m.MapPageModule)
   },
   {
+    path: 'home/trajet-geo',
+    loadChildren: () => import('./pages/trajet-geo/trajet-geo.module').then( m => m.TrajetGeoPageModule)
+  },
+  {
     path: 'home/profil',
     loadChildren: () => import('./pages/tabs/profil/profil.module').then( m => m.ProfilPageModule)
   },
@@ -53,6 +57,7 @@ const routes: Routes = [
   },
   // A PLACER A LA FIN
   {path: '**', redirectTo: '/404'},
+
 
   // A PLACER A LA FIN
 

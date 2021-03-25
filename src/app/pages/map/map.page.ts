@@ -17,8 +17,7 @@ export class MapPage implements OnInit, AfterViewInit {
 
   constructor(
       private geolocation: Geolocation,
-      public router: Router,
-      private homePage: HomePage
+      public router: Router
   ) {
   }
 
