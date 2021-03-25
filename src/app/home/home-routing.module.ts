@@ -26,6 +26,15 @@ const routes: Routes = [
         ]
       },
       {
+        path: 'trajet-geo',
+        children: [
+          {
+            path: '',
+            loadChildren: () => import('../pages/trajet-geo/trajet-geo.module').then(m => m.TrajetGeoPageModule)
+          }
+        ]
+      },
+      {
         path: 'profil',
         children: [
           {
