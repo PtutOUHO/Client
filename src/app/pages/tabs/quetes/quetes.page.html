@@ -11,7 +11,16 @@
                 </ion-item>
             </ion-card-header>
             <ion-card-content>
-                <p>JE</p>
+
+                <p *ngFor="let quest of questList">
+                    <span class="design_quest">{{ quest.name }}</span>
+                    <span class="design_quest">{{quest.description}}</span>
+                    <span class="design_quest">{{ quest.date_de_creation }}</span>
+                    <span class="design_quest">{{quest.type}}</span>
+                    <span class="design_quest">{{quest.nb_runner_point}}</span>
+                    <span class="design_quest">{{quest.user_id}}</span>
+                </p>
+
             </ion-card-content>
         </ion-card>
     </ion-card>

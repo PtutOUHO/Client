@@ -7,6 +7,7 @@ import { AuthenticationService } from "../../../shared/authentication-service";
   templateUrl: "./quetes.page.html",
   styleUrls: ["./quetes.page.scss"],
 })
+
 export class QuetesPage implements OnInit {
   test : any;
   constructor(
@@ -14,11 +15,26 @@ export class QuetesPage implements OnInit {
     public router: Router
 
   ) {}
-
-  public lists = [
-    {
-      name: 'poulet',
-    }
+    
+  questList = [
+        {
+            name: 'Poulet'
+        },
+        {
+            description: 'Clean Code'
+        },
+        {
+            date_de_creation: '0'
+        },
+        {
+            type: 'on verra'
+        },
+        {
+            nb_runner_point: '200'
+        },
+        {
+            user_id: 'optionnel'  
+        }
   ];
 
   ngOnInit() {
