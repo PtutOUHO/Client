@@ -8,8 +8,6 @@ import { LoginPageRoutingModule } from './login-routing.module';
 
 import { LoginPage } from './login.page';
 
-import { ProfilPage } from '../tabs/profil/profil.page';
-
 @NgModule({
   imports: [
     CommonModule,
@@ -19,15 +17,4 @@ import { ProfilPage } from '../tabs/profil/profil.page';
   ],
   declarations: [LoginPage]
 })
-export class LoginPageModule {
-  constructor(
-    public profilPage: ProfilPage,
-  ) {}
-  
-  resetPassword() {
-    this.profilPage.resetPassword();
-    
-  }
-
-  
-}
+export class LoginPageModule {}
