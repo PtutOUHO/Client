@@ -15,7 +15,7 @@ export class LoginPage implements OnInit {
   constructor(
       public authService: AuthenticationService,
       public router: Router,
-      private toastr: ToastrService
+      private toastr: ToastrService,
   ) {}
 
   ngOnInit() {
@@ -41,7 +41,7 @@ export class LoginPage implements OnInit {
       window.alert(error.message);
     });
   }
-
+  
   resetPassword() {
     this.authService.ResetPassword(this.userData.email);
     this.toastr.success('Mail envoyé avec succes !', 'Changement de mot de passe ', { timeOut : 5500 }); // Le message reste 5,5 secondes
