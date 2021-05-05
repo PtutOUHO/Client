@@ -1,6 +1,8 @@
 import { Component, OnInit } from '@angular/core';
 import { Router } from '@angular/router';
 import { AuthenticationService } from '../../shared/authentication-service';
+import { ToastrService } from 'ngx-toastr';
+
 
 @Component({
   selector: 'app-login',
@@ -9,16 +11,18 @@ import { AuthenticationService } from '../../shared/authentication-service';
 })
 
 export class LoginPage implements OnInit {
-
+  public userData: any;
   constructor(
       public authService: AuthenticationService,
       public router: Router,
+      private toastr: ToastrService,
   ) {}
 
   ngOnInit() {
     if (this.authService.isLoggedIn()) {
       this.router.navigate(['home/accueil']);
     }
+    this.userData = JSON.parse(localStorage.getItem('userData'));
   }
 
   logIn(email, password) {
@@ -36,6 +40,13 @@ export class LoginPage implements OnInit {
         }).catch((error) => {
       window.alert(error.message);
     });
+  }
+  
+  resetPassword() {
+    this.authService.ResetPassword(this.userData.email);
+    this.toastr.success('Mail envoyé avec succes !', 'Changement de mot de passe ', { timeOut : 5500 }); // Le message reste 5,5 secondes
+    this.authService.SignOut();
+    
   }
   
   ngOnDestroy() {
