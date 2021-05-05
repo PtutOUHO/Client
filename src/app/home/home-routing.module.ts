@@ -17,6 +17,24 @@ const routes: Routes = [
         ]
       },
       {
+        path: 'map',
+        children: [
+          {
+            path: '',
+            loadChildren: () => import('../pages/map/map.module').then(m => m.MapPageModule)
+          }
+        ]
+      },
+      {
+        path: 'trajet-geo',
+        children: [
+          {
+            path: '',
+            loadChildren: () => import('../pages/trajet-geo/trajet-geo.module').then(m => m.TrajetGeoPageModule)
+          }
+        ]
+      },
+      {
         path: 'profil',
         children: [
           {

@@ -1,0 +1,11 @@
+<ion-content>
+  <form [formGroup]="directionForm" (ngSubmit)="calculateAndDisplayRoute(directionForm.value)">
+    <ion-item>
+      <ion-label position="floating">Destination</ion-label>
+      <ion-input formControlName="destination"></ion-input>
+    </ion-item>
+    <ion-button expand="full" type="submit" [disabled]="!directionForm.valid">Trouver direction</ion-button>
+  </form>
+
+  <div #mapElement class="map"></div>
+</ion-content>

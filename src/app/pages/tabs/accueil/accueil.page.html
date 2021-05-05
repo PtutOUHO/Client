@@ -1,3 +1,32 @@
 <ion-content>
+    <ion-row>
+        <ion-col>
+            <ion-item lines="full">
+                <ion-label class="text-form">
+                    Bienvenue {{ userData.firstname + ' ' + userData.lastname }} sur RunningQuest !
+                </ion-label>
+            </ion-item>
+        </ion-col>
+    </ion-row>
 
+    <ion-row>
+        <ion-col>
+            <ion-button id="map-button"
+                        expand="block"
+                        type="submit"
+                        (click)="displayMap()">
+                Voir ma position
+            </ion-button>
+        </ion-col>
+    </ion-row>
+    <ion-row>
+        <ion-col>
+            <ion-button id="trajet-button"
+                        expand="block"
+                        type="submit"
+                        (click)="displayMapWithDirection()">
+                Choisir une destination
+            </ion-button>
+        </ion-col>
+    </ion-row>
 </ion-content>

@@ -1,7 +1,9 @@
 export interface User {
     uid: string;
     email: string;
-    displayName: string;
-    photoURL: string;
-    emailVerified: boolean;
+    pseudo: string;
+    firstname: string;
+    lastname: string;
+    birthdate: Date;
+    inscription_date: Date;
 }

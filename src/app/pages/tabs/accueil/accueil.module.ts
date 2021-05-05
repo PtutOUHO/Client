@@ -15,6 +15,6 @@ import { AccueilPage } from './accueil.page';
     IonicModule,
     AccueilPageRoutingModule
   ],
-  declarations: [AccueilPage]
+  declarations: [AccueilPage],
 })
 export class AccueilPageModule {}

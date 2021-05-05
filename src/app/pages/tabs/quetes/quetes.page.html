@@ -1,3 +1,95 @@
 <ion-content>
+    <ion-card color="success">
+        <ion-card-header>
+            <ion-card-title>Quotidienne</ion-card-title>
+        </ion-card-header>
+        <ion-card>
+            <ion-card-header>
+                <ion-item href="#" class="ion-activated">
+                    <ion-icon color="dark" name="time-outline" slot="start"></ion-icon>
+                    <ion-card-title>Journalier</ion-card-title>
+                </ion-item>
+            </ion-card-header>
+            <ion-card-content>
 
+                <p *ngFor="let quest of questList">
+                    <span class="design_quest">{{ quest.name }}</span>
+                    <span class="design_quest">{{quest.description}}</span>
+                    <span class="design_quest">{{ quest.date_de_creation }}</span>
+                    <span class="design_quest">{{quest.type}}</span>
+                    <span class="design_quest">{{quest.nb_runner_point}}</span>
+                    <span class="design_quest">{{quest.user_id}}</span>
+                </p>
+
+            </ion-card-content>
+        </ion-card>
+    </ion-card>
+
+    <ion-card color="secondary">
+        <ion-card-header>
+            <ion-card-title>Hebdomadaire</ion-card-title>
+        </ion-card-header>
+
+        <ion-card>
+            <ion-card-header>
+                <ion-item href="#" class="ion-activated">
+                    <ion-icon color="dark" name="time-outline" slot="start"></ion-icon>
+                    <ion-card-title>Journalier</ion-card-title>
+                </ion-item>
+            </ion-card-header>
+            <ion-card-content>
+                <p>JE</p>
+            </ion-card-content>
+        </ion-card>
+        <ion-card>
+            <ion-card-header>
+                <ion-item href="#" class="ion-activated">
+                    <ion-icon color="dark" name="time-outline" slot="start"></ion-icon>
+                    <ion-card-title>Journalier</ion-card-title>
+                </ion-item>
+            </ion-card-header>
+            <ion-card-content>
+                <p>JE</p>
+            </ion-card-content>
+        </ion-card>
+    </ion-card>
+
+    <ion-card color="danger">
+        <ion-card-header>
+            <ion-card-title>Mensuel</ion-card-title>
+        </ion-card-header>
+        <ion-card>
+            <ion-card-header>
+                <ion-item href="#" class="ion-activated">
+                    <ion-icon color="dark" name="time-outline" slot="start"></ion-icon>
+                    <ion-card-title>Journalier</ion-card-title>
+                </ion-item>
+            </ion-card-header>
+            <ion-card-content>
+                <p>JE</p>
+            </ion-card-content>
+        </ion-card>
+        <ion-card>
+            <ion-card-header>
+                <ion-item href="#" class="ion-activated">
+                    <ion-icon color="dark" name="time-outline" slot="start"></ion-icon>
+                    <ion-card-title>Journalier</ion-card-title>
+                </ion-item>
+            </ion-card-header>
+            <ion-card-content>
+                <p>JE</p>
+            </ion-card-content>
+        </ion-card>
+        <ion-card>
+            <ion-card-header>
+                <ion-item href="#" class="ion-activated">
+                    <ion-icon color="dark" name="time-outline" slot="start"></ion-icon>
+                    <ion-card-title>Journalier</ion-card-title>
+                </ion-item>
+            </ion-card-header>
+            <ion-card-content>
+                <p>JE</p>
+            </ion-card-content>
+        </ion-card>
+    </ion-card>
 </ion-content>

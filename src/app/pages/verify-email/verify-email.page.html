@@ -1,29 +1,42 @@
 <ion-header>
-  <ion-toolbar>
-    <ion-buttons slot="start">
-      <ion-back-button></ion-back-button>
-    </ion-buttons>
-    <ion-title>Verification d'email</ion-title>
+  <ion-toolbar class="header">
+    <div class="content-image">
+      <center>
+        <ion-img expand="full" class="logo"
+          src="assets/icon/logo.png"></ion-img>
+      </center>
+    </div>
   </ion-toolbar>
+</ion-header>
+
+<ion-header>
+  <ion-title class="subtitle">
+    Vérification d'Email
+  </ion-title>
 </ion-header>
 
 <ion-content>
   <ion-grid>
-    <ion-row>
-      <p>
-        Vérifiez votre boite mail et cliquez sur le lien pour verifier votre adresse email.
+
+    <ion-row class="content-message">
+      <p class=inscription_ps>Vérifiez votre boîte mail et cliquez sur le lien pour vérifier votre adresse email.<br>Pensez à vérifier vos spams.
       </p>
-      <br>
-      <b>
-        Pensez à vérifier vos spams
-      </b>
-      <ion-col>
+      <div class="content-image-email">
+        <center>
+          <ion-img  expand="block" class="logo-email"
+            src="assets/icon/email.png"></ion-img>
+        </center>
+      </div>
+      <ion-col class="col-content">
         <ion-button
                 type="submit"
                 (click)="authService.SendVerificationMail()"
                 expand="block">
           Renvoyez l'email
         </ion-button>
+        <p class=inscription_ps> Une fois votre email vérifié appuyez sur le boutton accueil pour commencer votre aventure ! 
+        </p>
+        <ion-button [routerLink]="['/home']" expand="full">Accueil</ion-button>
       </ion-col>
     </ion-row>
   </ion-grid>

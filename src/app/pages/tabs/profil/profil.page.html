@@ -1,9 +1,40 @@
+<ion-header>
+    <ion-title>
+        Informations générales
+    </ion-title>
+</ion-header>
+
 <ion-content>
-    <ion-header>
-        <ion-title>
-            Information générales 
-        </ion-title>
-    </ion-header>
+<form>
+    <ion-item lines="full">
+            <ion-label class="text-form" position="floating">Nom :  </ion-label>
+            <ion-input type="text" placeholder="{{userData.lastname}}" required></ion-input>
+        </ion-item>
+
+        <ion-item lines="full">
+            <ion-label class="text-form" position="floating">Prenom :  </ion-label>
+            <ion-input type="text" placeholder="{{userData.firstname}}" required></ion-input>
+        </ion-item>
+
+        <ion-item lines="full">
+            <ion-label class="text-form" position="floating">Pseudonyme :  </ion-label>
+            <ion-input type="text" placeholder="{{userData.pseudo}}" required></ion-input>
+        </ion-item>
+
+        <ion-item lines="full">
+            <ion-label class="text-form" position="floating">Email :  </ion-label>
+            <ion-input type="text" placeholder="{{userData.email}}" #email required></ion-input>
+        </ion-item>
+
+        <ion-item lines="full">
+            <ion-label class="text-form" position="floating">Date de naissance :  </ion-label>
+            <ion-input type="date" value="{{userData.birthdate}}" required></ion-input>
+        </ion-item>
+    </form>
+    <!-- <ion-title>
+        Statistiques 
+    </ion-title>
+    <ion-button color="warning" type="submit" (click)="resetPassword()" expand="block">Modification du mot de passe</ion-button>
 
 <form>
     <ion-item lines="full">

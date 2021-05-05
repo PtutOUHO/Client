@@ -1,6 +1,7 @@
-import { Component, OnInit } from '@angular/core';
-import {AuthenticationService} from '../../../shared/authentication-service';
-import {Router} from '@angular/router';
+import { Component, HostListener, OnInit } from "@angular/core";
+import { Router } from "@angular/router";
+import { AuthenticationService } from "../../../shared/authentication-service";
+import { HomePage } from '../../../home/home.page';
 
 @Component({
   selector: 'app-parametres',
@@ -8,16 +9,15 @@ import {Router} from '@angular/router';
   styleUrls: ['./parametres.page.scss'],
 })
 export class ParametresPage implements OnInit {
-
   constructor(
-      public authService: AuthenticationService,
-      public router: Router
-  ) { }
+    public home: HomePage, 
+    public authService: AuthenticationService,
+  ) {}
 
-  ngOnInit() {
-    if (!this.authService.isLoggedIn()) {
-      this.router.navigate(['login']);
-    }
+  ngOnInit() {}
+
+  SignOut() {
+    this.authService.SignOut();
+    this.home.ngOnDestroy();
   }
-
 }
