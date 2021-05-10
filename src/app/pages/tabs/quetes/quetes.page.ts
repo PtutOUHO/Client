@@ -18,22 +18,28 @@ export class QuetesPage implements OnInit {
     
   questList = [
         {
-            name: 'Poulet'
+          quest_name: 'Poulet'
         },
         {
-            description: 'Clean Code'
+          quest_description: 'Clean Code'
         },
         {
-            date_de_creation: '0'
+          quest_creationDate: '0'
         },
         {
-            type: 'on verra'
+          quest_type: 'on verra'
         },
         {
-            nb_runner_point: '200'
+          quest_nbRp: '200'
         },
         {
-            user_id: 'optionnel'  
+          quest_distance: 'optionnel'  
+        },
+        {
+          quest_time: 'optionnel'  
+        },
+        {
+          quest_userId: 'optionnel'  
         }
   ];
 
