@@ -28,10 +28,6 @@ const routes: Routes = [
     loadChildren: () => import('./pages/tabs/quetes/quetes.module').then( m => m.QuetesPageModule)
   },
   {
-    path: 'home/options',
-    loadChildren: () => import('./pages/tabs/parametres/parametres.module').then( m => m.ParametresPageModule)
-  },
-  {
     path: 'home/friends',
     loadChildren: () => import('./pages/tabs/friends/friends.module').then( m => m.FriendsPageModule)
   },

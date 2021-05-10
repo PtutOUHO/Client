@@ -55,5 +55,10 @@ export class HomePage implements OnInit, OnDestroy {
     const test: string = "";
     this.afStore.collection("users").doc(uid).valueChanges().subscribe((data : string)=>{ localStorage.setItem("userData", JSON.stringify(data));});
   }
+
+  SignOut() {
+    this.authService.SignOut();
+    this.ngOnDestroy();
+  }
   
 }
