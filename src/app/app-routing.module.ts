@@ -36,8 +36,8 @@ const routes: Routes = [
     loadChildren: () => import('./pages/tabs/parametres/parametres.module').then( m => m.ParametresPageModule)
   },
   {
-    path: 'home/friends',
-    loadChildren: () => import('./pages/tabs/friends/friends.module').then( m => m.FriendsPageModule)
+    path: 'home/amis',
+    loadChildren: () => import('./pages/tabs/amis/amis.module').then(m => m.FriendsPageModule)
   },
   {
     path: 'registration',

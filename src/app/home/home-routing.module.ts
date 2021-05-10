@@ -62,11 +62,11 @@ const routes: Routes = [
         ]
       },
       {
-        path: 'friends',
+        path: 'amis',
         children: [
           {
             path: '',
-            loadChildren: () => import('../pages/tabs/friends/friends.module').then(m => m.FriendsPageModule)
+            loadChildren: () => import('../pages/tabs/amis/amis.module').then(m => m.FriendsPageModule)
           }
         ]
       },
