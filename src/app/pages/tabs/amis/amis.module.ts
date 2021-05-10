@@ -4,7 +4,7 @@ import { FormsModule } from '@angular/forms';
 
 import { IonicModule } from '@ionic/angular';
 
-import { FriendsPageRoutingModule } from './amis-routing.module';
+import { AmisPageRoutingModule } from './amis-routing.module';
 
 import { AmisPage } from './amis.page';
 
@@ -13,8 +13,8 @@ import { AmisPage } from './amis.page';
     CommonModule,
     FormsModule,
     IonicModule,
-    FriendsPageRoutingModule
+    AmisPageRoutingModule
   ],
   declarations: [AmisPage]
 })
-export class FriendsPageModule {}
+export class AmisPageModule {}

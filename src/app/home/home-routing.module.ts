@@ -66,7 +66,7 @@ const routes: Routes = [
         children: [
           {
             path: '',
-            loadChildren: () => import('../pages/tabs/amis/amis.module').then(m => m.FriendsPageModule)
+            loadChildren: () => import('../pages/tabs/amis/amis.module').then(m => m.AmisPageModule)
           }
         ]
       },

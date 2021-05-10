@@ -37,7 +37,7 @@ const routes: Routes = [
   },
   {
     path: 'home/amis',
-    loadChildren: () => import('./pages/tabs/amis/amis.module').then(m => m.FriendsPageModule)
+    loadChildren: () => import('./pages/tabs/amis/amis.module').then(m => m.AmisPageModule)
   },
   {
     path: 'registration',
