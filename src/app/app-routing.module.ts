@@ -32,12 +32,8 @@ const routes: Routes = [
     loadChildren: () => import('./pages/tabs/quetes/quetes.module').then( m => m.QuetesPageModule)
   },
   {
-    path: 'home/options',
-    loadChildren: () => import('./pages/tabs/parametres/parametres.module').then( m => m.ParametresPageModule)
-  },
-  {
-    path: 'home/amis',
-    loadChildren: () => import('./pages/tabs/amis/amis.module').then(m => m.AmisPageModule)
+    path: 'home/friends',
+    loadChildren: () => import('./pages/tabs/friends/friends.module').then( m => m.FriendsPageModule)
   },
   {
     path: 'registration',

@@ -53,16 +53,7 @@ const routes: Routes = [
         ]
       },
       {
-        path: 'options',
-        children: [
-          {
-            path: '',
-            loadChildren: () => import('../pages/tabs/parametres/parametres.module').then(m => m.ParametresPageModule)
-          }
-        ]
-      },
-      {
-        path: 'amis',
+        path: 'friends',
         children: [
           {
             path: '',

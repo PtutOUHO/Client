@@ -1,5 +1,6 @@
 import {Component, OnInit} from '@angular/core';
 import {Router} from '@angular/router';
+import { AuthenticationService } from "../../../shared/authentication-service";
 import {HomePage} from '../../../home/home.page';
 @Component({
   selector: 'app-accueil',
@@ -11,7 +12,8 @@ export class AccueilPage implements OnInit {
 
   constructor(
       public router: Router,
-      public homePage: HomePage
+      public homePage: HomePage,
+      public authService: AuthenticationService
       ) {
   }
 
