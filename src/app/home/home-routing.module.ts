@@ -53,7 +53,7 @@ const routes: Routes = [
         ]
       },
       {
-        path: 'friends',
+        path: 'amis',
         children: [
           {
             path: '',

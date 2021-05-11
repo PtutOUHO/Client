@@ -27,13 +27,10 @@ export class HomePage implements OnInit, OnDestroy {
   ngOnInit() {
     const pages = this.router.url.split('/');
     this.title = pages[pages.length - 1];
-
     if (!this.authService.isLoggedIn()) {
       this.router.navigate(["login"]);
     }
     else if (this.title == "home") {
-      this.login.ngOnDestroy();
-      this.register.ngOnDestroy();
       this.router.navigate(["home/accueil"]);
       this.title = "Accueil";
     }
