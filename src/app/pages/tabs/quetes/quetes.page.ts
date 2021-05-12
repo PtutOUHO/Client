@@ -3,6 +3,7 @@ import { Router } from '@angular/router';
 import {Quest} from '../../../shared/quest';
 import {AuthenticationService} from '../../../shared/authentication-service';
 
+
 @Component({
   selector: 'app-quetes',
   templateUrl: './quetes.page.html',
@@ -10,6 +11,7 @@ import {AuthenticationService} from '../../../shared/authentication-service';
 })
 
 export class QuetesPage implements OnInit {
+  test: any;
   constructor(
     public router: Router,
     private quest: Quest,
