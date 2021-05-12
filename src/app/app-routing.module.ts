@@ -32,6 +32,10 @@ const routes: Routes = [
     loadChildren: () => import('./pages/tabs/quetes/quetes.module').then( m => m.QuetesPageModule)
   },
   {
+    path:'shoes/:quest_id',
+    loadChildren: () => import('./pages/shoes/shoes.module').then( m => m.ShoesPageModule)
+  },
+  {
     path: 'home/amis',
     loadChildren: () => import('./pages/tabs/amis/amis.module').then( m => m.AmisPageModule)
   },
@@ -52,7 +56,8 @@ const routes: Routes = [
     loadChildren: () => import('./error-page/error-page.module').then( m => m.ErrorPagePageModule)
   },
   // A PLACER A LA FIN
-  {path: '**', redirectTo: '/404'},
+  {path: '**', redirectTo: '/404'}
+
 
 
   // A PLACER A LA FIN

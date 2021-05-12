@@ -2,6 +2,7 @@ import { Component, OnInit } from "@angular/core";
 import { Router } from "@angular/router";
 import { AuthenticationService } from "../../../shared/authentication-service";
 
+
 @Component({
   selector: "app-quetes",
   templateUrl: "./quetes.page.html",
@@ -9,40 +10,96 @@ import { AuthenticationService } from "../../../shared/authentication-service";
 })
 
 export class QuetesPage implements OnInit {
-  test : any;
+  test: any;
   constructor(
     public authService: AuthenticationService,
-    public router: Router
-
+    public router: Router,
   ) {}
-    
-  questList = [
-        {
-          quest_name: 'Poulet'
-        },
-        {
-          quest_description: 'Clean Code'
-        },
-        {
-          quest_creationDate: '0'
-        },
-        {
-          quest_type: 'on verra'
-        },
-        {
-          quest_nbRp: '200'
-        },
-        {
-          quest_distance: 'optionnel'  
-        },
-        {
-          quest_time: 'optionnel'  
-        },
-        {
-          quest_userId: 'optionnel'  
-        }
+
+  questDailyList = [
+    {
+      quest_id: "jyguhkfzeioflgzefb",
+      quest_name: "FootingQuest",
+      quest_description: "Voici la description",
+      quest_creation_date: Date.now(),
+      quest_userId: "83Rx2iDpyoZKJEDqSbbVEhj5pNG2",
+      quest_period: 3,
+      quest_type: 3,
+      nbRp: 1000,
+      quest_distance: 2,
+      quest_temps: 2
+    },
+  ];
+
+  questWeeklyList = [
+    {
+      quest_id: "jyguhkfzeioflgzefb",
+      quest_name: "FootingQuest",
+      quest_description: "Voici la description",
+      quest_creation_date: Date.now(),
+      quest_userId: "83Rx2iDpyoZKJEDqSbbVEhj5pNG2",
+      quest_period: 3,
+      quest_type: 3,
+      nbRp: 1000,
+      quest_distance: 2,
+      quest_temps: 2
+    },
+    {
+      quest_id: "jyguhkfzeioflgzefb",
+      quest_name: "FootingQuest", 
+      quest_description: "Voici la description", 
+      quest_creation_date: Date.now(), 
+      quest_userId: "83Rx2iDpyoZKJEDqSbbVEhj5pNG2", 
+      quest_period: 3, 
+      quest_type: 3, 
+      nbRp: 1000, 
+      quest_distance: 2, 
+      quest_temps: 2
+    },
+  ];
+
+  questMonthlyList = [
+    { 
+      quest_id: "jyguhkfzeioflgzefb", 
+      quest_name: "FootingQuest", 
+      quest_description: "Voici la description", 
+      quest_creation_date: Date.now(), 
+      quest_userId: "83Rx2iDpyoZKJEDqSbbVEhj5pNG2", 
+      quest_period: 3, 
+      quest_type: 3, 
+      bRp: 1000, 
+      quest_distance: 2, 
+      quest_temps: 2 },
+    { 
+      quest_id: "jyguhkfzeioflgzefb", 
+      quest_name: "FootingQuest", 
+      quest_description: "Voici la description", 
+      quest_creation_date: Date.now(), 
+      quest_userId: "83Rx2iDpyoZKJEDqSbbVEhj5pNG2", 
+      quest_period: 3, 
+      quest_type: 3, 
+      nbRp: 1000, 
+      quest_distance: 2, 
+      quest_temps: 2 },
+    { 
+      quest_id: "jyguhkfzeioflgzefb", 
+      quest_name: "FootingQuest", 
+      quest_description: "Voici la description", 
+      quest_creation_date: Date.now(), 
+      quest_userId: "83Rx2iDpyoZKJEDqSbbVEhj5pNG2", 
+      quest_period: 3, 
+      quest_type: 3, 
+      nbRp: 1000, 
+      quest_distance: 2, 
+      quest_temps: 2 },
   ];
 
   ngOnInit() {
   }
+
+  goToShoes() {
+    this.router.navigate(['/shoes', this.questDailyList]);
+  }
+
+
 }
