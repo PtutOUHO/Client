@@ -35,17 +35,17 @@ export class QuetesPage implements OnInit {
         });
     });
 
-    if (this.compareDate(this.creationDateQuest, this.todayDate) === -1) {
-        this.generateDailyQuest();
-    }
-    this.creationDateQuest.setDate(this.creationDateQuest.getDay() + 7);
-    if (this.compareDate(this.creationDateQuest, this.todayDate) === -1) {
-        this.generateWeeklyQuest();
-    }
-    this.creationDateQuest.setDate(this.creationDateQuest.getDay() + 23);
-    if (this.compareDate(this.creationDateQuest, this.todayDate) === -1) {
-        this.generateMonthlyQuest();
-    }
+    // if (this.compareDate(this.creationDateQuest, this.todayDate) === -1) {
+    //     this.generateDailyQuest();
+    // }
+    // this.creationDateQuest.setDate(this.creationDateQuest.getDay() + 7);
+    // if (this.compareDate(this.creationDateQuest, this.todayDate) === -1) {
+    //     this.generateWeeklyQuest();
+    // }
+    // this.creationDateQuest.setDate(this.creationDateQuest.getDay() + 23);
+    // if (this.compareDate(this.creationDateQuest, this.todayDate) === -1) {
+    //     this.generateMonthlyQuest();
+    // }
 }
 
 async generateDailyQuest() {
