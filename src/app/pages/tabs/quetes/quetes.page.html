@@ -3,8 +3,7 @@
         <ion-card-header>
             <ion-card-title>Quotidienne</ion-card-title>
         </ion-card-header>
-        <!-- Pour chaque quête quotienne -->
-        <ion-card (click)="goToShoes()"  *ngFor="let quest of questDailyList">
+        <ion-card *ngFor="let quest of questDailyList" (click)="goToShoes(quest.quest_id)">
             <ion-card-header>
                 <ion-item>
                     <ion-icon color="dark" name="time-outline" slot="start"></ion-icon>
@@ -23,7 +22,7 @@
         <ion-card-header>
             <ion-card-title>Hebdomadaire</ion-card-title>
         </ion-card-header>
-        <ion-card (click)="goToShoes()"  *ngFor="let quest of questDailyList">
+        <ion-card *ngFor="let quest of questWeeklyList" (click)="goToShoes(quest.quest_id)">
             <ion-card-header>
                 <ion-item>
                     <ion-icon color="dark" name="time-outline" slot="start"></ion-icon>
@@ -42,7 +41,7 @@
         <ion-card-header>
             <ion-card-title>Mensuel</ion-card-title>
         </ion-card-header>
-        <ion-card (click)="goToShoes()"  *ngFor="let quest of questDailyList">
+        <ion-card *ngFor="let quest of questMonthlyList" (click)="goToShoes(quest.quest_id)">
             <ion-card-header>
                 <ion-item>
                     <ion-icon color="dark" name="time-outline" slot="start"></ion-icon>

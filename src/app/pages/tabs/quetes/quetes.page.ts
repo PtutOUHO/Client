@@ -60,7 +60,7 @@ export class QuetesPage implements OnInit {
 
   questMonthlyList = [
     { 
-      quest_id: "jyguhkfzeioflgzefb", 
+      quest_id: 10, 
       quest_name: "FootingQuest", 
       quest_description: "Voici la description", 
       quest_creation_date: Date.now(), 
@@ -71,7 +71,7 @@ export class QuetesPage implements OnInit {
       quest_distance: 2, 
       quest_temps: 2 },
     { 
-      quest_id: "jyguhkfzeioflgzefb", 
+      quest_id: 10, 
       quest_name: "FootingQuest", 
       quest_description: "Voici la description", 
       quest_creation_date: Date.now(), 
@@ -82,7 +82,7 @@ export class QuetesPage implements OnInit {
       quest_distance: 2, 
       quest_temps: 2 },
     { 
-      quest_id: "jyguhkfzeioflgzefb", 
+      quest_id: 10, 
       quest_name: "FootingQuest", 
       quest_description: "Voici la description", 
       quest_creation_date: Date.now(), 
@@ -97,8 +97,9 @@ export class QuetesPage implements OnInit {
   ngOnInit() {
   }
 
-  goToShoes() {
-    this.router.navigate(['/shoes', this.questDailyList]);
+  goToShoes(id) {
+    console.log(id);
+    this.router.navigate(['/shoes', id]);
   }
 
 
