@@ -55,9 +55,13 @@ const routes: Routes = [
     path: '404',
     loadChildren: () => import('./error-page/error-page.module').then( m => m.ErrorPagePageModule)
   },
+  {
+    path: 'profil-edit',
+    loadChildren: () => import('./profil-edit/profil-edit.module').then( m => m.ProfilEditPageModule)
+  },
   // A PLACER A LA FIN
-  {path: '**', redirectTo: '/404'}
-
+  {path: '**', redirectTo: '/404'},
+  
 
 
   // A PLACER A LA FIN

@@ -6,18 +6,18 @@ import { Quest } from "../../../shared/quest";
 
 
 @Component({
-  selector: 'app-quetes',
-  templateUrl: './quetes.page.html',
-  styleUrls: ['./quetes.page.scss'],
+  selector: "app-quetes",
+  templateUrl: "./quetes.page.html",
+  styleUrls: ["./quetes.page.scss"],
 })
 
 export class QuetesPage implements OnInit {
   afStore: AngularFirestore;
   todayDate: Date;
   constructor(
-    public router: Router,
-    private quest: Quest,
     public authService: AuthenticationService,
+    public router: Router,
+    private quest: Quest
   ) {}
 
 
@@ -202,3 +202,4 @@ public compareDate(date1: Date, date2: Date): number {
     this.router.navigate(['/shoes', id]);
   }
 }
+

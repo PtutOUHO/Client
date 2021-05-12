@@ -5,37 +5,33 @@
 </ion-header>
 
 <ion-content>
-    <form>
-        <ion-item lines="full">
-            <ion-label class="text-form" position="floating">Nom : </ion-label>
-            <ion-input type="text" placeholder="{{userData.lastname}}" required></ion-input>
+<form>
+    <ion-item lines="full">
+            <ion-label class="text-form" position="floating">Nom :  </ion-label>
+            <ion-input type="text" value="{{userData.lastname}}" readonly></ion-input>
         </ion-item>
 
         <ion-item lines="full">
-            <ion-label class="text-form" position="floating">Prenom : </ion-label>
-            <ion-input type="text" placeholder="{{userData.firstname}}" required></ion-input>
+            <ion-label class="text-form" position="floating">Prenom :  </ion-label>
+            <ion-input type="text" value="{{userData.firstname}}" readonly></ion-input>
         </ion-item>
 
         <ion-item lines="full">
-            <ion-label class="text-form" position="floating">Pseudonyme : </ion-label>
-            <ion-input type="text" placeholder="{{userData.pseudo}}" required></ion-input>
+            <ion-label class="text-form" position="floating">Pseudonyme :  </ion-label>
+            <ion-input type="text" value="{{userData.pseudo}}" readonly></ion-input>
         </ion-item>
 
         <ion-item lines="full">
-            <ion-label class="text-form" position="floating">Email : </ion-label>
-            <ion-input type="text" placeholder="{{userData.email}}" #email required></ion-input>
+            <ion-label class="text-form" position="floating">Email :  </ion-label>
+            <ion-input type="text" value="{{userData.email}}" #email readonly></ion-input>
         </ion-item>
 
         <ion-item lines="full">
-            <ion-label class="text-form" position="floating">Date de naissance : </ion-label>
-            <ion-input type="date" value="{{userData.birthdate}}" required></ion-input>
+            <ion-label class="text-form" position="floating">Date de naissance :  </ion-label>
+            <ion-input type="date" value="{{userData.birthdate}}" readonly></ion-input>
         </ion-item>
     </form>
-    <!-- <ion-title>
-        Statistiques 
-    </ion-title>
--->
-    <ion-button color="warning" type="submit" (click)="resetPassword()" expand="block">Modification du mot de passe
-    </ion-button>
+    <ion-button color="warning" type="submit" (click)="resetPassword()" expand="block">Modification du mot de passe</ion-button>
+    <ion-button color="primary" type="submit" (click)="editProfil()" expand="block">Modifier le profile</ion-button>
 
 </ion-content>
