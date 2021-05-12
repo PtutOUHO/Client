@@ -28,4 +28,8 @@ export class ProfilPage implements OnInit {
     
   }
 
+  editProfil() {
+    this.router.navigate(['profil-edit']);
+  }
+
 }
