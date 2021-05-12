@@ -48,12 +48,10 @@ export class LoginPage implements OnInit {
     this.authService.SignOut();
     
   }
-  
-  ngOnDestroy() {
-  }
 
   goToRegisterPage() {
       this.router.navigate(['registration']);
+
   }
 
 }

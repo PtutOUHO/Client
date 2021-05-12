@@ -20,6 +20,10 @@ const routes: Routes = [
     loadChildren: () => import('./pages/map/map.module').then(m => m.MapPageModule)
   },
   {
+    path: 'home/trajet-geo',
+    loadChildren: () => import('./pages/trajet-geo/trajet-geo.module').then( m => m.TrajetGeoPageModule)
+  },
+  {
     path: 'home/profil',
     loadChildren: () => import('./pages/tabs/profil/profil.module').then( m => m.ProfilPageModule)
   },
@@ -28,8 +32,12 @@ const routes: Routes = [
     loadChildren: () => import('./pages/tabs/quetes/quetes.module').then( m => m.QuetesPageModule)
   },
   {
-    path: 'home/friends',
-    loadChildren: () => import('./pages/tabs/friends/friends.module').then( m => m.FriendsPageModule)
+    path:'shoes/:quest_id',
+    loadChildren: () => import('./pages/shoes/shoes.module').then( m => m.ShoesPageModule)
+  },
+  {
+    path: 'home/amis',
+    loadChildren: () => import('./pages/tabs/amis/amis.module').then( m => m.AmisPageModule)
   },
   {
     path: 'registration',

@@ -3,10 +3,10 @@ import {Router} from '@angular/router';
 
 @Component({
   selector: 'app-friends',
-  templateUrl: './friends.page.html',
-  styleUrls: ['./friends.page.scss'],
+  templateUrl: './amis.page.html',
+  styleUrls: ['./amis.page.scss'],
 })
-export class FriendsPage implements OnInit {
+export class AmisPage implements OnInit {
 
   constructor(
       public router: Router

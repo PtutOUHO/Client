@@ -26,5 +26,8 @@ export class AccueilPage implements OnInit {
     this.homePage.title = 'map';
   }
 
-  
+  displayMapWithDirection() {
+    this.router.navigate(['home/trajet-geo']);
+    this.homePage.title = 'trajet';
+  }
 }
