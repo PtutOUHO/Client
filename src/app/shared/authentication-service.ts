@@ -125,7 +125,8 @@ export class AuthenticationService {
     lastname,
     pseudo,
     birthdate,
-    inscription_date
+    inscription_date,
+    town
   ) {
     const user: User = {
       uid: uid,
@@ -135,6 +136,7 @@ export class AuthenticationService {
       pseudo: pseudo,
       birthdate: birthdate,
       inscription_date: inscription_date,
+      town: town,
     };
     return this.SetUserData(user);
   }
