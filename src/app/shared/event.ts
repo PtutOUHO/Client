@@ -17,6 +17,7 @@ export class Event extends Course {
 
     
     constructor() {
-        super();
+        super(null, null, null, null);
+        //TODO
     }
 }

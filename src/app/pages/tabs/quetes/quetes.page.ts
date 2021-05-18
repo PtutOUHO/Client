@@ -1,6 +1,7 @@
 import { Component, OnInit } from "@angular/core";
 import { AngularFirestore } from "@angular/fire/firestore";
 import { Router } from "@angular/router";
+import { type } from "os";
 import { AuthenticationService } from "../../../shared/authentication-service";
 import { Quest } from "../../../shared/quest";
 
@@ -14,99 +15,42 @@ import { Quest } from "../../../shared/quest";
 export class QuetesPage implements OnInit {
   afStore: AngularFirestore;
   todayDate: Date;
+  uid: any;
+  givenQuest: Quest[];
+  selectedQuest: Quest[];
   constructor(
     public authService: AuthenticationService,
     public router: Router,
-  ) { }
+  ) {
+  }
 
 
   ngOnInit() {
-    /* this.afStore = this.authService.afStore;
+    this.afStore = this.authService.afStore;
+    this.uid = JSON.parse(localStorage.getItem('userData')).uid;
     this.todayDate = new Date();
 
-    let uid = JSON.parse(localStorage.getItem('userData')).uid;
-    let collection = this.authService.afStore.collection('Quest', ref => ref.where('quest_userId', '==', uid));
-    let documentList = collection.valueChanges();
-    documentList.forEach(doc => {
-      doc.forEach(quest => {
-        const quete = quest as Quest;
-        console.log(quete.quest_userId);
-      });
-    }); */
-
-    // if (this.compareDate(this.creationDateQuest, this.todayDate) === -1) {
-    //     this.generateDailyQuest();
-    // }
-    // this.creationDateQuest.setDate(this.creationDateQuest.getDay() + 7);
-    // if (this.compareDate(this.creationDateQuest, this.todayDate) === -1) {
-    //     this.generateWeeklyQuest();
-    // }
-    // this.creationDateQuest.setDate(this.creationDateQuest.getDay() + 23);
-    // if (this.compareDate(this.creationDateQuest, this.todayDate) === -1) {
-    //     this.generateMonthlyQuest();
-    // }
+    this.givenQuest = this.getGivenQuestFromDatabase();
+    this.selectedQuest = this.getSelectedQuestFromDatabase();
+    this.checkIfGivenQuestAreExpired();
+    this.checkIfSelectedQuestAreExpired();
+    this.checkRemainingGivenQuest();
+    this.removeUnselectedExpiredQuests();
   }
-
-  /* async generateDailyQuest() {
-    var questType;
-    var questDistance;
-    var questTime;
-    var uid = JSON.parse(localStorage.getItem('userData')).uid;
-    var collection = this.authService.afStore.collection("Quest", ref => ref.where('quest_userId', '==', uid));
-    var documentList = collection.valueChanges();
-    documentList.forEach(doc => {
-      doc.forEach(quest => {
-        var quete = <Quest>quest;
-        var date_expiration: Date;
-        date_expiration.setDate(quete.quest_creation_date.getDay() + 1)
-        if (this.compareDate(date_expiration, this.todayDate) == 1) {
-
-        }
-      });
-
-    });
-    switch (Math.floor(Math.random() * 3)) {
-      case 1: {
-        questType = "ChronoQuest"
-        questDistance = Math.floor(Math.random() * 3);
-        questTime = Math.floor(Math.random() * 3);
-        break;
+  checkRemainingGivenQuest() {
+    //Voir combien de quetes il faut generer et les generer
+    var questToGenerate = [1, 2, 3];
+    this.givenQuest.forEach(quest => {
+      questToGenerate[quest.period]--;
+    })
+    var index = 1;
+    questToGenerate.forEach(numberToGenerate => {
+      for (var i = 0; i < numberToGenerate; i++) {
+          this.generateQuest(index);
       }
-      case 2: {
-        questType = "DistanceQuest"
-        questDistance = Math.floor(Math.random() * 3);
-        break;
-      }
-      case 3: {
-        questType = "FootingQuest"
-        questTime = Math.floor(Math.random() * 3);
-        break;
-      }
-      default: {
-        break;
-      }
-    }
-    if (questType != null) {
-      var documentName = "dailyQuest_" + Date.now();
-      await this.authService.afStore.collection('quests').add({ original: documentName });
-      this.authService.afStore.collection('quests').doc(documentName).set({
-        quest_name: documentName,
-        quest_description: "test",
-        quest_creationDate: Date.now(),
-        quest_type: questType,
-        quest_nbRp: 1000,
-        quest_distance: questDistance,
-        quest_time: questTime,
-      });
-    }
+    index++;
+    })
   }
-  generateMonthlyQuest() {
-    throw new Error("Method not implemented.");
-  }
-  generateWeeklyQuest() {
-    throw new Error("Method not implemented.");
-  }
-   */
 
   public compareDate(date1: Date, date2: Date): number {
     const d1 = new Date(date1); const d2 = new Date(date2);
@@ -205,36 +149,93 @@ export class QuetesPage implements OnInit {
     this.router.navigate(['/shoes', id]);
   }
 
-  selectGivenQuest() {
-    //TODO
-    //Prendre toutes les quêtes ou le userId est égal à celui de l'utilisateur et où expired n'est pas false
+  getGivenQuestFromDatabase(): Quest[] {
+    var questList: Quest[];
+    let collection = this.authService.afStore.collection('Quest', ref => ref.where('userId', '==', this.uid).where('expired', '==', false));
+    let documentList = collection.valueChanges();
+    documentList.forEach(doc => {
+      doc.forEach(quest => {
+        const quete = quest as Quest;
+        questList.push(quete);
+      });
+    });
+    return questList;
   }
 
-  selectSelectedQuest() : Quest {
-    //TODO
-    //Prendre toutes les quêtes où selectionne n'est pas nulle et ou le userId est égal à celui de l'utilisateur et où selection{expired} n'est pas false
-    return new Quest();
+  getSelectedQuestFromDatabase(): Quest[] {
+    var questList: Quest[];
+    let collection = this.authService.afStore.collection('Quest', ref => ref.where('userId', '==', this.uid).where('selection.expired', '==', false));
+    let documentList = collection.valueChanges();
+    documentList.forEach(doc => {
+      doc.forEach(quest => {
+        const quete = quest as Quest;
+        questList.push(quete);
+      });
+    });
+    return questList;
   }
 
-  checkIfGivenQuestIsExpired() {
-    //TODO
-    //Prendre toutes les quêtes ou le userId égal à celui de l'utilisateur et expired n'est pas true
-    //Pour chacune, prendre la date d'expiration et la comparer
-    //Si la date d'expiration de selection est dépassée, calculer et donner les récompenses
-    //A la fin, regarder combien de quetes sont proposées par jours
+  checkIfGivenQuestAreExpired() {
+    var index = 0;
+    this.givenQuest.forEach(quete => {
+      if (this.checkDateExpired(quete.expiration_date)) {
+        quete.expired = true;
+        this.authService.afStore.collection('Quest').doc(quete.id).set(quete, {
+          merge: true,
+        });
+        delete this.givenQuest[index];
+      }
+      index++;
+    });
   }
 
-  checkIfSelectedQuestIsExpired() {
-    //TODO
-    //Prendre toutes les quêtes ou le userId égal à celui de l'utilisateur et où selection n'est pas nulle et expired n'est pas true, et selection{expired} n'est pas false
-    //Pour chacune, prendre la date d'expiration et la comparer
-    //Si la date d'expiration de selection est dépassée, calculer et donner les récompenses
+  checkIfSelectedQuestAreExpired() {
+    var index = 0;
+    this.selectedQuest.forEach(quete => {
+      if (this.checkDateExpired(quete.selection.expiration_date)) {
+        quete.selection.expired = true;
+        this.authService.afStore.collection('Quest').doc(quete.id).set(quete, {
+          merge: true,
+        });
+        //TODO Donner récompenses
+        delete this.selectedQuest[index];
+      }
+      index++;
+    })
   }
 
-  removeUnselectedQuests() {
-    //TODO
+  removeUnselectedExpiredQuests() {
     //Prendre toutes les quêtes ou selection est nulle et expired est true
     //Les supprimer
+    
+    let collection = this.authService.afStore.collection('Quest', ref => ref.where('userId', '==', this.uid).where('expired', '==', true).where('selection.expired', '==', null));
+    let documentList = collection.valueChanges();
+    documentList.forEach(doc => {
+      doc.forEach(quest => {
+        const quete = quest as Quest;
+        this.authService.afStore.collection('Quest').doc(quete.id).delete;
+      });
+    });
+  }
+
+  getRemainingTime(date_expiration: Date): any {
+    var now = new Date().valueOf();
+    var ms = date_expiration.valueOf() - now;
+    return this.convertMillisecondsToDigitalClock(ms);
+
+  }
+
+  // CONVERT MILLISECONDS TO DIGITAL CLOCK FORMAT
+  convertMillisecondsToDigitalClock(ms: number) {
+    var hours = Math.floor(ms / 3600000); // 1 Hour = 36000 Milliseconds
+    var minutes = Math.floor((ms % 3600000) / 60000); // 1 Minutes = 60000 Milliseconds
+    var seconds = Math.floor(((ms % 360000) % 60000) / 1000); // 1 Second = 1000 Milliseconds
+    return {
+      hours: hours,
+      minutes: minutes,
+      seconds: seconds,
+      clock: hours + ":" + minutes + ":" + seconds
+    };
   }
 
   checkDateExpired(date_expiration: Date): boolean {
@@ -244,6 +245,41 @@ export class QuetesPage implements OnInit {
     }
     else {
       return false;
+    }
+  }
+
+  //Génération
+  generateQuest(period: number) {
+    var questType;
+    var questDistance;
+    var questTime;
+    switch (Math.floor(Math.random() * 3)) {
+      case 1: {
+        questType = "ChronoQuest"
+        questDistance = Math.floor(Math.random() * 3) * period;
+        questTime = Math.floor(Math.random() * 3) * period;
+        break;
+      }
+      case 2: {
+        questType = "DistanceQuest"
+        questDistance = Math.floor(Math.random() * 3) * period;
+        break;
+      }
+      case 3: {
+        questType = "FootingQuest"
+        questTime = Math.floor(Math.random() * 3) * period;
+        break;
+      }
+      default: {
+        break;
+      }
+    }
+    if (questType != null) {
+      var id: string = this.afStore.createId();
+      var quest = new Quest(id, period, questType, questDistance, questTime);
+      this.authService.afStore.collection('quests').doc(id).set(quest, {
+        merge: true,
+      });
     }
   }
 
