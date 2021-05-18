@@ -12,10 +12,15 @@ export class Quest extends Course {
         shoes: number;
         selection_date: Date; //Now
         expiration_date: Date; //Calcul en fonction de la periode et de la date de selection, vérification à chaque connexion
+        expired: false;
         //Une fois la quête terminée
         distance_sucess?: number;
         time_sucess?: number;
         percentage?: number; //Calcul en fonction des shoes, de la distance et/ ou du temps accomplie.
     }
     //ATTENTION, une footing quest peut aussi s'expirer si le temps est dépassé!
+    
+    constructor() {
+        super();
+    }
 }

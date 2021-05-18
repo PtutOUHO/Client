@@ -4,4 +4,7 @@ export class Course {
     description: string;
     given_date: Date;
     expired: false;
+
+    constructor() {
+    }
 }

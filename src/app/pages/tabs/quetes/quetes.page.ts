@@ -2,7 +2,7 @@ import { Component, OnInit } from "@angular/core";
 import { AngularFirestore } from "@angular/fire/firestore";
 import { Router } from "@angular/router";
 import { AuthenticationService } from "../../../shared/authentication-service";
-// import { Quest } from "../../../shared/quest";
+import { Quest } from "../../../shared/quest";
 
 
 @Component({
@@ -17,7 +17,6 @@ export class QuetesPage implements OnInit {
   constructor(
     public authService: AuthenticationService,
     public router: Router,
-    // private quest: Quest
   ) { }
 
 
@@ -107,6 +106,7 @@ export class QuetesPage implements OnInit {
   generateWeeklyQuest() {
     throw new Error("Method not implemented.");
   }
+   */
 
   public compareDate(date1: Date, date2: Date): number {
     const d1 = new Date(date1); const d2 = new Date(date2);
@@ -117,7 +117,7 @@ export class QuetesPage implements OnInit {
     if (d1 > d2) { return 1; }
 
     if (d1 < d2) { return -1; }
-  } */
+  }
 
   questDailyList = [
     {
@@ -204,5 +204,48 @@ export class QuetesPage implements OnInit {
     console.log(id);
     this.router.navigate(['/shoes', id]);
   }
+
+  selectGivenQuest() {
+    //TODO
+    //Prendre toutes les quêtes ou le userId est égal à celui de l'utilisateur et où expired n'est pas false
+  }
+
+  selectSelectedQuest() : Quest {
+    //TODO
+    //Prendre toutes les quêtes où selectionne n'est pas nulle et ou le userId est égal à celui de l'utilisateur et où selection{expired} n'est pas false
+    return new Quest();
+  }
+
+  checkIfGivenQuestIsExpired() {
+    //TODO
+    //Prendre toutes les quêtes ou le userId égal à celui de l'utilisateur et expired n'est pas true
+    //Pour chacune, prendre la date d'expiration et la comparer
+    //Si la date d'expiration de selection est dépassée, calculer et donner les récompenses
+    //A la fin, regarder combien de quetes sont proposées par jours
+  }
+
+  checkIfSelectedQuestIsExpired() {
+    //TODO
+    //Prendre toutes les quêtes ou le userId égal à celui de l'utilisateur et où selection n'est pas nulle et expired n'est pas true, et selection{expired} n'est pas false
+    //Pour chacune, prendre la date d'expiration et la comparer
+    //Si la date d'expiration de selection est dépassée, calculer et donner les récompenses
+  }
+
+  removeUnselectedQuests() {
+    //TODO
+    //Prendre toutes les quêtes ou selection est nulle et expired est true
+    //Les supprimer
+  }
+
+  checkDateExpired(date_expiration: Date): boolean {
+    var isExpired = this.compareDate(date_expiration, new Date());
+    if (isExpired == 1 || isExpired == 0) {
+      return true;
+    }
+    else {
+      return false;
+    }
+  }
+
 }
 
