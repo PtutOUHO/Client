@@ -17,7 +17,9 @@ export class Quest extends Course {
         //Une fois la quête terminée
         distance_sucess?: number;
         time_sucess?: number;
+        //Quete terminée et expirée
         percentage?: number; //Calcul en fonction des shoes, de la distance et/ ou du temps accomplie.
+        nbRp?: number;
     }
     //ATTENTION, une footing quest peut aussi s'expirer si le temps est dépassé!
 
@@ -40,7 +42,6 @@ export class Quest extends Course {
                 questDescription = "Cette quête sera accomplie si vous effectué la distance imposée en moins de temps que le temps imposé, et ce avant la date d'expiration. Vous percevrez un pourcentage de récompense en fonction de votre progression."
                 break;
             default:
-                console.log("Type: ", type)
                 break;
         }
         super(id, questName, questDescription, new Date());

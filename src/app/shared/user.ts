@@ -6,5 +6,5 @@ export class User {
     lastname: string;
     birthdate: Date;
     inscription_date: Date;
-    town: string;
+    nbRp: number;
 }
