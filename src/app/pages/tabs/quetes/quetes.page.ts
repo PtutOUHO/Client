@@ -1,7 +1,7 @@
 import { Component, OnInit } from "@angular/core";
 import { AngularFirestore } from "@angular/fire/firestore";
 import { Router } from "@angular/router";
-import { from } from "rxjs";
+import { User } from "src/app/shared/user";
 import { AuthenticationService } from "../../../shared/authentication-service";
 import { Quest } from "../../../shared/quest";
 
@@ -39,11 +39,11 @@ export class QuetesPage implements OnInit {
 
   ngOnInit() {
   }
+
   checkRemainingGivenQuest() {
     //Voir combien de quetes il faut generer et les generer
     var questToGenerate = [1, 2, 3];
     this.givenQuest.forEach(quest => {
-      console.log(this.givenQuest)
       questToGenerate[quest.period - 1]--;
     })
     var index = 1;
@@ -186,6 +186,8 @@ export class QuetesPage implements OnInit {
           merge: true,
         });
         //TODO Donner récompenses
+        this.giveRewards(quete);
+
         delete this.selectedQuest[index];
         refresh = true;
       }
@@ -195,6 +197,55 @@ export class QuetesPage implements OnInit {
       this.continueRefresh = false;
       this.getSelectedQuestFromDatabase(true);
     }
+  }
+
+  async giveRewards(quete: Quest) {
+    let collection = this.authService.afStore.collection('users', ref => ref.where('uid', '==', this.uid));
+    const documentList = await collection.get().toPromise();
+    documentList.docs.forEach(user => {
+      var userData = user.data() as User;
+
+      //Calcul
+      var pourcentage: number;
+      var rpToGive: number;
+      switch (quete.type) {
+        case 1:
+          //Chrono
+          pourcentage = Math.floor(100 * quete.selection.time_sucess / quete.time);
+          rpToGive = quete.nbRp * pourcentage / 100;
+          break;
+        case 2:
+          //Distance
+          pourcentage = Math.floor(100 * quete.selection.distance_sucess / quete.distance);
+          rpToGive = quete.nbRp * pourcentage / 100;
+          break;
+        case 3:
+          //Distance
+          if (quete.selection.distance_sucess == quete.distance) {
+            var pourcentageTempsGagne = Math.floor(100 * quete.time / quete.selection.time_sucess);
+            rpToGive = quete.nbRp * pourcentageTempsGagne / 100;
+
+          }
+          else if (quete.selection.time_sucess == quete.time) {
+            //Temps gagné
+            pourcentage = Math.floor(100 * quete.selection.distance_sucess / quete.distance);
+            rpToGive = quete.nbRp * pourcentage / 100;
+          }
+          break;
+      }
+      rpToGive = Math.floor(rpToGive);
+      userData.nbRp += rpToGive;
+      quete.selection.percentage = pourcentage;
+      quete.selection.nbRp = rpToGive;
+
+      this.authService.afStore.collection('users').doc(this.uid).set(userData, {
+        merge: true,
+      });
+
+      this.authService.afStore.collection('quests').doc(quete.id).set(quete, {
+        merge: true,
+      });
+    });
   }
 
   async removeUnselectedExpiredQuests() {
