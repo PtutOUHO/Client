@@ -57,11 +57,9 @@ export class Quest extends Course {
                 this.expiration_date.setDate(this.given_date.getDate() + 31)
                 break;
             default:
-                console.log("Period: ", period)
                 break;
 
         }
-        console.log(this.given_date, "    ", this.expiration_date)
         this.userId = JSON.parse(localStorage.getItem('userData')).uid;
         if (distance != null)
             this.distance = distance;

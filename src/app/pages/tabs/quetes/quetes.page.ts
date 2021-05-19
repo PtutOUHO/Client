@@ -24,6 +24,8 @@ export class QuetesPage implements OnInit {
   selectedDailyQuest: Quest[];
   selectedWeeklyQuest: Quest[];
   selectedMonthlyQuest: Quest[];
+  continueRefresh: boolean = true;
+  refreshDisplay: any;
   constructor(
     public authService: AuthenticationService,
     public router: Router,
@@ -41,6 +43,7 @@ export class QuetesPage implements OnInit {
     //Voir combien de quetes il faut generer et les generer
     var questToGenerate = [1, 2, 3];
     this.givenQuest.forEach(quest => {
+      console.log(this.givenQuest)
       questToGenerate[quest.period - 1]--;
     })
     var index = 1;
@@ -65,92 +68,11 @@ export class QuetesPage implements OnInit {
     if (d1 < d2) { return -1; }
   }
 
-  questDailyList = [
-    {
-      quest_id: "jyguhkfzeioflgzefb",
-      quest_name: "FootingQuest",
-      quest_description: "Voici la description",
-      quest_creation_date: new Date(),
-      quest_userId: "83Rx2iDpyoZKJEDqSbbVEhj5pNG2",
-      quest_period: 3,
-      quest_type: 3,
-      nbRp: 1000,
-      quest_distance: 2,
-      quest_temps: 2
-    },
-  ];
-
-  questWeeklyList = [
-    {
-      quest_id: "jyguhkfzeioflgzefb",
-      quest_name: "FootingQuest",
-      quest_description: "Voici la description",
-      quest_creation_date: new Date(),
-      quest_userId: "83Rx2iDpyoZKJEDqSbbVEhj5pNG2",
-      quest_period: 3,
-      quest_type: 3,
-      nbRp: 1000,
-      quest_distance: 2,
-      quest_temps: 2
-    },
-    {
-      quest_id: "jyguhkfzeioflgzefb",
-      quest_name: "FootingQuest",
-      quest_description: "Voici la description",
-      quest_creation_date: new Date(),
-      quest_userId: "83Rx2iDpyoZKJEDqSbbVEhj5pNG2",
-      quest_period: 3,
-      quest_type: 3,
-      nbRp: 1000,
-      quest_distance: 2,
-      quest_temps: 2
-    },
-  ];
-
-  questMonthlyList = [
-    {
-      quest_id: 10,
-      quest_name: "FootingQuest",
-      quest_description: "Voici la description",
-      quest_creation_date: new Date(),
-      quest_userId: "83Rx2iDpyoZKJEDqSbbVEhj5pNG2",
-      quest_period: 3,
-      quest_type: 3,
-      bRp: 1000,
-      quest_distance: 2,
-      quest_temps: 2
-    },
-    {
-      quest_id: 10,
-      quest_name: "FootingQuest",
-      quest_description: "Voici la description",
-      quest_creation_date: new Date(),
-      quest_userId: "83Rx2iDpyoZKJEDqSbbVEhj5pNG2",
-      quest_period: 3,
-      quest_type: 3,
-      nbRp: 1000,
-      quest_distance: 2,
-      quest_temps: 2
-    },
-    {
-      quest_id: 10,
-      quest_name: "FootingQuest",
-      quest_description: "Voici la description",
-      quest_creation_date: new Date(),
-      quest_userId: "83Rx2iDpyoZKJEDqSbbVEhj5pNG2",
-      quest_period: 3,
-      quest_type: 3,
-      nbRp: 1000,
-      quest_distance: 2,
-      quest_temps: 2
-    },
-  ];
-
   goToShoes(id) {
     this.router.navigate(['/shoes', id]);
   }
 
-  async getGivenQuestFromDatabase() {
+  async getGivenQuestFromDatabase(refresh?: boolean) {
     this.givenQuest = [];
     this.givenDailyQuest = [];
     this.givenWeeklyQuest = [];
@@ -174,10 +96,17 @@ export class QuetesPage implements OnInit {
           break;
       }
     });
-    this.getSelectedQuestFromDatabase();
+    if (refresh == undefined)
+      this.getSelectedQuestFromDatabase();
+    else if (refresh) {
+      this.continueRefresh = true;
+      this.ngSuite2();
+    }
+    else
+      this.refreshDisplay = undefined;
   }
 
-  async getSelectedQuestFromDatabase() {
+  async getSelectedQuestFromDatabase(refresh?: boolean) {
     this.selectedQuest = [];
     this.selectedDailyQuest = [];
     this.selectedWeeklyQuest = [];
@@ -201,14 +130,29 @@ export class QuetesPage implements OnInit {
           break;
       }
     });
-    this.ngSuite();
+    if (refresh == undefined)
+      this.ngSuite();
+    else if (refresh) {
+      this.continueRefresh = true;
+      this.ngSuite2();
+    }
+    else
+      this.refreshDisplay = undefined;
   }
 
   ngSuite() {
     this.checkIfGivenQuestAreExpired();
     this.checkIfSelectedQuestAreExpired();
+    if (this.continueRefresh)
+      this.ngSuite2();
+  }
+  ngSuite2() {
     this.checkRemainingGivenQuest();
     this.removeUnselectedExpiredQuests();
+    if (this.refreshDisplay) {
+      this.getGivenQuestFromDatabase(false)
+      this.getSelectedQuestFromDatabase(false)
+    }
   }
 
   checkIfGivenQuestAreExpired() {
@@ -226,7 +170,8 @@ export class QuetesPage implements OnInit {
       index++;
     });
     if (refresh) {
-      this.getGivenQuestFromDatabase();
+      this.continueRefresh = false;
+      this.getGivenQuestFromDatabase(true);
     }
   }
 
@@ -247,7 +192,8 @@ export class QuetesPage implements OnInit {
       index++;
     })
     if (refresh) {
-      this.getSelectedQuestFromDatabase();
+      this.continueRefresh = false;
+      this.getSelectedQuestFromDatabase(true);
     }
   }
 
@@ -270,8 +216,8 @@ export class QuetesPage implements OnInit {
 
   }
 
-  // CONVERT MILLISECONDS TO DIGITAL CLOCK FORMAT
-  convertMillisecondsToDigitalClock(ms: number) {
+  // Avoir le temps restant
+  convertMillisecondsToDigitalClock(ms: number) { //JEST
     var hours = Math.floor(ms / 3600000); // 1 Hour = 36000 Milliseconds
     var minutes = Math.floor((ms % 3600000) / 60000); // 1 Minutes = 60000 Milliseconds
     var seconds = Math.floor(((ms % 360000) % 60000) / 1000); // 1 Second = 1000 Milliseconds
@@ -283,7 +229,7 @@ export class QuetesPage implements OnInit {
     };
   }
 
-  checkDateExpired(date_expiration: Date): boolean {
+  checkDateExpired(date_expiration: Date): boolean { //JEST
     var isExpired = this.compareDate(new Date(), date_expiration);
     if (isExpired == 1 || isExpired == 0) {
       return true;
@@ -295,6 +241,7 @@ export class QuetesPage implements OnInit {
 
   //Génération
   generateQuest(period: number) {
+    this.refreshDisplay = true;
     var questType;
     var questDistance;
     var questTime;
