@@ -11,9 +11,9 @@ export class Course {
         name: string,
         description: string,
         given_date: Date) {
-            this.id = id;
-            this.name = name;
-            this.description = description;
-            this.given_date = given_date;
+        this.id = id;
+        this.name = name;
+        this.description = description;
+        this.given_date = given_date;
     }
 }

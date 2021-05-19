@@ -30,24 +30,39 @@ export class Quest extends Course {
             case 1:
                 questName = "ChronoQuest";
                 questDescription = "Il s'agit d'une quête où tout se joue sur le temps, vous devez courir le temps impartie avant la date d'expiration pour accomplir cette quête."
+                break;
             case 2:
                 questName = "DistanceQuest";
                 questDescription = "Il s'agit d'une quête où tout se joue sur la distance, vous devez courir la distance impartie avant la date d'expiration pour accomplir cette quête."
-            case 1:
+                break;
+            case 3:
                 questName = "FootingQuest";
                 questDescription = "Cette quête sera accomplie si vous effectué la distance imposée en moins de temps que le temps imposé, et ce avant la date d'expiration. Vous percevrez un pourcentage de récompense en fonction de votre progression."
+                break;
+            default:
+                console.log("Type: ", type)
+                break;
         }
         super(id, questName, questDescription, new Date());
+        this.period = period;
+        this.expiration_date = new Date();
         switch (period) {
             case 1:
-                this.expiration_date.setDate(this.given_date.getDay() + 1)
+                this.expiration_date.setDate(this.given_date.getDate() + 1)
+                break;
             case 2:
-                this.expiration_date.setDate(this.given_date.getDay() + 7)
+                this.expiration_date.setDate(this.given_date.getDate() + 7)
+                break;
             case 3:
-                this.expiration_date.setDate(this.given_date.getDay() + 31)
+                this.expiration_date.setDate(this.given_date.getDate() + 31)
+                break;
+            default:
+                console.log("Period: ", period)
+                break;
 
         }
-        this.userId =JSON.parse(localStorage.getItem('userData')).uid;
+        console.log(this.given_date, "    ", this.expiration_date)
+        this.userId = JSON.parse(localStorage.getItem('userData')).uid;
         if (distance != null)
             this.distance = distance;
 
