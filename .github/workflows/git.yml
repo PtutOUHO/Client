@@ -2,7 +2,7 @@ name: RunningQuest
 on:
   push:
     branches:
-      - main
+      - test-ci
 jobs:
   build:
     name: Build & Deploy
