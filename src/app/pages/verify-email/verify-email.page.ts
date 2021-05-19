@@ -13,6 +13,14 @@ export class VerifyEmailPage implements OnInit {
     public router: Router
   ) {}
 
+  public addNumbers (
+    number1: number = 1,
+    number2: number = 2,
+  ): number {
+    return number1 + number2;
+  }
+
+
   ngOnInit() {
     if (this.authService.isLoggedIn()) {
       this.router.navigate(["home/accueil"]);
