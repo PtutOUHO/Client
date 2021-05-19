@@ -1,4 +1,4 @@
-export interface User {
+export class User {
     uid: string;
     email: string;
     pseudo: string;
@@ -6,4 +6,5 @@ export interface User {
     lastname: string;
     birthdate: Date;
     inscription_date: Date;
+    town: string;
 }

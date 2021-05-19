@@ -1,0 +1,43 @@
+<ion-header>
+  <ion-toolbar class="header">
+    <div class="content-image">
+      <center>
+        <ion-img expand="full" class="logo"
+          src="assets/icon/logo.png"></ion-img>
+      </center>
+    </div>
+  </ion-toolbar>
+</ion-header>
+
+<ion-header>
+  <ion-title class="subtitle">
+    Modifier le profil
+  </ion-title>
+</ion-header>
+
+<ion-content>
+  <form>
+      <ion-item lines="full">
+              <ion-label class="text-form" position="floating">Nom :</ion-label>
+              <ion-input type="form-text" #nom value="{{userData.lastname}}"></ion-input>
+          </ion-item>
+  
+          <ion-item lines="full">
+              <ion-label class="text-form" position="floating">Prenom :</ion-label>
+              <ion-input type="text" required #prenom value="{{userData.firstname}}"></ion-input>
+          </ion-item>
+  
+          <ion-item lines="full">
+              <ion-label class="text-form" position="floating">Pseudonyme :</ion-label>
+              <ion-input type="text" required #pseudo value="{{userData.pseudo}}"></ion-input>
+          </ion-item>
+  
+          <ion-item lines="full">
+              <ion-label class="text-form" position="floating">Date de naissance :</ion-label>
+              <ion-input type="date" required #birthdate value="{{userData.birthdate}}" ></ion-input>
+          </ion-item>
+      </form>
+      <ion-button color="warning" type="submit" (click)="updateProfil(nom, prenom, pseudo, birthdate)" expand="block">Sauvegarder les Modifications</ion-button>
+
+  </ion-content>
+  

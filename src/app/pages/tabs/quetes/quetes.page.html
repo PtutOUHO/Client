@@ -3,24 +3,17 @@
         <ion-card-header>
             <ion-card-title>Quotidienne</ion-card-title>
         </ion-card-header>
-        <ion-card>
+        <ion-card *ngFor="let quest of givenDailyQuest" (click)="goToShoes(quest.id)">
             <ion-card-header>
-                <ion-item href="#" class="ion-activated">
+                <ion-item>
                     <ion-icon color="dark" name="time-outline" slot="start"></ion-icon>
-                    <ion-card-title>Journalier</ion-card-title>
+                    <ion-card-title>{{ quest.name }}</ion-card-title>
                 </ion-item>
             </ion-card-header>
             <ion-card-content>
-                <p *ngFor="let quest of questList">
-                    <span class="design_quest">{{ quest.quest_name }}</span>
-                    <span class="design_quest">{{quest.quest_description}}</span>
-                    <span class="design_quest">{{ quest.quest_creationDate }}</span>
-                    <span class="design_quest">{{quest.quest_type}}</span>
-                    <span class="design_quest">{{quest.quest_nbRp}}</span>
-                    <span class="design_quest">{{quest.quest_distance}}</span>
-                    <span class="design_quest">{{quest.quest_time}}</span>
-                    <span class="design_quest">{{quest.quest_userId}}</span>
-                </p>
+                <!-- <p *ngFor="let property of quest | keyvalue">
+                    <span class="design_quest">{{ property.value }}</span>
+                </p> -->
             </ion-card-content>
         </ion-card>
     </ion-card>
@@ -29,45 +22,15 @@
         <ion-card-header>
             <ion-card-title>Hebdomadaire</ion-card-title>
         </ion-card-header>
-
-        <ion-card>
+        <ion-card *ngFor="let quest of givenWeeklyQuest" (click)="goToShoes(quest.id)">
             <ion-card-header>
-                <ion-item href="#" class="ion-activated">
+                <ion-item>
                     <ion-icon color="dark" name="time-outline" slot="start"></ion-icon>
-                    <ion-card-title>Journalier</ion-card-title>
+                    <ion-card-title>{{ quest.name }}</ion-card-title>
                 </ion-item>
             </ion-card-header>
             <ion-card-content>
-                <p *ngFor="let quest of questList">
-                    <span class="design_quest">{{ quest.quest_name }}</span>
-                    <span class="design_quest">{{quest.quest_description}}</span>
-                    <span class="design_quest">{{ quest.quest_creationDate }}</span>
-                    <span class="design_quest">{{quest.quest_type}}</span>
-                    <span class="design_quest">{{quest.quest_nbRp}}</span>
-                    <span class="design_quest">{{quest.quest_distance}}</span>
-                    <span class="design_quest">{{quest.quest_time}}</span>
-                    <span class="design_quest">{{quest.quest_userId}}</span>
-                </p>
-            </ion-card-content>
-        </ion-card>
-        <ion-card>
-            <ion-card-header>
-                <ion-item href="#" class="ion-activated">
-                    <ion-icon color="dark" name="time-outline" slot="start"></ion-icon>
-                    <ion-card-title>Journalier</ion-card-title>
-                </ion-item>
-            </ion-card-header>
-            <ion-card-content>
-                <p *ngFor="let quest of questList">
-                    <span class="design_quest">{{ quest.quest_name }}</span>
-                    <span class="design_quest">{{quest.quest_description}}</span>
-                    <span class="design_quest">{{ quest.quest_creationDate }}</span>
-                    <span class="design_quest">{{quest.quest_type}}</span>
-                    <span class="design_quest">{{quest.quest_nbRp}}</span>
-                    <span class="design_quest">{{quest.quest_distance}}</span>
-                    <span class="design_quest">{{quest.quest_time}}</span>
-                    <span class="design_quest">{{quest.quest_userId}}</span>
-                </p>
+                <!-- Afficher propriété ici -->
             </ion-card-content>
         </ion-card>
     </ion-card>
@@ -76,64 +39,15 @@
         <ion-card-header>
             <ion-card-title>Mensuel</ion-card-title>
         </ion-card-header>
-        <ion-card>
+        <ion-card *ngFor="let quest of givenMonthlyQuest" (click)="goToShoes(quest.id)">
             <ion-card-header>
-                <ion-item href="#" class="ion-activated">
+                <ion-item>
                     <ion-icon color="dark" name="time-outline" slot="start"></ion-icon>
-                    <ion-card-title>Journalier</ion-card-title>
+                    <ion-card-title>{{ quest.name }}</ion-card-title>
                 </ion-item>
             </ion-card-header>
             <ion-card-content>
-                <p *ngFor="let quest of questList">
-                    <span class="design_quest">{{ quest.quest_name }}</span>
-                    <span class="design_quest">{{quest.quest_description}}</span>
-                    <span class="design_quest">{{ quest.quest_creationDate }}</span>
-                    <span class="design_quest">{{quest.quest_type}}</span>
-                    <span class="design_quest">{{quest.quest_nbRp}}</span>
-                    <span class="design_quest">{{quest.quest_distance}}</span>
-                    <span class="design_quest">{{quest.quest_time}}</span>
-                    <span class="design_quest">{{quest.quest_userId}}</span>
-                </p>
-            </ion-card-content>
-        </ion-card>
-        <ion-card>
-            <ion-card-header>
-                <ion-item href="#" class="ion-activated">
-                    <ion-icon color="dark" name="time-outline" slot="start"></ion-icon>
-                    <ion-card-title>Journalier</ion-card-title>
-                </ion-item>
-            </ion-card-header>
-            <ion-card-content>
-                <p *ngFor="let quest of questList">
-                    <span class="design_quest">{{ quest.quest_name }}</span>
-                    <span class="design_quest">{{quest.quest_description}}</span>
-                    <span class="design_quest">{{ quest.quest_creationDate }}</span>
-                    <span class="design_quest">{{quest.quest_type}}</span>
-                    <span class="design_quest">{{quest.quest_nbRp}}</span>
-                    <span class="design_quest">{{quest.quest_distance}}</span>
-                    <span class="design_quest">{{quest.quest_time}}</span>
-                    <span class="design_quest">{{quest.quest_userId}}</span>
-                </p>
-            </ion-card-content>
-        </ion-card>
-        <ion-card>
-            <ion-card-header>
-                <ion-item href="#" class="ion-activated">
-                    <ion-icon color="dark" name="time-outline" slot="start"></ion-icon>
-                    <ion-card-title>Journalier</ion-card-title>
-                </ion-item>
-            </ion-card-header>
-            <ion-card-content>
-                <p *ngFor="let quest of questList">
-                    <span class="design_quest">{{ quest.quest_name }}</span>
-                    <span class="design_quest">{{quest.quest_description}}</span>
-                    <span class="design_quest">{{ quest.quest_creationDate }}</span>
-                    <span class="design_quest">{{quest.quest_type}}</span>
-                    <span class="design_quest">{{quest.quest_nbRp}}</span>
-                    <span class="design_quest">{{quest.quest_distance}}</span>
-                    <span class="design_quest">{{quest.quest_time}}</span>
-                    <span class="design_quest">{{quest.quest_userId}}</span>
-                </p>
+                <!-- Afficher propriété ici -->
             </ion-card-content>
         </ion-card>
     </ion-card>
