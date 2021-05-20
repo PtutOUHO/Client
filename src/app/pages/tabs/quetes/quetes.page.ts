@@ -16,16 +16,19 @@ export class QuetesPage implements OnInit {
   afStore: AngularFirestore;
   todayDate: Date;
   uid: any;
+  //Liste globales des quêtes
   givenQuest: Quest[];
   selectedQuest: Quest[];
-  givenDailyQuest: Quest[];
-  givenWeeklyQuest: Quest[];
-  givenMonthlyQuest: Quest[];
-  selectedDailyQuest: Quest[];
-  selectedWeeklyQuest: Quest[];
-  selectedMonthlyQuest: Quest[];
-  continueRefresh: boolean = true;
-  refreshDisplay: any;
+  //Liste des quêtes du front
+  givenDailyQuest: Quest[] = [];
+  givenWeeklyQuest: Quest[] = [];
+  givenMonthlyQuest: Quest[] = [];
+  selectedDailyQuest: Quest[] = [];
+  selectedWeeklyQuest: Quest[] = [];
+  selectedMonthlyQuest: Quest[] = [];
+  //Liste des listes de quêtes pour l'actualisation du front
+  GivenQuestLists: Quest[][] = [this.givenDailyQuest, this.givenWeeklyQuest, this.givenMonthlyQuest];
+  SelectedQuestLists: Quest[][] = [this.selectedDailyQuest, this.selectedWeeklyQuest, this.selectedMonthlyQuest];
   constructor(
     public authService: AuthenticationService,
     public router: Router,
@@ -40,6 +43,53 @@ export class QuetesPage implements OnInit {
   ngOnInit() {
   }
 
+  refreshGivenDisplay() {
+    this.givenDailyQuest = [];
+    this.givenWeeklyQuest = [];
+    this.givenMonthlyQuest = [];
+    this.givenQuest.forEach(quest => {
+      this.orderGivenQuestFromPeriod(quest);
+    })
+  }
+  orderGivenQuestFromPeriod(quest: Quest) {
+    
+    switch (quest.period) {
+      case 1:
+        this.givenDailyQuest.push(quest);
+        break;
+      case 2:
+        this.givenWeeklyQuest.push(quest);
+        break;
+      case 3:
+        this.givenMonthlyQuest.push(quest);
+        break;
+      default:
+        break;
+    }
+  }
+  orderSelectedQuestFromPeriod(quest: Quest) {
+    
+    switch (quest.period) {
+      case 1:
+        this.selectedDailyQuest.push(quest);
+        break;
+      case 2:
+        this.selectedWeeklyQuest.push(quest);
+        break;
+      case 3:
+        this.selectedMonthlyQuest.push(quest);
+        break;
+      default:
+        break;
+    }
+  }
+
+  refreshSelectedDisplay() {
+    this.selectedDailyQuest = [];
+    this.selectedWeeklyQuest = [];
+    this.selectedMonthlyQuest = [];
+  }
+
   checkRemainingGivenQuest() {
     //Voir combien de quetes il faut generer et les generer
     var questToGenerate = [1, 2, 3];
@@ -47,14 +97,18 @@ export class QuetesPage implements OnInit {
       questToGenerate[quest.period - 1]--;
     })
     var index = 1;
+    var needRefresh: boolean = false;
     questToGenerate.forEach(numberToGenerate => {
       if (numberToGenerate > 0) {
         for (var i = 0; i < numberToGenerate; i++) {
           this.generateQuest(index);
+          needRefresh = true;
         }
       }
       index++;
     })
+    if (needRefresh)
+      this.refreshGivenDisplay()
   }
 
   public compareDate(date1: Date, date2: Date): number {
@@ -72,7 +126,7 @@ export class QuetesPage implements OnInit {
     this.router.navigate(['/shoes', id]);
   }
 
-  async getGivenQuestFromDatabase(refresh?: boolean) {
+  async getGivenQuestFromDatabase() {
     this.givenQuest = [];
     this.givenDailyQuest = [];
     this.givenWeeklyQuest = [];
@@ -82,31 +136,12 @@ export class QuetesPage implements OnInit {
     documentList.docs.forEach(doc => {
       var quete = doc.data() as Quest;
       this.givenQuest.push(quete);
-      switch (quete.period) {
-        case 1:
-          this.givenDailyQuest.push(quete);
-          break;
-        case 2:
-          this.givenWeeklyQuest.push(quete);
-          break;
-        case 3:
-          this.givenMonthlyQuest.push(quete);
-          break;
-        default:
-          break;
-      }
+      this.orderGivenQuestFromPeriod(quete)
     });
-    if (refresh == undefined)
-      this.getSelectedQuestFromDatabase();
-    else if (refresh) {
-      this.continueRefresh = true;
-      this.ngSuite2();
-    }
-    else
-      this.refreshDisplay = undefined;
+    this.getSelectedQuestFromDatabase();
   }
 
-  async getSelectedQuestFromDatabase(refresh?: boolean) {
+  async getSelectedQuestFromDatabase() {
     this.selectedQuest = [];
     this.selectedDailyQuest = [];
     this.selectedWeeklyQuest = [];
@@ -116,43 +151,16 @@ export class QuetesPage implements OnInit {
     documentList.docs.forEach(doc => {
       var quete = doc.data() as Quest;
       this.selectedQuest.push(quete);
-      switch (quete.period) {
-        case 1:
-          this.selectedDailyQuest.push(quete);
-          break;
-        case 2:
-          this.selectedWeeklyQuest.push(quete);
-          break;
-        case 3:
-          this.selectedMonthlyQuest.push(quete);
-          break;
-        default:
-          break;
-      }
+      this.orderSelectedQuestFromPeriod(quete)
     });
-    if (refresh == undefined)
-      this.ngSuite();
-    else if (refresh) {
-      this.continueRefresh = true;
-      this.ngSuite2();
-    }
-    else
-      this.refreshDisplay = undefined;
+    this.ngSuite();
   }
 
   ngSuite() {
     this.checkIfGivenQuestAreExpired();
     this.checkIfSelectedQuestAreExpired();
-    if (this.continueRefresh)
-      this.ngSuite2();
-  }
-  ngSuite2() {
     this.checkRemainingGivenQuest();
     this.removeUnselectedExpiredQuests();
-    if (this.refreshDisplay) {
-      this.getGivenQuestFromDatabase(false)
-      this.getSelectedQuestFromDatabase(false)
-    }
   }
 
   checkIfGivenQuestAreExpired() {
@@ -170,8 +178,7 @@ export class QuetesPage implements OnInit {
       index++;
     });
     if (refresh) {
-      this.continueRefresh = false;
-      this.getGivenQuestFromDatabase(true);
+      this.refreshGivenDisplay()
     }
   }
 
@@ -194,8 +201,7 @@ export class QuetesPage implements OnInit {
       index++;
     })
     if (refresh) {
-      this.continueRefresh = false;
-      this.getSelectedQuestFromDatabase(true);
+      this.refreshSelectedDisplay()
     }
   }
 
@@ -292,7 +298,6 @@ export class QuetesPage implements OnInit {
 
   //Génération
   generateQuest(period: number) {
-    this.refreshDisplay = true;
     var questType;
     var questDistance;
     var questTime;
@@ -320,6 +325,7 @@ export class QuetesPage implements OnInit {
     }
     var id: string = this.afStore.createId();
     var quest = new Quest(id, period, randomType, questDistance, questTime);
+    this.givenQuest.push(quest);
     this.authService.afStore.collection('quests').doc(id).set(JSON.parse(JSON.stringify(quest)), {
       merge: true,
     });
