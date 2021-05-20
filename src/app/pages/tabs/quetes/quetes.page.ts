@@ -52,7 +52,7 @@ export class QuetesPage implements OnInit {
     })
   }
   orderGivenQuestFromPeriod(quest: Quest) {
-    
+
     switch (quest.period) {
       case 1:
         this.givenDailyQuest.push(quest);
@@ -68,7 +68,7 @@ export class QuetesPage implements OnInit {
     }
   }
   orderSelectedQuestFromPeriod(quest: Quest) {
-    
+
     switch (quest.period) {
       case 1:
         this.selectedDailyQuest.push(quest);
@@ -135,8 +135,10 @@ export class QuetesPage implements OnInit {
     const documentList = await collection.get().toPromise();
     documentList.docs.forEach(doc => {
       var quete = doc.data() as Quest;
-      this.givenQuest.push(quete);
-      this.orderGivenQuestFromPeriod(quete)
+      if (quete.selection == undefined) {
+        this.givenQuest.push(quete);
+        this.orderGivenQuestFromPeriod(quete)
+      }
     });
     this.getSelectedQuestFromDatabase();
   }
@@ -218,24 +220,24 @@ export class QuetesPage implements OnInit {
         case 1:
           //Chrono
           pourcentage = Math.floor(100 * quete.selection.time_sucess / quete.time);
-          rpToGive = quete.nbRp * pourcentage / 100;
+          rpToGive = quete.selection.shoes * quete.nbRp * pourcentage / 100;
           break;
         case 2:
           //Distance
           pourcentage = Math.floor(100 * quete.selection.distance_sucess / quete.distance);
-          rpToGive = quete.nbRp * pourcentage / 100;
+          rpToGive = quete.selection.shoes * quete.nbRp * pourcentage / 100;
           break;
         case 3:
           //Distance
           if (quete.selection.distance_sucess == quete.distance) {
             var pourcentageTempsGagne = Math.floor(100 * quete.time / quete.selection.time_sucess);
-            rpToGive = quete.nbRp * pourcentageTempsGagne / 100;
+            rpToGive = quete.selection.shoes * quete.nbRp * pourcentageTempsGagne / 100;
 
           }
           else if (quete.selection.time_sucess == quete.time) {
             //Temps gagné
             pourcentage = Math.floor(100 * quete.selection.distance_sucess / quete.distance);
-            rpToGive = quete.nbRp * pourcentage / 100;
+            rpToGive = quete.selection.shoes * quete.nbRp * pourcentage / 100;
           }
           break;
       }
@@ -305,7 +307,6 @@ export class QuetesPage implements OnInit {
     switch (randomType) {
       case 1: {
         //"ChronoQuest"
-        questDistance = (Math.floor(Math.random() * 3) + 1) * period;
         questTime = (Math.floor(Math.random() * 3) + 1) * period;
         break;
       }
@@ -316,6 +317,7 @@ export class QuetesPage implements OnInit {
       }
       case 3: {
         //"FootingQuest"
+        questDistance = (Math.floor(Math.random() * 3) + 1) * period;
         questTime = (Math.floor(Math.random() * 3) + 1) * period;
         break;
       }
