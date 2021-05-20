@@ -59,13 +59,12 @@ const routes: Routes = [
     path: 'profil-edit',
     loadChildren: () => import('./profil-edit/profil-edit.module').then( m => m.ProfilEditPageModule)
   },
+  {
+    path: 'quetes-en-cours',
+    loadChildren: () => import('./quetes-en-cours/quetes-en-cours.module').then( m => m.QuetesEnCoursPageModule)
+  },
   // A PLACER A LA FIN
-  {path: '**', redirectTo: '/404'},
-  
-
-
-  // A PLACER A LA FIN
-
+  {path: '**', redirectTo: '/404'}
 ];
 
 @NgModule({

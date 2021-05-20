@@ -6,7 +6,15 @@
         <ion-card *ngFor="let quest of givenDailyQuest" (click)="goToShoes(quest.id)">
             <ion-card-header>
                 <ion-item>
-                    <ion-icon color="dark" name="time-outline" slot="start"></ion-icon>
+                    <ng-template [ngIf]="quest.type == 1">
+                        <ion-icon color="dark" name="time-outline" slot="start"></ion-icon>
+                    </ng-template>
+                    <ng-template [ngIf]="quest.type == 2">
+                        <ion-icon color="dark" name="flag" slot="start"></ion-icon>
+                    </ng-template>
+                    <ng-template [ngIf]="quest.type == 3">
+                        <ion-icon color="dark" name="infinite" slot="start"></ion-icon>
+                    </ng-template>
                     <ion-card-title>{{ quest.name }}</ion-card-title>
                 </ion-item>
             </ion-card-header>
@@ -25,7 +33,15 @@
         <ion-card *ngFor="let quest of givenWeeklyQuest" (click)="goToShoes(quest.id)">
             <ion-card-header>
                 <ion-item>
-                    <ion-icon color="dark" name="time-outline" slot="start"></ion-icon>
+                    <ng-template [ngIf]="quest.type == 1">
+                        <ion-icon color="dark" name="time-outline" slot="start"></ion-icon>
+                    </ng-template>
+                    <ng-template [ngIf]="quest.type == 2">
+                        <ion-icon color="dark" name="flag" slot="start"></ion-icon>
+                    </ng-template>
+                    <ng-template [ngIf]="quest.type == 3">
+                        <ion-icon color="dark" name="infinite" slot="start"></ion-icon>
+                    </ng-template>
                     <ion-card-title>{{ quest.name }}</ion-card-title>
                 </ion-item>
             </ion-card-header>
@@ -42,7 +58,15 @@
         <ion-card *ngFor="let quest of givenMonthlyQuest" (click)="goToShoes(quest.id)">
             <ion-card-header>
                 <ion-item>
-                    <ion-icon color="dark" name="time-outline" slot="start"></ion-icon>
+                    <ng-template [ngIf]="quest.type == 1">
+                        <ion-icon color="dark" name="time-outline" slot="start"></ion-icon>
+                    </ng-template>
+                    <ng-template [ngIf]="quest.type == 2">
+                        <ion-icon color="dark" name="flag" slot="start"></ion-icon>
+                    </ng-template>
+                    <ng-template [ngIf]="quest.type == 3">
+                        <ion-icon color="dark" name="infinite" slot="start"></ion-icon>
+                    </ng-template>
                     <ion-card-title>{{ quest.name }}</ion-card-title>
                 </ion-item>
             </ion-card-header>

@@ -18,17 +18,10 @@ export class QuetesPage implements OnInit {
   uid: any;
   //Liste globales des quêtes
   givenQuest: Quest[];
-  selectedQuest: Quest[];
   //Liste des quêtes du front
   givenDailyQuest: Quest[] = [];
   givenWeeklyQuest: Quest[] = [];
   givenMonthlyQuest: Quest[] = [];
-  selectedDailyQuest: Quest[] = [];
-  selectedWeeklyQuest: Quest[] = [];
-  selectedMonthlyQuest: Quest[] = [];
-  //Liste des listes de quêtes pour l'actualisation du front
-  GivenQuestLists: Quest[][] = [this.givenDailyQuest, this.givenWeeklyQuest, this.givenMonthlyQuest];
-  SelectedQuestLists: Quest[][] = [this.selectedDailyQuest, this.selectedWeeklyQuest, this.selectedMonthlyQuest];
   constructor(
     public authService: AuthenticationService,
     public router: Router,
@@ -55,28 +48,12 @@ export class QuetesPage implements OnInit {
       this.givenQuest.push(quete);
       this.orderGivenQuestFromPeriod(quete)
     });
-    this.getSelectedQuestFromDatabase();
-  }
-
-  //Récupérer les quêtes sélectionnées par l'utilisateur et attendre avant de déclencher la suite
-  async getSelectedQuestFromDatabase() {
-    this.selectedQuest = [];
-    this.selectedDailyQuest = [];
-    this.selectedWeeklyQuest = [];
-    this.selectedMonthlyQuest = [];
-    let collection = this.authService.afStore.collection('quests', ref => ref.where('userId', '==', this.uid).where('selection.expired', '==', false));
-    const documentList = await collection.get().toPromise();
-    documentList.docs.forEach(doc => {
-      var quete = doc.data() as Quest;
-      this.selectedQuest.push(quete);
-      this.orderSelectedQuestFromPeriod(quete)
-    });
     this.ngSuite();
   }
+
   ngSuite() {
     //Vérifies quelles sont les quêtes expirées puis actualise le front s'il y en a
     this.checkIfGivenQuestAreExpired();
-    this.checkIfSelectedQuestAreExpired();
 
     //Vérifies si l'utilisateur a le bon nombre de quêtes proposées, sinon les génère et actualise le front
     this.checkRemainingGivenQuest();
@@ -102,22 +79,6 @@ export class QuetesPage implements OnInit {
           break;
       }
   }
-  orderSelectedQuestFromPeriod(quest: Quest) {
-
-    switch (quest.period) {
-      case 1:
-        this.selectedDailyQuest.push(quest);
-        break;
-      case 2:
-        this.selectedWeeklyQuest.push(quest);
-        break;
-      case 3:
-        this.selectedMonthlyQuest.push(quest);
-        break;
-      default:
-        break;
-    }
-  }
 
   //Actualise le front
   refreshGivenDisplay() {
@@ -126,15 +87,6 @@ export class QuetesPage implements OnInit {
     this.givenMonthlyQuest = [];
     this.givenQuest.forEach(quest => {
       this.orderGivenQuestFromPeriod(quest);
-    })
-  }
-
-  refreshSelectedDisplay() {
-    this.selectedDailyQuest = [];
-    this.selectedWeeklyQuest = [];
-    this.selectedMonthlyQuest = [];
-    this.selectedQuest.forEach(quest => {
-      this.orderSelectedQuestFromPeriod(quest);
     })
   }
 
@@ -178,81 +130,8 @@ export class QuetesPage implements OnInit {
     }
   }
 
-  checkIfSelectedQuestAreExpired() {
-    var index = 0;
-    var refresh = false;
-    this.selectedQuest.forEach(quete => {
-      if (this.checkDateExpired(quete.selection.expiration_date)) {
-        quete.selection.expired = true;
-        delete this.selectedQuest[index];
-        this.authService.afStore.collection('quests').doc(quete.id).set(quete, {
-          merge: true,
-        });
-        this.giveRewards(quete);
-
-        delete this.selectedQuest[index];
-        refresh = true;
-      }
-      index++;
-    })
-    if (refresh) {
-      this.refreshSelectedDisplay()
-    }
-    console.log(this.selectedQuest)
-  }
-
-  //Attribut les récompenses lors de l'expiration de la quête
-  async giveRewards(quete: Quest) {
-    let collection = this.authService.afStore.collection('users', ref => ref.where('uid', '==', this.uid));
-    const documentList = await collection.get().toPromise();
-    documentList.docs.forEach(user => {
-      var userData = user.data() as User;
-
-      //Calcul
-      var pourcentage: number;
-      var rpToGive: number;
-      switch (quete.type) {
-        case 1:
-          //Chrono
-          pourcentage = Math.floor(100 * quete.selection.time_sucess / quete.time);
-          rpToGive = quete.selection.shoes * quete.nbRp * pourcentage / 100;
-          break;
-        case 2:
-          //Distance
-          pourcentage = Math.floor(100 * quete.selection.distance_sucess / quete.distance);
-          rpToGive = quete.selection.shoes * quete.nbRp * pourcentage / 100;
-          break;
-        case 3:
-          //Distance
-          if (quete.selection.distance_sucess == quete.distance) {
-            var pourcentageTempsGagne = Math.floor(100 * quete.time / quete.selection.time_sucess);
-            rpToGive = quete.selection.shoes * quete.nbRp * pourcentageTempsGagne / 100;
-
-          }
-          else if (quete.selection.time_sucess == quete.time) {
-            //Temps gagné
-            pourcentage = Math.floor(100 * quete.selection.distance_sucess / quete.distance);
-            rpToGive = quete.selection.shoes * quete.nbRp * pourcentage / 100;
-          }
-          break;
-      }
-      rpToGive = Math.floor(rpToGive);
-      userData.nbRp += rpToGive;
-      quete.selection.percentage = pourcentage;
-      quete.selection.nbRp = rpToGive;
-
-      this.authService.afStore.collection('users').doc(this.uid).set(userData, {
-        merge: true,
-      });
-
-      this.authService.afStore.collection('quests').doc(quete.id).set(quete, {
-        merge: true,
-      });
-    });
-  }
-
   async removeUnselectedExpiredQuests() {
-    //Prendre toutes les quêtes ou selection est nulle et expired est true
+    //Prendre toutes les quêtes ou selection est null et expired est true
     //Les supprimer
     let collection = this.authService.afStore.collection('quests', ref => ref.where('userId', '==', this.uid).where('expired', '==', true));
     const documentList = await collection.get().toPromise();
@@ -339,9 +218,20 @@ export class QuetesPage implements OnInit {
     });
   }
 
-  goToShoes(id) {
+  async goToShoes(id) {
+    var index = 0;
+    let collection = this.authService.afStore.collection('quests', ref => ref.where('userId', '==', this.uid).where('selection.expired', '==', false));
+    const documentList = await collection.get().toPromise();
+    documentList.docs.forEach(doc => {
+      index++;
+  });
+  if(index >= 3) {
+    alert('You can only choose 3 quests maximum !')
+  }
+  else {
     this.router.navigate(['/shoes', id]);
   }
+}
 
 }
 

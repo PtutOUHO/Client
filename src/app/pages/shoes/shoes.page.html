@@ -19,13 +19,15 @@
     <ion-card>
       <ion-card-header>
         <ion-item>
-          <ion-icon color="dark" name="time-outline" slot="start"></ion-icon>
-          <ion-card-title>{{ quest.name}}</ion-card-title>
+          <ng-template [ngIf]="quest.type == 1"><ion-icon color="dark" name="time-outline" slot="start"></ion-icon></ng-template>
+          <ng-template [ngIf]="quest.type == 2"><ion-icon color="dark" name="flag" slot="start"></ion-icon></ng-template>
+          <ng-template [ngIf]="quest.type == 3"><ion-icon color="dark" name="infinite" slot="start"></ion-icon></ng-template>
+          <ion-card-title>{{quest.name}}</ion-card-title>
         </ion-item>
       </ion-card-header>
       <ion-card-content>
-        <p>Time = ... min</p>
-        <p>Distance = ... min</p>
+        <ng-template [ngIf]="quest.type == 1 || quest.type == 3 "><p>Time = {{quest.time}} min</p></ng-template>
+        <ng-template [ngIf]="quest.type == 2 || quest.type == 3 "><p>Distance = {{quest.distance}} min</p></ng-template>
       </ion-card-content>
     </ion-card>
     <p>Choisir votre niveau de difficulté:</p>
@@ -35,7 +37,7 @@
       <span class ="shoes" alt="3eme étoile" data-shoes = "3">★</span>
       <span class ="shoes" alt="2eme étoile" data-shoes = "4">★</span>
       <span class ="shoes" alt="1ere étoile" data-shoes = "5">★</span>
-      &nbsp; rating: <span class="rating">-</span>
     </div>
+    <ion-button color="success" (click)="selectQuestWithDifficulty()">Valider</ion-button>
   </ion-card>
 </ion-content>
