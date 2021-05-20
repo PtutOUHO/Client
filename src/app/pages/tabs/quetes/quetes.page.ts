@@ -39,24 +39,68 @@ export class QuetesPage implements OnInit {
     this.getGivenQuestFromDatabase();
   }
 
-
   ngOnInit() {
   }
-  orderGivenQuestFromPeriod(quest: Quest) {
+  
+  //Récupérer les quêtes proposées à l'utilisateur et attendre avant de déclencher la suite
+  async getGivenQuestFromDatabase() {
+    this.givenQuest = [];
+    this.givenDailyQuest = [];
+    this.givenWeeklyQuest = [];
+    this.givenMonthlyQuest = [];
+    let collection = this.authService.afStore.collection('quests', ref => ref.where('userId', '==', this.uid).where('expired', '==', false));
+    const documentList = await collection.get().toPromise();
+    documentList.docs.forEach(doc => {
+      var quete = doc.data() as Quest;
+      this.givenQuest.push(quete);
+      this.orderGivenQuestFromPeriod(quete)
+    });
+    this.getSelectedQuestFromDatabase();
+  }
 
-    switch (quest.period) {
-      case 1:
-        this.givenDailyQuest.push(quest);
-        break;
-      case 2:
-        this.givenWeeklyQuest.push(quest);
-        break;
-      case 3:
-        this.givenMonthlyQuest.push(quest);
-        break;
-      default:
-        break;
-    }
+  //Récupérer les quêtes sélectionnées par l'utilisateur et attendre avant de déclencher la suite
+  async getSelectedQuestFromDatabase() {
+    this.selectedQuest = [];
+    this.selectedDailyQuest = [];
+    this.selectedWeeklyQuest = [];
+    this.selectedMonthlyQuest = [];
+    let collection = this.authService.afStore.collection('quests', ref => ref.where('userId', '==', this.uid).where('selection.expired', '==', false));
+    const documentList = await collection.get().toPromise();
+    documentList.docs.forEach(doc => {
+      var quete = doc.data() as Quest;
+      this.selectedQuest.push(quete);
+      this.orderSelectedQuestFromPeriod(quete)
+    });
+    this.ngSuite();
+  }
+  ngSuite() {
+    //Vérifies quelles sont les quêtes expirées puis actualise le front s'il y en a
+    this.checkIfGivenQuestAreExpired();
+    this.checkIfSelectedQuestAreExpired();
+
+    //Vérifies si l'utilisateur a le bon nombre de quêtes proposées, sinon les génère et actualise le front
+    this.checkRemainingGivenQuest();
+
+    //Supprimes les quêtes expirées seulement si elles n'ont jamais été sélectionnées (pour les stats)
+    this.removeUnselectedExpiredQuests();
+  }
+
+  //Trie les quêtes par période pour le front
+  orderGivenQuestFromPeriod(quest: Quest) {
+    if (quest.selection == undefined)
+      switch (quest.period) {
+        case 1:
+          this.givenDailyQuest.push(quest);
+          break;
+        case 2:
+          this.givenWeeklyQuest.push(quest);
+          break;
+        case 3:
+          this.givenMonthlyQuest.push(quest);
+          break;
+        default:
+          break;
+      }
   }
   orderSelectedQuestFromPeriod(quest: Quest) {
 
@@ -75,6 +119,7 @@ export class QuetesPage implements OnInit {
     }
   }
 
+  //Actualise le front
   refreshGivenDisplay() {
     this.givenDailyQuest = [];
     this.givenWeeklyQuest = [];
@@ -112,61 +157,7 @@ export class QuetesPage implements OnInit {
     })
     if (needRefresh)
       this.refreshGivenDisplay()
-  }
-
-  public compareDate(date1: Date, date2: Date): number {
-    const d1 = new Date(date1); const d2 = new Date(date2);
-
-    const same = d1.getTime() === d2.getTime();
-    if (same) { return 0; }
-
-    if (d1 > d2) { return 1; }
-
-    if (d1 < d2) { return -1; }
-  }
-
-  goToShoes(id) {
-    this.router.navigate(['/shoes', id]);
-  }
-
-  async getGivenQuestFromDatabase() {
-    this.givenQuest = [];
-    this.givenDailyQuest = [];
-    this.givenWeeklyQuest = [];
-    this.givenMonthlyQuest = [];
-    let collection = this.authService.afStore.collection('quests', ref => ref.where('userId', '==', this.uid).where('expired', '==', false));
-    const documentList = await collection.get().toPromise();
-    documentList.docs.forEach(doc => {
-      var quete = doc.data() as Quest;
-      if (quete.selection == undefined) {
-        this.givenQuest.push(quete);
-        this.orderGivenQuestFromPeriod(quete)
-      }
-    });
-    this.getSelectedQuestFromDatabase();
-  }
-
-  async getSelectedQuestFromDatabase() {
-    this.selectedQuest = [];
-    this.selectedDailyQuest = [];
-    this.selectedWeeklyQuest = [];
-    this.selectedMonthlyQuest = [];
-    let collection = this.authService.afStore.collection('quests', ref => ref.where('userId', '==', this.uid).where('selection.expired', '==', false));
-    const documentList = await collection.get().toPromise();
-    documentList.docs.forEach(doc => {
-      var quete = doc.data() as Quest;
-      this.selectedQuest.push(quete);
-      this.orderSelectedQuestFromPeriod(quete)
-    });
-    this.ngSuite();
-  }
-
-  ngSuite() {
-    this.checkIfGivenQuestAreExpired();
-    this.checkIfSelectedQuestAreExpired();
-    this.checkRemainingGivenQuest();
-    this.removeUnselectedExpiredQuests();
-  }
+  }  
 
   checkIfGivenQuestAreExpired() {
     var index = 0;
@@ -197,7 +188,6 @@ export class QuetesPage implements OnInit {
         this.authService.afStore.collection('quests').doc(quete.id).set(quete, {
           merge: true,
         });
-        //TODO Donner récompenses
         this.giveRewards(quete);
 
         delete this.selectedQuest[index];
@@ -208,8 +198,10 @@ export class QuetesPage implements OnInit {
     if (refresh) {
       this.refreshSelectedDisplay()
     }
+    console.log(this.selectedQuest)
   }
 
+  //Attribut les récompenses lors de l'expiration de la quête
   async giveRewards(quete: Quest) {
     let collection = this.authService.afStore.collection('users', ref => ref.where('uid', '==', this.uid));
     const documentList = await collection.get().toPromise();
@@ -301,6 +293,17 @@ export class QuetesPage implements OnInit {
     }
   }
 
+  public compareDate(date1: Date, date2: Date): number {
+    const d1 = new Date(date1); const d2 = new Date(date2);
+
+    const same = d1.getTime() === d2.getTime();
+    if (same) { return 0; }
+
+    if (d1 > d2) { return 1; }
+
+    if (d1 < d2) { return -1; }
+  }
+
   //Génération
   generateQuest(period: number) {
     var questType;
@@ -334,6 +337,10 @@ export class QuetesPage implements OnInit {
     this.authService.afStore.collection('quests').doc(id).set(JSON.parse(JSON.stringify(quest)), {
       merge: true,
     });
+  }
+
+  goToShoes(id) {
+    this.router.navigate(['/shoes', id]);
   }
 
 }
