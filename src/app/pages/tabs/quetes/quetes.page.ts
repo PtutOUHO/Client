@@ -42,15 +42,6 @@ export class QuetesPage implements OnInit {
 
   ngOnInit() {
   }
-
-  refreshGivenDisplay() {
-    this.givenDailyQuest = [];
-    this.givenWeeklyQuest = [];
-    this.givenMonthlyQuest = [];
-    this.givenQuest.forEach(quest => {
-      this.orderGivenQuestFromPeriod(quest);
-    })
-  }
   orderGivenQuestFromPeriod(quest: Quest) {
 
     switch (quest.period) {
@@ -84,10 +75,22 @@ export class QuetesPage implements OnInit {
     }
   }
 
+  refreshGivenDisplay() {
+    this.givenDailyQuest = [];
+    this.givenWeeklyQuest = [];
+    this.givenMonthlyQuest = [];
+    this.givenQuest.forEach(quest => {
+      this.orderGivenQuestFromPeriod(quest);
+    })
+  }
+
   refreshSelectedDisplay() {
     this.selectedDailyQuest = [];
     this.selectedWeeklyQuest = [];
     this.selectedMonthlyQuest = [];
+    this.selectedQuest.forEach(quest => {
+      this.orderSelectedQuestFromPeriod(quest);
+    })
   }
 
   checkRemainingGivenQuest() {
