@@ -33,7 +33,7 @@ export class ShoesPage implements OnInit {
   }
 
   async getQuestFromDatabase() {
-    var doc = await this.authService.afStore.collection('quests').doc(this.quest_id).get().toPromise();
+    let doc = await this.authService.afStore.collection('quests').doc(this.quest_id).get().toPromise();
     this.quest = doc.data() as Quest;
     if (this.quest.userId != this.uid || this.quest.selection != undefined) {
       alert("You can't try to redirect yourself using an unusual way");

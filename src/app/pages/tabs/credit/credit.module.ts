@@ -4,17 +4,17 @@ import { FormsModule } from '@angular/forms';
 
 import { IonicModule } from '@ionic/angular';
 
-import { AmisPageRoutingModule } from './amis-routing.module';
+import { CreditPageRoutingModule } from './credit-routing.module';
 
-import { AmisPage } from './amis.page';
+import { CreditPage } from './credit.page';
 
 @NgModule({
   imports: [
     CommonModule,
     FormsModule,
     IonicModule,
-    AmisPageRoutingModule
+    CreditPageRoutingModule
   ],
-  declarations: [AmisPage]
+  declarations: [CreditPage]
 })
-export class AmisPageModule {}
+export class CreditPageModule {}
