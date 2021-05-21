@@ -92,10 +92,6 @@ export class CoursePage implements OnInit {
           quest.selection.distance_sucess == 0;
           quest.selection.distance_sucess += (this.distanceKm - this.distanceLastSave)
       }
-      //Save
-      this.authService.afStore.collection("quests").doc(quest.id).set(quest, {
-        merge: true,
-      });
     });
     this.distanceLastSave = this.distanceKm;
   }
@@ -115,6 +111,11 @@ export class CoursePage implements OnInit {
           quete.selection.percentage = Math.floor(100 * quete.selection.distance_sucess / quete.distance);
           break;
       }
+      
+      //Save
+      this.authService.afStore.collection("quests").doc(quete.id).set(quete, {
+        merge: true,
+      });
     })
   }
 
