@@ -1,10 +1,8 @@
 <ion-header>
   <ion-toolbar>
     <div>
-
       <ion-title>Shoes</ion-title>
-
-    </div>
+    </div>  
   </ion-toolbar>
 </ion-header>
 
@@ -27,7 +25,7 @@
       </ion-card-header>
       <ion-card-content>
         <ng-template [ngIf]="quest.type == 1 || quest.type == 3 "><p>Time = {{quest.time}} min</p></ng-template>
-        <ng-template [ngIf]="quest.type == 2 || quest.type == 3 "><p>Distance = {{quest.distance}} min</p></ng-template>
+        <ng-template [ngIf]="quest.type == 2 || quest.type == 3 "><p>Distance = {{quest.distance}} km</p></ng-template>
       </ion-card-content>
     </ion-card>
     <p>Choisir votre niveau de difficulté:</p>

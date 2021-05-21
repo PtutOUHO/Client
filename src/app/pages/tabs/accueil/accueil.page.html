@@ -26,6 +26,9 @@
     <ion-card color="success" *ngFor="let quest of selectedDailyQuest" (click)="goToQuestEnCours()">
         <ion-card-header>
             <ion-item color="success">
+                <ng-template [ngIf]="quest.selection.expired == true">
+                    <ion-icon style="color:green; float: right;" name="checkmark-circle-outline"></ion-icon>
+                </ng-template>
                 <ng-template [ngIf]="quest.type == 1">
                     <ion-icon color="dark" name="time-outline" slot="start"></ion-icon>
                 </ng-template>
@@ -39,14 +42,30 @@
             </ion-item>
         </ion-card-header>
         <ion-card-content>
-            <!-- <p *ngFor="let property of quest | keyvalue">
-                        <span class="design_quest">{{ property.value }}</span>
-                    </p> -->
+            <div style="text-align: center;">
+                <span><strong>Début: {{quest.given_date | date : "dd/MM/y" }} ➔ </strong></span>
+                <span><strong>Fin: {{quest.expiration_date | date : "dd/MM/y"}}</strong></span>
+                <br/><br/>
+                <p><em>{{quest.description}}</em></p>
+                <br/>
+                <ng-template [ngIf]="quest.type == 1 || quest.type == 3 ">
+                    <span>Time = {{quest.time}} min</span>
+                </ng-template>
+                <ng-template [ngIf]="quest.type == 3 "><span> /---\ </span></ng-template>
+                <ng-template [ngIf]="quest.type == 2 || quest.type == 3 ">
+                    <span>Distance = {{quest.distance}} km</span>
+                </ng-template>
+            </div>
+            <br/>
+                <p style="float: right;">Runner Point:{{quest.nbRp}}</p>
         </ion-card-content>
     </ion-card>
     <ion-card color="secondary" *ngFor="let quest of selectedWeeklyQuest" (click)="goToQuestEnCours()">
         <ion-card-header>
             <ion-item color="secondary">
+                <ng-template [ngIf]="quest.selection.expired == true">
+                    <ion-icon style="color:green; float: right;" name="checkmark-circle-outline"></ion-icon>
+                </ng-template>
                 <ng-template [ngIf]="quest.type == 1">
                     <ion-icon color="dark" name="time-outline" slot="start"></ion-icon>
                 </ng-template>
@@ -60,12 +79,30 @@
             </ion-item>
         </ion-card-header>
         <ion-card-content>
-            <!-- Afficher propriété ici -->
+            <div style="text-align: center;">
+                <span><strong>Début: {{quest.given_date | date : "dd/MM/y" }} ➔ </strong></span>
+                <span><strong>Fin: {{quest.expiration_date | date : "dd/MM/y"}}</strong></span>
+                <br/><br/>
+                <p><em>{{quest.description}}</em></p>
+                <br/>
+                <ng-template [ngIf]="quest.type == 1 || quest.type == 3 ">
+                    <span>Time = {{quest.time}} min</span>
+                </ng-template>
+                <ng-template [ngIf]="quest.type == 3 "><span> /---\ </span></ng-template>
+                <ng-template [ngIf]="quest.type == 2 || quest.type == 3 ">
+                    <span>Distance = {{quest.distance}} km</span>
+                </ng-template>
+            </div>
+            <br/>
+                <p style="float: right;">Runner Point:{{quest.nbRp}}</p>
         </ion-card-content>
     </ion-card>
     <ion-card color="danger" *ngFor="let quest of selectedMonthlyQuest" (click)="goToQuestEnCours()">
         <ion-card-header>
             <ion-item color="danger">
+                <ng-template [ngIf]="quest.selection.expired == true">
+                    <ion-icon style="color:green; float: right;" name="checkmark-circle-outline"></ion-icon>
+                </ng-template>
                 <ng-template [ngIf]="quest.type == 1">
                     <ion-icon color="dark" name="time-outline" slot="start"></ion-icon>
                 </ng-template>
@@ -79,7 +116,22 @@
             </ion-item>
         </ion-card-header>
         <ion-card-content>
-            <!-- Afficher propriété ici -->
+            <div style="text-align: center;">
+                <span><strong>Début: {{quest.given_date | date : "dd/MM/y" }} ➔ </strong></span>
+                <span><strong>Fin: {{quest.expiration_date | date : "dd/MM/y"}}</strong></span>
+                <br/><br/>
+                <p><em>{{quest.description}}</em></p>
+                <br/>
+                <ng-template [ngIf]="quest.type == 1 || quest.type == 3 ">
+                    <span>Time = {{quest.time}} min</span>
+                </ng-template>
+                <ng-template [ngIf]="quest.type == 3 "><span> /---\ </span></ng-template>
+                <ng-template [ngIf]="quest.type == 2 || quest.type == 3 ">
+                    <span>Distance = {{quest.distance}} km</span>
+                </ng-template>
+            </div>
+            <br/>
+                <p style="float: right;">Runner Point:{{quest.nbRp}}</p>
         </ion-card-content>
     </ion-card>
 </ion-content>
