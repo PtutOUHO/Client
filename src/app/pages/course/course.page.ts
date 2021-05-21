@@ -35,6 +35,8 @@ export class CoursePage implements OnInit, AfterViewInit {
         .subscribe(position => {
           if ('coords' in position) {
             console.log(position.coords.longitude + ' ' + position.coords.latitude);
+            this.currentLocation.lng = position.coords.longitude;
+            this.currentLocation.lat = position.coords.latitude;
           }
         });
     const map = new google.maps.Map(this.mapNativeElement.nativeElement, {
