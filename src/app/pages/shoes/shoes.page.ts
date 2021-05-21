@@ -21,9 +21,9 @@ export class ShoesPage implements OnInit {
 
   ngOnInit() {
     const allStars = document.querySelectorAll(".shoes");
-    //const rating = document.querySelectorAll(".rating");
 
     allStars.forEach((shoes) => {
+      shoes.addEventListener("click", saveRating);
       shoes.addEventListener("mouseover", addCSS);
       shoes.addEventListener("mouseleave", removeCSS);
     });
@@ -64,17 +64,10 @@ export class ShoesPage implements OnInit {
     this.quest.selection.expired = false;
     this.authService.afStore.collection('quests').doc(this.quest.id).set(this.quest, {
       merge: true,
+    }).then(() => {
+      window.location.href = "/home/quetes";
+
     });
-    var questsPage = new QuetesPage(this.authService, this.router);
-    questsPage.givenQuest.forEach((item, index) => {
-      if (item.id == this.quest.id) { 
-        questsPage.givenQuest.splice(index, 1)
-      };
-    });
-    questsPage.refreshGivenDisplay();
-    questsPage.givenMonthlyQuest = []; //A verifier
-    //TODO
-    this.router.navigate(['/home/quetes']);
   }
 
 }
@@ -91,7 +84,6 @@ function removeCSS(e, css = "checked") {
   overedStar.classList.remove(css);
   const previousSiblings = getPreviousSliblings(overedStar);
   previousSiblings.forEach(e => e.classList.remove(css));
-
 }
 
 function getPreviousSliblings(e) {
@@ -104,6 +96,31 @@ function getPreviousSliblings(e) {
   }
   ShoesPage.difficulty = siblings.length + 1;
   return siblings;
+}
+
+function saveRating(e, css = "checked") {
+  removeEventListenersToAllStars();
+}
+
+function removeEventListenersToAllStars() {
+
+  const allStars = document.querySelectorAll(".shoes");
+  allStars.forEach((star) => {
+    star.removeEventListener("click", saveRating);
+    star.removeEventListener("mouseover", addCSS);
+    star.removeEventListener("mouseleave", removeCSS);
+    star.addEventListener("click", customCss)
+  });
+}
+
+function customCss(e, css = "checked") {
+    const overedStar = e.target;
+
+    const allStars = document.querySelectorAll(".shoes");
+    allStars.forEach(e => e.classList.remove(css))
+    const previousSiblings = getPreviousSliblings(overedStar);
+    previousSiblings.push(overedStar)
+    previousSiblings.forEach(e => e.classList.add(css));
 }
 
 
