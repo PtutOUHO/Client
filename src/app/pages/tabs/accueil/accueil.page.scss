@@ -1,16 +1,37 @@
 .text-form {
-  font-family: "DotGothic16", sans-serif;
-  font-size: 16px;
-  text-align: center;
- 
+	font-family: "DotGothic16", sans-serif;
+	font-size: 16px;
+	text-align: center;
 }
 
 .container-btn-map {
-  margin-right: auto;
-  margin-left: auto;
-  margin-top: 1em;
-  width: 50%;
-  
+	margin-right: auto;
+	margin-left: auto;
+	margin-top: 1em;
+	width: 50%;
+}
+
+.dateQuest {
+	font-weight: bold;
+}
+
+.content,
+ion-card-title {
+	text-align: center;
+}
+
+.runnerPoint {
+	float: right;
+	font-weight: bolder;
+}
+
+.design_quest {
+	text-align: left;
+}
+
+.completion {
+  color:green;
+  float: right;
 }
 
 

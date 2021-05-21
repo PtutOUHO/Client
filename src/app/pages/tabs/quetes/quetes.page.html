@@ -24,7 +24,7 @@
                         <span><strong>Début: {{quest.given_date | date : "dd/MM/y" }} ➔ </strong></span>
                         <span><strong>Fin: {{quest.expiration_date | date : "dd/MM/y"}}</strong></span>
                     </div>
-                    <br /><br />
+                    <br />
                     <p><em>{{quest.description}}</em></p>
                     <br />
                     <ng-template [ngIf]="quest.type == 1 || quest.type == 3 ">
@@ -64,10 +64,12 @@
                 </ion-item>
             </ion-card-header>
             <ion-card-content>
-                <div style="text-align: center;">
-                    <span><strong>Début: {{quest.given_date | date : "dd/MM/y" }} ➔ </strong></span>
-                    <span><strong>Fin: {{quest.expiration_date | date : "dd/MM/y"}}</strong></span>
-                    <br /><br />
+                <div class="content">
+                    <div class="dateQuest">
+                        <span><strong>Début: {{quest.given_date | date : "dd/MM/y" }} ➔ </strong></span>
+                        <span><strong>Fin: {{quest.expiration_date | date : "dd/MM/y"}}</strong></span>
+                    </div>
+                    <br />
                     <p><em>{{quest.description}}</em></p>
                     <br />
                     <ng-template [ngIf]="quest.type == 1 || quest.type == 3 ">
@@ -104,10 +106,12 @@
                 </ion-item>
             </ion-card-header>
             <ion-card-content>
-                <div style="text-align: center;">
-                    <span><strong>Début: {{quest.given_date | date : "dd/MM/y" }} ➔ </strong></span>
-                    <span><strong>Fin: {{quest.expiration_date | date : "dd/MM/y"}}</strong></span>
-                    <br /><br />
+                <div class="content">
+                    <div class="dateQuest">
+                        <span><strong>Début: {{quest.given_date | date : "dd/MM/y" }} ➔ </strong></span>
+                        <span><strong>Fin: {{quest.expiration_date | date : "dd/MM/y"}}</strong></span>
+                    </div>
+                    <br />
                     <p><em>{{quest.description}}</em></p>
                     <br />
                     <ng-template [ngIf]="quest.type == 1 || quest.type == 3 ">
