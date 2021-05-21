@@ -77,6 +77,7 @@ export class QuetesPage implements OnInit {
         default:
           break;
       }
+      //return [this.givenDailyQuest, this.givenWeeklyQuest, this.givenMonthlyQuest] Pour les tests
   }
 
   //Actualise le front
