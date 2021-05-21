@@ -25,8 +25,8 @@ export class QuetesPage implements OnInit {
   constructor(
     public authService: AuthenticationService,
     public router: Router,
-  ) {
-  }
+  ) {}
+
   ngOnInit() {
     this.afStore = this.authService.afStore;
     this.uid = JSON.parse(localStorage.getItem('userData')).uid;
