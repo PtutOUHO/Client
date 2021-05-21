@@ -25,14 +25,14 @@ export class QuetesPage implements OnInit {
   constructor(
     public authService: AuthenticationService,
     public router: Router,
-  ) {
+  ) {}
+
+  ngOnInit() {
     this.afStore = this.authService.afStore;
     this.uid = JSON.parse(localStorage.getItem('userData')).uid;
 
     this.getGivenQuestFromDatabase();
-  }
-
-  ngOnInit() {
+  
   }
   
   //Récupérer les quêtes proposées à l'utilisateur et attendre avant de déclencher la suite
