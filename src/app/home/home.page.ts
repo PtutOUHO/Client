@@ -42,7 +42,7 @@ export class HomePage implements OnInit, OnDestroy {
 
   updateTitlePage(): void {
     setTimeout(() => {
-      var pages = this.router.url.split("/");
+      let pages = this.router.url.split("/");
       this.title = pages[pages.length - 1];
     }, 1);
   }

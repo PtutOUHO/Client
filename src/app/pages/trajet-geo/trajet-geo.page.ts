@@ -1,7 +1,7 @@
 import {AfterViewInit, Component, ElementRef, OnInit, ViewChild} from '@angular/core';
 import {FormBuilder, FormGroup, Validators} from '@angular/forms';
 import {Geolocation} from '@ionic-native/geolocation/ngx';
-declare var google;
+declare let google;
 
 @Component({
   selector: 'app-trajet-geo',

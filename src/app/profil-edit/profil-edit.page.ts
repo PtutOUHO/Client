@@ -42,7 +42,7 @@ export class ProfilEditPage implements OnInit {
     birthdate: { value: any }
   ) {
     let args = [nom, prenom, pseudo, birthdate];
-    var go = true;
+    let go = true;
     args.forEach((arg) => {
       if (arg.value == "") {
         this.nullMessage();

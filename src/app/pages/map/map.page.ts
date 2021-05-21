@@ -2,7 +2,7 @@ import {AfterViewInit, Component, ElementRef, OnInit, ViewChild} from '@angular/
 import {Geolocation} from '@ionic-native/geolocation/ngx';
 import {Router} from '@angular/router';
 import {HomePage} from '../../home/home.page';
-declare var google;
+declare let google;
 
 @Component({
   selector: 'app-map',
