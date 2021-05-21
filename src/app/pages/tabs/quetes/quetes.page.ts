@@ -43,7 +43,7 @@ export class QuetesPage implements OnInit {
     let collection = this.authService.afStore.collection('quests', ref => ref.where('userId', '==', this.uid).where('expired', '==', false));
     const documentList = await collection.get().toPromise();
     documentList.docs.forEach(doc => {
-      var quete = doc.data() as Quest;
+      let quete = doc.data() as Quest;
       this.givenQuest.push(quete);
       this.orderGivenQuestFromPeriod(quete)
     });
@@ -77,6 +77,7 @@ export class QuetesPage implements OnInit {
         default:
           break;
       }
+      return [this.givenDailyQuest, this.givenWeeklyQuest, this.givenMonthlyQuest] //Pour les tests
   }
 
   //Actualise le front
@@ -91,15 +92,15 @@ export class QuetesPage implements OnInit {
 
   checkRemainingGivenQuest() {
     //Voir combien de quetes il faut generer et les generer
-    var questToGenerate = [1, 2, 3];
+    let questToGenerate = [1, 2, 3];
     this.givenQuest.forEach(quest => {
       questToGenerate[quest.period - 1]--;
     })
-    var index = 1;
-    var needRefresh: boolean = false;
+    let index = 1;
+    let needRefresh: boolean = false;
     questToGenerate.forEach(numberToGenerate => {
       if (numberToGenerate > 0) {
-        for (var i = 0; i < numberToGenerate; i++) {
+        for (let i = 0; i < numberToGenerate; i++) {
           this.generateQuest(index);
           needRefresh = true;
         }
@@ -111,8 +112,8 @@ export class QuetesPage implements OnInit {
   }  
 
   checkIfGivenQuestAreExpired() {
-    var index = 0;
-    var refresh = false;
+    let index = 0;
+    let refresh = false;
     this.givenQuest.forEach(quete => {
       if (this.checkDateExpired(quete.expiration_date)) {
         quete.expired = true;
@@ -135,24 +136,24 @@ export class QuetesPage implements OnInit {
     let collection = this.authService.afStore.collection('quests', ref => ref.where('userId', '==', this.uid).where('expired', '==', true));
     const documentList = await collection.get().toPromise();
     documentList.docs.forEach(doc => {
-      var quete = doc.data() as Quest;
+      let quete = doc.data() as Quest;
       if (quete.selection == undefined)
         this.authService.afStore.collection('quests').doc(quete.id).delete();
     });
   }
 
   getRemainingTime(date_expiration: Date): any {
-    var now = new Date().valueOf();
-    var ms = date_expiration.valueOf() - now;
+    let now = new Date().valueOf();
+    let ms = date_expiration.valueOf() - now;
     return this.convertMillisecondsToDigitalClock(ms);
 
   }
 
   // Avoir le temps restant
   convertMillisecondsToDigitalClock(ms: number) { //JEST
-    var hours = Math.floor(ms / 3600000); // 1 Hour = 36000 Milliseconds
-    var minutes = Math.floor((ms % 3600000) / 60000); // 1 Minutes = 60000 Milliseconds
-    var seconds = Math.floor(((ms % 360000) % 60000) / 1000); // 1 Second = 1000 Milliseconds
+    let hours = Math.floor(ms / 3600000); // 1 Hour = 36000 Milliseconds
+    let minutes = Math.floor((ms % 3600000) / 60000); // 1 Minutes = 60000 Milliseconds
+    let seconds = Math.floor(((ms % 360000) % 60000) / 1000); // 1 Second = 1000 Milliseconds
     return {
       hours: hours,
       minutes: minutes,
@@ -162,7 +163,7 @@ export class QuetesPage implements OnInit {
   }
 
   checkDateExpired(date_expiration: Date): boolean { //JEST
-    var isExpired = this.compareDate(new Date(), date_expiration);
+    let isExpired = this.compareDate(new Date(), date_expiration);
     if (isExpired == 1 || isExpired == 0) {
       return true;
     }
@@ -184,10 +185,10 @@ export class QuetesPage implements OnInit {
 
   //Génération
   generateQuest(period: number) {
-    var questType;
-    var questDistance;
-    var questTime;
-    var randomType = Math.floor(Math.random() * 3) + 1;
+    let questType;
+    let questDistance;
+    let questTime;
+    let randomType = Math.floor(Math.random() * 3) + 1;
     switch (randomType) {
       case 1: {
         //"ChronoQuest"
@@ -209,8 +210,8 @@ export class QuetesPage implements OnInit {
         break;
       }
     }
-    var id: string = this.afStore.createId();
-    var quest = new Quest(id, period, randomType, questDistance, questTime);
+    let id: string = this.afStore.createId();
+    let quest = new Quest(id, period, randomType, questDistance, questTime);
     this.givenQuest.push(quest);
     this.authService.afStore.collection('quests').doc(id).set(JSON.parse(JSON.stringify(quest)), {
       merge: true,
@@ -218,7 +219,7 @@ export class QuetesPage implements OnInit {
   }
 
   async goToShoes(id) {
-    var index = 0;
+    let index = 0;
     let collection = this.authService.afStore.collection('quests', ref => ref.where('userId', '==', this.uid).where('selection.expired', '==', false));
     const documentList = await collection.get().toPromise();
     documentList.docs.forEach(doc => {

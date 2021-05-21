@@ -1,14 +1,14 @@
 import {AfterViewInit, Component, ElementRef, OnInit, ViewChild} from '@angular/core';
 import {FormBuilder, FormGroup, Validators} from '@angular/forms';
 import {Geolocation} from '@ionic-native/geolocation/ngx';
-declare let google;
+declare var google;
 
 @Component({
-  selector: 'app-trajet-geo',
-  templateUrl: './trajet-geo.page.html',
-  styleUrls: ['./trajet-geo.page.scss'],
+  selector: 'app-course',
+  templateUrl: './course.page.html',
+  styleUrls: ['./course.page.scss'],
 })
-export class TrajetGeoPage implements OnInit, AfterViewInit {
+export class CoursePage implements OnInit, AfterViewInit {
   @ViewChild('mapElement') mapNativeElement: ElementRef;
   directionsService = new google.maps.DirectionsService;
   directionsDisplay = new google.maps.DirectionsRenderer;
@@ -31,10 +31,12 @@ export class TrajetGeoPage implements OnInit, AfterViewInit {
   }
 
   ngAfterViewInit(): void {
-    this.geolocation.getCurrentPosition().then((resp) => {
-      this.currentLocation.lat = resp.coords.latitude;
-      this.currentLocation.lng = resp.coords.longitude;
-    });
+    this.geolocation.watchPosition()
+        .subscribe(position => {
+          if ('coords' in position) {
+            console.log(position.coords.longitude + ' ' + position.coords.latitude);
+          }
+        });
     const map = new google.maps.Map(this.mapNativeElement.nativeElement, {
       zoom: 7,
       center: {lat: 43.60, lng: 1.44}

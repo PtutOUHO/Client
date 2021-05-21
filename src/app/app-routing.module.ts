@@ -36,8 +36,8 @@ const routes: Routes = [
     loadChildren: () => import('./pages/shoes/shoes.module').then( m => m.ShoesPageModule)
   },
   {
-    path: 'home/amis',
-    loadChildren: () => import('./pages/tabs/amis/amis.module').then( m => m.AmisPageModule)
+    path: 'home/credit',
+    loadChildren: () => import('./pages/tabs/credit/credit.module').then( m => m.CreditPageModule)
   },
   {
     path: 'registration',
@@ -59,8 +59,13 @@ const routes: Routes = [
     path: 'profil-edit',
     loadChildren: () => import('./profil-edit/profil-edit.module').then( m => m.ProfilEditPageModule)
   },
+  {
+    path: 'course',
+    loadChildren: () => import('./pages/course/course.module').then( m => m.CoursePageModule)
+  },
   // A PLACER A LA FIN
-  {path: '**', redirectTo: '/404'}
+  {path: '**', redirectTo: '/404'},
+
 ];
 
 @NgModule({

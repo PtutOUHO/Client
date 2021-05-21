@@ -35,6 +35,15 @@ const routes: Routes = [
         ]
       },
       {
+        path: 'course',
+        children: [
+          {
+            path: '',
+            loadChildren: () => import('../pages/course/course.module').then(m => m.CoursePageModule)
+          }
+        ]
+      },
+      {
         path: 'profil',
         children: [
           {
@@ -53,11 +62,11 @@ const routes: Routes = [
         ]
       },
       {
-        path: 'amis',
+        path: 'credit',
         children: [
           {
             path: '',
-            loadChildren: () => import('../pages/tabs/amis/amis.module').then(m => m.AmisPageModule)
+            loadChildren: () => import('../pages/tabs/credit/credit.module').then(m => m.CreditPageModule)
           }
         ]
       },

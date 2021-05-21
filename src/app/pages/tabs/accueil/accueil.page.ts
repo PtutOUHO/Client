@@ -40,7 +40,7 @@ export class AccueilPage implements OnInit {
     let collection = this.authService.afStore.collection('quests', ref => ref.where('userId', '==', this.uid).where('selection.expired', '==', false));
     const documentList = await collection.get().toPromise();
     documentList.docs.forEach(doc => {
-      var quete = doc.data() as Quest;
+      let quete = doc.data() as Quest;
       this.selectedQuest.push(quete);
       this.orderSelectedQuestFromPeriod(quete)
     });
@@ -80,8 +80,8 @@ export class AccueilPage implements OnInit {
   }
 
   checkIfSelectedQuestAreExpired() {
-    var index = 0;
-    var refresh = false;
+    let index = 0;
+    let refresh = false;
     this.selectedQuest.forEach(quete => {
       if (this.checkDateExpired(quete.selection.expiration_date)) {
         quete.selection.expired = true;
@@ -107,11 +107,11 @@ export class AccueilPage implements OnInit {
     let collection = this.authService.afStore.collection('users', ref => ref.where('uid', '==', this.uid));
     const documentList = await collection.get().toPromise();
     documentList.docs.forEach(user => {
-      var userData = user.data() as User;
+      let userData = user.data() as User;
 
       //Calcul
-      var pourcentage: number;
-      var rpToGive: number;
+      let pourcentage: number;
+      let rpToGive: number;
       switch (quete.type) {
         case 1:
           //Chrono
@@ -126,7 +126,7 @@ export class AccueilPage implements OnInit {
         case 3:
           //Distance
           if (quete.selection.distance_sucess == quete.distance) {
-            var pourcentageTempsGagne = Math.floor(100 * quete.time / quete.selection.time_sucess);
+            let pourcentageTempsGagne = Math.floor(100 * quete.time / quete.selection.time_sucess);
             rpToGive = quete.selection.shoes * quete.nbRp * pourcentageTempsGagne / 100;
 
           }
@@ -153,7 +153,7 @@ export class AccueilPage implements OnInit {
   }
 
   checkDateExpired(date_expiration: Date): boolean { //JEST
-    var isExpired = this.compareDate(new Date(), date_expiration);
+    let isExpired = this.compareDate(new Date(), date_expiration);
     if (isExpired == 1 || isExpired == 0) {
       return true;
     }
@@ -181,6 +181,11 @@ export class AccueilPage implements OnInit {
   displayMapWithDirection() {
     this.router.navigate(['home/trajet-geo']);
     this.homePage.title = 'trajet';
+  }
+
+  displayCourseMode() {
+    this.router.navigate(['home/course']);
+    this.homePage.title = 'course';
   }
 
   goToQuestEnCours(){
