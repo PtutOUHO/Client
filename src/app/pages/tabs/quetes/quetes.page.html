@@ -19,12 +19,14 @@
                 </ion-item>
             </ion-card-header>
             <ion-card-content>
-                <div style="text-align: center;">
-                    <span><strong>Début: {{quest.given_date | date : "dd/MM/y" }} ➔ </strong></span>
-                    <span><strong>Fin: {{quest.expiration_date | date : "dd/MM/y"}}</strong></span>
-                    <br/><br/>
+                <div class="content">
+                    <div class="dateQuest">
+                        <span><strong>Début: {{quest.given_date | date : "dd/MM/y" }} ➔ </strong></span>
+                        <span><strong>Fin: {{quest.expiration_date | date : "dd/MM/y"}}</strong></span>
+                    </div>
+                    <br />
                     <p><em>{{quest.description}}</em></p>
-                    <br/>
+                    <br />
                     <ng-template [ngIf]="quest.type == 1 || quest.type == 3 ">
                         <span>Time = {{quest.time}} min</span>
                     </ng-template>
@@ -33,8 +35,8 @@
                         <span>Distance = {{quest.distance}} km</span>
                     </ng-template>
                 </div>
-                <br/>
-                    <p style="float: right;">Runner Point:{{quest.nbRp}}</p>
+                <br />
+                <p class="runnerPoint">RP : {{quest.nbRp}}</p>
                 <!-- <p *ngFor="let property of quest | keyvalue">
                     <span class="design_quest">{{ property.value }}</span>
                 </p> -->
@@ -62,12 +64,14 @@
                 </ion-item>
             </ion-card-header>
             <ion-card-content>
-                <div style="text-align: center;">
-                    <span><strong>Début: {{quest.given_date | date : "dd/MM/y" }} ➔ </strong></span>
-                    <span><strong>Fin: {{quest.expiration_date | date : "dd/MM/y"}}</strong></span>
-                    <br/><br/>
+                <div class="content">
+                    <div class="dateQuest">
+                        <span><strong>Début: {{quest.given_date | date : "dd/MM/y" }} ➔ </strong></span>
+                        <span><strong>Fin: {{quest.expiration_date | date : "dd/MM/y"}}</strong></span>
+                    </div>
+                    <br />
                     <p><em>{{quest.description}}</em></p>
-                    <br/>
+                    <br />
                     <ng-template [ngIf]="quest.type == 1 || quest.type == 3 ">
                         <span>Time = {{quest.time}} min</span>
                     </ng-template>
@@ -76,8 +80,8 @@
                         <span>Distance = {{quest.distance}} km</span>
                     </ng-template>
                 </div>
-                <br/>
-                    <p style="float: right;">Runner Point:{{quest.nbRp}}</p>
+                <br />
+                <p class="runnerPoint">RP : {{quest.nbRp}}</p>
             </ion-card-content>
         </ion-card>
     </ion-card>
@@ -102,12 +106,14 @@
                 </ion-item>
             </ion-card-header>
             <ion-card-content>
-                <div style="text-align: center;">
-                    <span><strong>Début: {{quest.given_date | date : "dd/MM/y" }} ➔ </strong></span>
-                    <span><strong>Fin: {{quest.expiration_date | date : "dd/MM/y"}}</strong></span>
-                    <br/><br/>
+                <div class="content">
+                    <div class="dateQuest">
+                        <span><strong>Début: {{quest.given_date | date : "dd/MM/y" }} ➔ </strong></span>
+                        <span><strong>Fin: {{quest.expiration_date | date : "dd/MM/y"}}</strong></span>
+                    </div>
+                    <br />
                     <p><em>{{quest.description}}</em></p>
-                    <br/>
+                    <br />
                     <ng-template [ngIf]="quest.type == 1 || quest.type == 3 ">
                         <span>Time = {{quest.time}} min</span>
                     </ng-template>
@@ -116,8 +122,8 @@
                         <span>Distance = {{quest.distance}} km</span>
                     </ng-template>
                 </div>
-                <br/>
-                    <p style="float: right;">Runner Point:{{quest.nbRp}}</p>
+                <br />
+                <p class="runnerPoint">RP : {{quest.nbRp}}</p>
             </ion-card-content>
         </ion-card>
     </ion-card>

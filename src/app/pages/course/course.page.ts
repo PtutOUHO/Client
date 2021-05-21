@@ -128,11 +128,13 @@ export class CoursePage implements OnInit {
 
   ngAfterViewInit(): void {
     this.geolocation.watchPosition()
-      .subscribe(position => {
-        if ('coords' in position) {
-          console.log(position.coords.longitude + ' ' + position.coords.latitude);
-        }
-      });
+        .subscribe(position => {
+          if ('coords' in position) {
+            console.log(position.coords.longitude + ' ' + position.coords.latitude);
+            this.currentLocation.lng = position.coords.longitude;
+            this.currentLocation.lat = position.coords.latitude;
+          }
+        });
     const map = new google.maps.Map(this.mapNativeElement.nativeElement, {
       zoom: 7,
       center: { lat: 43.60, lng: 1.44 }
