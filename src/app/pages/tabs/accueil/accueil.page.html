@@ -23,6 +23,13 @@
             </ion-button>
         </ion-col>
     </ion-row>
+    <ion-row>
+        <ion-col>
+            <ion-button id="course-button" color="success" expand="block" type="submit" (click)="displayCourseMode()">
+                Lancer la course
+            </ion-button>
+        </ion-col>
+    </ion-row>
     <ion-card color="success" *ngFor="let quest of selectedDailyQuest" (click)="goToQuestEnCours()">
         <ion-card-header>
             <ion-item color="success">

@@ -59,8 +59,13 @@ const routes: Routes = [
     path: 'profil-edit',
     loadChildren: () => import('./profil-edit/profil-edit.module').then( m => m.ProfilEditPageModule)
   },
+  {
+    path: 'course',
+    loadChildren: () => import('./pages/course/course.module').then( m => m.CoursePageModule)
+  },
   // A PLACER A LA FIN
-  {path: '**', redirectTo: '/404'}
+  {path: '**', redirectTo: '/404'},
+
 ];
 
 @NgModule({
