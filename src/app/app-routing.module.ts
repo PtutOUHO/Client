@@ -63,6 +63,10 @@ const routes: Routes = [
     path: 'course',
     loadChildren: () => import('./pages/course/course.module').then( m => m.CoursePageModule)
   },
+  {
+    path: 'course',
+    loadChildren: () => import('./pages/course/course.module').then( m => m.CoursePageModule)
+  },
   // A PLACER A LA FIN
   {path: '**', redirectTo: '/404'},
 
