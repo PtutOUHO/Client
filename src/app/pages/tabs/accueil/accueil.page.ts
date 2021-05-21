@@ -186,8 +186,4 @@ export class AccueilPage implements OnInit {
   goToQuestEnCours(){
     this.router.navigate(['/quetes-en-cours']);
   }
-
-  displayQuestRide() {
-    this.router.navigate(['/course']);
-  }
 }

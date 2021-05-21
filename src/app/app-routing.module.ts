@@ -63,13 +63,8 @@ const routes: Routes = [
     path: 'quetes-en-cours',
     loadChildren: () => import('./quetes-en-cours/quetes-en-cours.module').then( m => m.QuetesEnCoursPageModule)
   },
-  {
-    path: 'course',
-    loadChildren: () => import('./course/course.module').then(m => m.CoursePageModule)
-  },
   // A PLACER A LA FIN
-  {path: '**', redirectTo: '/404'},
-
+  {path: '**', redirectTo: '/404'}
 ];
 
 @NgModule({
