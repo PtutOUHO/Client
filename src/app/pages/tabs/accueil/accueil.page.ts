@@ -183,6 +183,11 @@ export class AccueilPage implements OnInit {
     this.homePage.title = 'trajet';
   }
 
+  displayCourseMode() {
+    this.router.navigate(['home/course']);
+    this.homePage.title = 'course';
+  }
+
   goToQuestEnCours(){
     this.router.navigate(['/quetes-en-cours']);
   }
