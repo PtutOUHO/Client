@@ -30,7 +30,8 @@
             </ion-button>
         </ion-col>
     </ion-row>
-    <ion-card color="success" *ngFor="let quest of selectedDailyQuest" (click)="goToQuestEnCours()">
+    <ion-title>Liste des quêtes selectionnées</ion-title>
+    <ion-card color="success" *ngFor="let quest of selectedDailyQuest">
         <ion-card-header>
             <ion-item color="success">
                 <ng-template [ngIf]="quest.selection.expired == true">
@@ -67,7 +68,7 @@
                 <p style="float: right;">Runner Point:{{quest.nbRp}}</p>
         </ion-card-content>
     </ion-card>
-    <ion-card color="secondary" *ngFor="let quest of selectedWeeklyQuest" (click)="goToQuestEnCours()">
+    <ion-card color="secondary" *ngFor="let quest of selectedWeeklyQuest">
         <ion-card-header>
             <ion-item color="secondary">
                 <ng-template [ngIf]="quest.selection.expired == true">
@@ -104,7 +105,7 @@
                 <p style="float: right;">Runner Point:{{quest.nbRp}}</p>
         </ion-card-content>
     </ion-card>
-    <ion-card color="danger" *ngFor="let quest of selectedMonthlyQuest" (click)="goToQuestEnCours()">
+    <ion-card color="danger" *ngFor="let quest of selectedMonthlyQuest">
         <ion-card-header>
             <ion-item color="danger">
                 <ng-template [ngIf]="quest.selection.expired == true">
