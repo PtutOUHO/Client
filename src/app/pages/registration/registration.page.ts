@@ -26,7 +26,7 @@ export class RegistrationPage implements OnInit {
     this.toastr.success('Inscription réussite', 'Email de vérification envoyé ! ', { timeOut : 5500 }) // Le message reste 5,5 secondes
     this.authService.RegisterUser(email.value, password.value)
         .then((res) => {
-          this.authService.SetUser(res.user.uid, email.value, firstname.value, lastname.value, pseudo.value, birthdate.value, new Date());
+          this.authService.SetUser(res.user.uid, email.value, firstname.value, lastname.value, pseudo.value, birthdate.value, new Date(), 0);
           this.authService.SendVerificationMail();
           this.toastr.success('Mail envoyé avec succes !', 'un email vous as été envoyé', { timeOut : 5500 }); // Le message reste 5,5 secondes
           this.router.navigate(['verify-email']);

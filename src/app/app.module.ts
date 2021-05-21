@@ -20,10 +20,11 @@ import { AngularFirestoreModule } from '@angular/fire/firestore';
 import { environment } from '../environments/environment';
 
 import { Geolocation } from '@ionic-native/geolocation/ngx';
+// import { IonicStorageModule } from '@ionic/storage';
 
 @NgModule({
   declarations: [AppComponent],
-  entryComponents: [],
+  entryComponents: [AppComponent],
   imports: [
     BrowserModule,
     IonicModule.forRoot(),
@@ -34,6 +35,7 @@ import { Geolocation } from '@ionic-native/geolocation/ngx';
     AngularFirestoreModule,
     BrowserAnimationsModule, // Animations module
     ToastrModule.forRoot(), // ToastrModule added
+    // IonicStorageModule.forRoot(),
   ],
   providers: [
     StatusBar,

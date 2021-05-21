@@ -11,22 +11,82 @@
 
     <ion-row>
         <ion-col>
-            <ion-button id="map-button"
-                        expand="block"
-                        type="submit"
-                        (click)="displayMap()">
+            <ion-button id="map-button" expand="block" type="submit" (click)="displayMap()">
                 Voir ma position
             </ion-button>
         </ion-col>
     </ion-row>
     <ion-row>
         <ion-col>
-            <ion-button id="trajet-button"
-                        expand="block"
-                        type="submit"
-                        (click)="displayMapWithDirection()">
+            <ion-button id="trajet-button" expand="block" type="submit" (click)="displayMapWithDirection()">
                 Choisir une destination
             </ion-button>
         </ion-col>
     </ion-row>
+    <ion-row>
+        <ion-col>
+            <ion-button id="ride-button" expand="block" type="submit" color="success" (click)="displayQuestRide()">
+                Mode course
+            </ion-button>
+        </ion-col>
+    </ion-row>
+    <ion-card color="success" *ngFor="let quest of selectedDailyQuest" (click)="goToQuestEnCours()">
+        <ion-card-header>
+            <ion-item color="success">
+                <ng-template [ngIf]="quest.type == 1">
+                    <ion-icon color="dark" name="time-outline" slot="start"></ion-icon>
+                </ng-template>
+                <ng-template [ngIf]="quest.type == 2">
+                    <ion-icon color="dark" name="flag" slot="start"></ion-icon>
+                </ng-template>
+                <ng-template [ngIf]="quest.type == 3">
+                    <ion-icon color="dark" name="infinite" slot="start"></ion-icon>
+                </ng-template>
+                <ion-card-title>{{ quest.name }}</ion-card-title>
+            </ion-item>
+        </ion-card-header>
+        <ion-card-content>
+            <!-- <p *ngFor="let property of quest | keyvalue">
+                        <span class="design_quest">{{ property.value }}</span>
+                    </p> -->
+        </ion-card-content>
+    </ion-card>
+    <ion-card color="secondary" *ngFor="let quest of selectedWeeklyQuest" (click)="goToQuestEnCours()">
+        <ion-card-header>
+            <ion-item color="secondary">
+                <ng-template [ngIf]="quest.type == 1">
+                    <ion-icon color="dark" name="time-outline" slot="start"></ion-icon>
+                </ng-template>
+                <ng-template [ngIf]="quest.type == 2">
+                    <ion-icon color="dark" name="flag" slot="start"></ion-icon>
+                </ng-template>
+                <ng-template [ngIf]="quest.type == 3">
+                    <ion-icon color="dark" name="infinite" slot="start"></ion-icon>
+                </ng-template>
+                <ion-card-title>{{ quest.name }}</ion-card-title>
+            </ion-item>
+        </ion-card-header>
+        <ion-card-content>
+            <!-- Afficher propriété ici -->
+        </ion-card-content>
+    </ion-card>
+    <ion-card color="danger" *ngFor="let quest of selectedMonthlyQuest" (click)="goToQuestEnCours()">
+        <ion-card-header>
+            <ion-item color="danger">
+                <ng-template [ngIf]="quest.type == 1">
+                    <ion-icon color="dark" name="time-outline" slot="start"></ion-icon>
+                </ng-template>
+                <ng-template [ngIf]="quest.type == 2">
+                    <ion-icon color="dark" name="flag" slot="start"></ion-icon>
+                </ng-template>
+                <ng-template [ngIf]="quest.type == 3">
+                    <ion-icon color="dark" name="infinite" slot="start"></ion-icon>
+                </ng-template>
+                <ion-card-title>{{ quest.name }}</ion-card-title>
+            </ion-item>
+        </ion-card-header>
+        <ion-card-content>
+            <!-- Afficher propriété ici -->
+        </ion-card-content>
+    </ion-card>
 </ion-content>
