@@ -52,10 +52,6 @@ const routes: Routes = [
     loadChildren: () => import('./pages/login/login.module').then( m => m.LoginPageModule)
   },
   {
-    path: '404',
-    loadChildren: () => import('./error-page/error-page.module').then( m => m.ErrorPagePageModule)
-  },
-  {
     path: 'profil-edit',
     loadChildren: () => import('./profil-edit/profil-edit.module').then( m => m.ProfilEditPageModule)
   },
@@ -64,8 +60,8 @@ const routes: Routes = [
     loadChildren: () => import('./pages/course/course.module').then( m => m.CoursePageModule)
   },
   {
-    path: 'course',
-    loadChildren: () => import('./pages/course/course.module').then( m => m.CoursePageModule)
+    path: '404',
+    loadChildren: () => import('./error-page/error-page.module').then( m => m.ErrorPagePageModule)
   },
   // A PLACER A LA FIN
   {path: '**', redirectTo: '/404'},

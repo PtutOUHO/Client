@@ -81,7 +81,6 @@ export class ShoesPage implements OnInit {
 
     });
   }
-
 }
 
 function addCSS(e, css = "checked") {

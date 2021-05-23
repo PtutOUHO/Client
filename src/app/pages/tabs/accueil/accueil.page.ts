@@ -99,7 +99,6 @@ export class AccueilPage implements OnInit {
     if (refresh) {
       this.refreshSelectedDisplay()
     }
-    console.log(this.selectedQuest)
   }
 
   //Attribut les récompenses lors de l'expiration de la quête
@@ -115,24 +114,24 @@ export class AccueilPage implements OnInit {
       switch (quete.type) {
         case 1:
           //Chrono
-          pourcentage = Math.floor(100 * quete.selection.time_sucess / quete.time);
+          pourcentage = Math.floor(quete.selection.time_sucess / quete.time * 60);
           rpToGive = quete.selection.shoes * quete.nbRp * pourcentage / 100;
           break;
         case 2:
           //Distance
-          pourcentage = Math.floor(100 * quete.selection.distance_sucess / quete.distance);
+          pourcentage = Math.floor(quete.selection.distance_sucess / quete.distance);
           rpToGive = quete.selection.shoes * quete.nbRp * pourcentage / 100;
           break;
         case 3:
           //Distance
           if (quete.selection.distance_sucess == quete.distance) {
-            let pourcentageTempsGagne = Math.floor(100 * quete.time / quete.selection.time_sucess);
+            let pourcentageTempsGagne = Math.floor(quete.time / quete.selection.time_sucess * 60);
             rpToGive = quete.selection.shoes * quete.nbRp * pourcentageTempsGagne / 100;
 
           }
           else if (quete.selection.time_sucess == quete.time) {
             //Temps gagné
-            pourcentage = Math.floor(100 * quete.selection.distance_sucess / quete.distance);
+            pourcentage = Math.floor(quete.selection.distance_sucess / quete.distance);
             rpToGive = quete.selection.shoes * quete.nbRp * pourcentage / 100;
           }
           break;
@@ -184,7 +183,7 @@ export class AccueilPage implements OnInit {
   }
 
   displayCourseMode() {
-    this.router.navigate(['home/course']);
+    this.router.navigate(['course']);
     this.homePage.title = 'course';
   }
 }

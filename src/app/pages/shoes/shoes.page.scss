@@ -1,12 +1,54 @@
-
-  ion-title {
-    font-family: "Permanent Marker", sans-serif;
-    font-size: 2em;
-    padding: 0;
-    position: relative;
-  }
-
 .checked{
   color: orange;
 }
-     
+
+#title {
+  float: left;
+  width: 50%;
+}
+
+ion-title {
+  font-family: "Permanent Marker", sans-serif;
+  font-size: 2em;
+  padding: 0;
+  position: relative;
+}
+
+.content-image {
+  float: right;
+  width: 40%;
+}
+
+.logo {
+  padding-top: 5px;
+  width: 5em;
+  height: auto;
+}
+
+#container {
+  text-align: center;
+
+  position: absolute;
+  left: 0;
+  right: 0;
+  top: 50%;
+  transform: translateY(-50%);
+}
+
+#container strong {
+  font-size: 20px;
+  line-height: 26px;
+}
+
+#container p {
+  font-size: 16px;
+  line-height: 22px;
+
+  color: #8c8c8c;
+
+  margin: 0;
+}
+
+#container a {
+  text-decoration: none;
+}

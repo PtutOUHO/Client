@@ -1,8 +1,16 @@
 <ion-header>
-  <ion-toolbar>
-    <div>
+  <ion-toolbar class="header">
+    <div id="title">
+      <center>
       <ion-title>Shoes</ion-title>
+      </center>
     </div>  
+    <div class="content-image">
+      <center>
+        <ion-img [routerLink]="['/home/accueil']" expand="full" class="logo"
+          src="../assets/icon/logo.png"></ion-img>
+      </center>
+    </div>
   </ion-toolbar>
 </ion-header>
 

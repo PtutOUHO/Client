@@ -35,15 +35,6 @@ const routes: Routes = [
         ]
       },
       {
-        path: 'course',
-        children: [
-          {
-            path: '',
-            loadChildren: () => import('../pages/course/course.module').then(m => m.CoursePageModule)
-          }
-        ]
-      },
-      {
         path: 'profil',
         children: [
           {

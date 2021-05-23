@@ -14,8 +14,15 @@ export class CoursePage implements OnInit {
   @ViewChild('mapElement') mapNativeElement: ElementRef;
   //Mode course
   interval;
+  courseMode: boolean = false;
   selectedQuest: Quest[];
   timeSecond: number = 0;
+  timeToDisplay = {
+    hours: 0,
+    minutes: 0,
+    seconds: 0,
+    clock: 0 + ":" + 0 + ":" + 0
+  };
   distanceKm: number = 0.00;
   distanceLastSave: number = 0.00;
   //Mode course
@@ -29,13 +36,30 @@ export class CoursePage implements OnInit {
     lng: 0
   };
   userData: any;
+  latitude: number;
+  longitude: number;
+
   constructor(private fb: FormBuilder, private geolocation: Geolocation, public authService: AuthenticationService) {
-    // this.createDirectionForm();
+    this.createDirectionForm();
   }
+
+  ngAfterViewInit(): void {
+    this.geolocation.getCurrentPosition().then((resp) => {
+      this.currentLocation.lat = resp.coords.latitude;
+      this.currentLocation.lng = resp.coords.longitude;
+    });
+    const map = new google.maps.Map(this.mapNativeElement.nativeElement, {
+      zoom: 7,
+      center: {lat: 43.60, lng: 1.44}
+    });
+    this.directionsDisplay.setMap(map);
+  }
+
 
   ngOnInit() {
     this.userData = JSON.parse(localStorage.getItem('userData'));
     this.getSelectedQuestFromDatabase()
+    this.startCourseMode();
 
   }
 
@@ -52,11 +76,13 @@ export class CoursePage implements OnInit {
   //Mode Course
   //Démarrer le chrono
   async startCourseMode() {
+    this.courseMode = true;
     this.interval = setInterval(() => {
       this.timeSecond++
+      this.displayTime()
       //Toutes les 30 secondes
-      if (this.timeSecond % 30 == 0 && this.timeSecond != 0) {
-        this.addDistanceAndTime(30);
+      if (this.timeSecond % 5 == 0 && this.timeSecond != 0) {
+        this.addDistanceAndTime(5);
         this.calculPercentage();
       }
     }, 1000)
@@ -64,6 +90,7 @@ export class CoursePage implements OnInit {
 
   //Mettre en pause le chrono
   async pauseCourseMode() {
+    this.courseMode = false;
     clearInterval(this.interval);
   }
 
@@ -76,21 +103,37 @@ export class CoursePage implements OnInit {
     //TODO Message possible d'arrêt de quête et redirection
   }
 
+  async displayTime() {
+    this.timeToDisplay = this.convertMillisecondsToDigitalClock(this.timeSecond * 1000)
+  }
+
+  convertMillisecondsToDigitalClock(ms: number) { //JEST
+    let hours = Math.floor(ms / 3600000); // 1 Hour = 36000 Milliseconds
+    let minutes = Math.floor((ms % 3600000) / 60000); // 1 Minutes = 60000 Milliseconds
+    let seconds = Math.floor(((ms % 360000) % 60000) / 1000); // 1 Second = 1000 Milliseconds
+    return {
+      hours: hours,
+      minutes: minutes,
+      seconds: seconds,
+      clock: hours + ":" + minutes + ":" + seconds
+    };
+  }
+
   //Ajouter pour chaque quete le temps donner en parametre en fonction de son type, ainsi que la distance calculé
   addDistanceAndTime(secondToAdd: number) {
     this.selectedQuest.forEach(quest => {
       //Ajouter le temps
       if (quest.type == 1 || quest.type == 3) {
         if (quest.selection.time_sucess == undefined)
-          quest.selection.time_sucess == 0;
-        quest.selection.time_sucess += secondToAdd;
+          quest.selection.time_sucess = 0;
+        quest.selection.time_sucess = quest.selection.time_sucess + secondToAdd;
 
       }
       //Ajouter la distance
       if (quest.type == 2 || quest.type == 3) {
         if (quest.selection.distance_sucess == undefined)
-          quest.selection.distance_sucess == 0;
-          quest.selection.distance_sucess += (this.distanceKm - this.distanceLastSave)
+          quest.selection.distance_sucess = 0;
+        quest.selection.distance_sucess += (this.distanceKm - this.distanceLastSave)
       }
     });
     this.distanceLastSave = this.distanceKm;
@@ -103,7 +146,7 @@ export class CoursePage implements OnInit {
       switch (quete.type) {
         case 1:
           //Chrono
-          quete.selection.percentage = Math.floor(100 * quete.selection.time_sucess / quete.time);
+          quete.selection.percentage = Math.floor(100 * quete.selection.time_sucess / quete.time * 60);
           break;
         case 2:
         case 3:
@@ -111,7 +154,7 @@ export class CoursePage implements OnInit {
           quete.selection.percentage = Math.floor(100 * quete.selection.distance_sucess / quete.distance);
           break;
       }
-      
+
       //Save
       this.authService.afStore.collection("quests").doc(quete.id).set(quete, {
         merge: true,
@@ -121,27 +164,7 @@ export class CoursePage implements OnInit {
 
   //Mode Course
 
-  createDirectionForm() {
-    this.directionForm = this.fb.group({
-      destination: ['', Validators.required]
-    });
-  }
-
-  ngAfterViewInit(): void {
-    this.geolocation.watchPosition()
-        .subscribe(position => {
-          if ('coords' in position) {
-            console.log(position.coords.longitude + ' ' + position.coords.latitude);
-            this.currentLocation.lng = position.coords.longitude;
-            this.currentLocation.lat = position.coords.latitude;
-          }
-        });
-    const map = new google.maps.Map(this.mapNativeElement.nativeElement, {
-      zoom: 7,
-      center: { lat: 43.60, lng: 1.44 }
-    });
-    this.directionsDisplay.setMap(map);
-  }
+  //Map
 
   calculateAndDisplayRoute(formValues) {
     const that = this;
@@ -158,4 +181,10 @@ export class CoursePage implements OnInit {
     });
   }
 
+  createDirectionForm() {
+    this.directionForm = this.fb.group({
+      destination: ['', Validators.required]
+    });
+
+  }
 }

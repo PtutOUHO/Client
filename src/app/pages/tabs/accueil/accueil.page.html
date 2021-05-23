@@ -31,10 +31,13 @@
         </ion-col>
     </ion-row>
     <br/>
-    <ion-title>Liste des quêtes selectionnées : </ion-title>
+    <ng-template [ngIf]="selectedDailyQuest.length != 0 || selectedWeeklyQuest.length != 0 || selectedMonthlyQuest.length != 0"><ion-title>Liste des quêtes selectionnées : </ion-title></ng-template>
     <ion-card color="success" *ngFor="let quest of selectedDailyQuest">
         <ion-card-header>
-            <ion-item color="success">
+            <ng-template [ngIf]="quest.selection.percentage != undefined">
+                <ion-progress-bar value="{{quest.selection.percentage}}"></ion-progress-bar>
+            </ng-template>
+            <ion-item color="success">                
                 <ng-template [ngIf]="quest.selection.expired == true">
                     <ion-icon class="completion" name="checkmark-circle-outline"></ion-icon>
                 </ng-template>
