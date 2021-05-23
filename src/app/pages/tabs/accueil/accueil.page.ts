@@ -10,8 +10,8 @@ import { User } from 'src/app/shared/user';
   styleUrls: ['./accueil.page.scss'],
 })
 export class AccueilPage implements OnInit {
-  public userData: any;
-  uid = JSON.parse(localStorage.getItem('userData')).uid;
+  public userData: any = new User();
+  uid;
   //Liste globales des quêtes
   selectedQuest: Quest[];
   //Liste des quêtes du front
@@ -28,6 +28,7 @@ export class AccueilPage implements OnInit {
 
   ngOnInit() {
     this.userData = JSON.parse(localStorage.getItem('userData'));
+    this.uid = this.userData.uid;
     this.getSelectedQuestFromDatabase();
   } 
 
