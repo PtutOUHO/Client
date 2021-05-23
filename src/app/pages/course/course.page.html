@@ -29,16 +29,20 @@
   </div>
 
   <ng-template [ngIf]="courseMode == false">
-    <div class="start">
-      <p></p>
+    <div class="start" (click)="startCourseMode()">
+      <ion-icon name="play"></ion-icon>
     </div>
   </ng-template>
 
   <ng-template [ngIf]="courseMode == true">
-    <div class="pause">
-      <p></p>
+    <div class="pause" (click)="pauseCourseMode()">
+      <ion-icon color="dark" name="pause" slot="start"></ion-icon>
     </div>
   </ng-template>
+
+  <div class="stop" (click)="stopCourseMode()">
+    <ion-icon name="square"></ion-icon>
+  </div>
 
   <div class="quest">
     <ion-card *ngFor="let quest of selectedQuest" class="questelement">

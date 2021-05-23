@@ -15,6 +15,22 @@
   opacity: 85%;
 }
 
+.start,.pause{
+ position: absolute;
+ height: 25%;
+ width: 20%;
+ margin-top: -90%;
+ border-radius: 20px 20px 20px 20px;
+}
+
+.stop{
+ position: absolute;
+ height: 25%;
+ width: 20%;
+ margin-top: -80%;
+ border-radius: 20px 20px 20px 20px;
+}
+
 .chrono{
   position: absolute;
   margin-top: -120%;
