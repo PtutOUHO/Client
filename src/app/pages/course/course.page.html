@@ -7,7 +7,7 @@
     </div>
     <div class="content-image">
       <center>
-        <ion-img [routerLink]="['/home/accueil']" expand="full" class="logo" src="assets/icon/logo.png"></ion-img>
+        <ion-img expand="full" class="logo" src="assets/icon/logo.png"></ion-img>
       </center>
     </div>
   </ion-toolbar>
@@ -36,7 +36,7 @@
 
   <ng-template [ngIf]="courseMode == true">
     <div class="pause" (click)="pauseCourseMode()">
-      <ion-icon color="dark" name="pause" slot="start"></ion-icon>
+      <ion-icon name="pause" slot="start"></ion-icon>
     </div>
   </ng-template>
 
@@ -47,8 +47,11 @@
   <div class="quest">
     <ion-card *ngFor="let quest of selectedQuest" class="questelement">
       <div class="element">
-        <ng-template [ngIf]="quest.selection.percentage != undefined">
+        <ng-template [ngIf]="quest.selection.percentage != undefined && quest.selection.percentage < 1">
           <ion-progress-bar value="{{quest.selection.percentage}}"></ion-progress-bar>
+        </ng-template>
+        <ng-template [ngIf]="quest.selection.percentage >= 1">
+          <ion-icon class="completion" name="checkmark-circle" slot="start"></ion-icon>
         </ng-template>
         <p><strong>{{ quest.name }}</strong>
           <br />

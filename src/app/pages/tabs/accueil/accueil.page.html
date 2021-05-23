@@ -34,12 +34,12 @@
     <ng-template [ngIf]="selectedDailyQuest.length != 0 || selectedWeeklyQuest.length != 0 || selectedMonthlyQuest.length != 0"><ion-title>Liste des quêtes selectionnées : </ion-title></ng-template>
     <ion-card color="success" *ngFor="let quest of selectedDailyQuest">
         <ion-card-header>
-            <ng-template [ngIf]="quest.selection.percentage != undefined">
+            <ng-template [ngIf]="quest.selection.percentage != undefined && quest.selection.percentage <= 1">
                 <ion-progress-bar value="{{quest.selection.percentage}}"></ion-progress-bar>
             </ng-template>
             <ion-item color="success">                
-                <ng-template [ngIf]="quest.selection.expired == true">
-                    <ion-icon class="completion" name="checkmark-circle-outline"></ion-icon>
+                <ng-template [ngIf]="quest.selection.percentage >= 1">
+                    <ion-icon class="completion" name="checkmark-circle" slot="start"></ion-icon>
                 </ng-template>
                 <ng-template [ngIf]="quest.type == 1">
                     <ion-icon color="dark" name="time-outline" slot="start"></ion-icon>
@@ -76,9 +76,12 @@
     </ion-card>
     <ion-card color="secondary" *ngFor="let quest of selectedWeeklyQuest">
         <ion-card-header>
-            <ion-item color="secondary">
-                <ng-template [ngIf]="quest.selection.expired == true">
-                    <ion-icon class="completion" name="checkmark-circle-outline"></ion-icon>
+            <ng-template [ngIf]="quest.selection.percentage != undefined && quest.selection.percentage <= 1">
+                <ion-progress-bar value="{{quest.selection.percentage}}"></ion-progress-bar>
+            </ng-template>
+            <ion-item color="secondary">                
+                <ng-template [ngIf]="quest.selection.percentage >= 1">
+                    <ion-icon class="completion" name="checkmark-circle" slot="start"></ion-icon>
                 </ng-template>
                 <ng-template [ngIf]="quest.type == 1">
                     <ion-icon color="dark" name="time-outline" slot="start"></ion-icon>
@@ -115,9 +118,12 @@
     </ion-card>
     <ion-card color="danger" *ngFor="let quest of selectedMonthlyQuest">
         <ion-card-header>
-            <ion-item color="danger">
-                <ng-template [ngIf]="quest.selection.expired == true">
-                    <ion-icon class="completion" name="checkmark-circle-outline"></ion-icon>
+            <ng-template [ngIf]="quest.selection.percentage != undefined && quest.selection.percenrtage != 1">
+                <ion-progress-bar value="{{quest.selection.percentage}}"></ion-progress-bar>
+            </ng-template>
+            <ion-item color="danger">                
+                <ng-template [ngIf]="quest.selection.percentage == 1">
+                    <ion-icon class="completion" name="checkmark-circle" slot="start"></ion-icon>
                 </ng-template>
                 <ng-template [ngIf]="quest.type == 1">
                     <ion-icon color="dark" name="time-outline" slot="start"></ion-icon>

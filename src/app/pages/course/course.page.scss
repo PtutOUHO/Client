@@ -15,25 +15,27 @@
   opacity: 85%;
 }
 
-.start,.pause{
+.pause,.start{
+ color:black;
  position: absolute;
- height: 25%;
- width: 20%;
- margin-top: -90%;
- border-radius: 20px 20px 20px 20px;
- color: black;
+ margin-top: -75%;
+ margin-left: 89%;
+ font-size: 30px;
 }
 
 .stop{
+ font-size: 30px;
  position: absolute;
  height: 25%;
  width: 20%;
- margin-top: -80%;
+ margin-top: -55%;
+ margin-left: 89%;
  border-radius: 20px 20px 20px 20px;
  color: black;
 }
 
 .chrono{
+  color: black;
   position: absolute;
   margin-top: -120%;
   margin-left: 40%;
@@ -46,6 +48,14 @@
   opacity: 60%;
   border-radius: 70px 70px 70px 70px;
   border-width: 1px;
+  border-color: black;
+}
+
+.completion {
+  color:greenyellow;
+  padding-left: 35%;
+  margin-top: -10%;
+  position: absolute;
 }
 
 .questelement {
