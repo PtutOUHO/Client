@@ -71,7 +71,7 @@ export class CoursePage implements OnInit {
     const documentList = await collection.get().toPromise();
     documentList.docs.forEach(doc => {
       let quete = doc.data() as Quest;
-      if (quete.selection.percentage < 1)
+      if (quete.selection.percentage == undefined || quete.selection.percentage < 1)
         this.selectedQuest.push(quete);
     });
   }
