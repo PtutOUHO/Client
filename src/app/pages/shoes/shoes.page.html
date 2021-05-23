@@ -2,13 +2,12 @@
   <ion-toolbar class="header">
     <div id="title">
       <center>
-      <ion-title>Shoes</ion-title>
+        <ion-title>Shoes</ion-title>
       </center>
-    </div>  
+    </div>
     <div class="content-image">
       <center>
-        <ion-img [routerLink]="['/home/accueil']" expand="full" class="logo"
-          src="../assets/icon/logo.png"></ion-img>
+        <ion-img expand="full" class="logo" src="../assets/icon/logo.png"></ion-img>
       </center>
     </div>
   </ion-toolbar>
@@ -25,24 +24,34 @@
     <ion-card>
       <ion-card-header>
         <ion-item>
-          <ng-template [ngIf]="quest.type == 1"><ion-icon color="dark" name="time-outline" slot="start"></ion-icon></ng-template>
-          <ng-template [ngIf]="quest.type == 2"><ion-icon color="dark" name="flag" slot="start"></ion-icon></ng-template>
-          <ng-template [ngIf]="quest.type == 3"><ion-icon color="dark" name="infinite" slot="start"></ion-icon></ng-template>
+          <ng-template [ngIf]="quest.type == 1">
+            <ion-icon color="dark" name="time-outline" slot="start"></ion-icon>
+          </ng-template>
+          <ng-template [ngIf]="quest.type == 2">
+            <ion-icon color="dark" name="flag" slot="start"></ion-icon>
+          </ng-template>
+          <ng-template [ngIf]="quest.type == 3">
+            <ion-icon color="dark" name="infinite" slot="start"></ion-icon>
+          </ng-template>
           <ion-card-title>{{quest.name}}</ion-card-title>
         </ion-item>
       </ion-card-header>
       <ion-card-content>
-        <ng-template [ngIf]="quest.type == 1 || quest.type == 3 "><p>Time = {{quest.time * difficulty}} min</p></ng-template>
-        <ng-template [ngIf]="quest.type == 2 || quest.type == 3 "><p>Distance = {{quest.distance * difficulty}} km</p></ng-template>
+        <ng-template [ngIf]="quest.type == 1 || quest.type == 3 ">
+          <p>Time = {{quest.time * difficulty}} min</p>
+        </ng-template>
+        <ng-template [ngIf]="quest.type == 2 || quest.type == 3 ">
+          <p>Distance = {{quest.distance * difficulty}} km</p>
+        </ng-template>
       </ion-card-content>
     </ion-card>
     <p>Choisir votre niveau de difficulté:</p>
     <div>
-      <span class ="shoes" alt="5eme étoile" data-shoes = "1">★</span>
-      <span class ="shoes" alt="4eme étoile" data-shoes = "2">★</span>
-      <span class ="shoes" alt="3eme étoile" data-shoes = "3">★</span>
-      <span class ="shoes" alt="2eme étoile" data-shoes = "4">★</span>
-      <span class ="shoes" alt="1ere étoile" data-shoes = "5">★</span>
+      <span class="shoes" alt="5eme étoile" data-shoes="1">★</span>
+      <span class="shoes" alt="4eme étoile" data-shoes="2">★</span>
+      <span class="shoes" alt="3eme étoile" data-shoes="3">★</span>
+      <span class="shoes" alt="2eme étoile" data-shoes="4">★</span>
+      <span class="shoes" alt="1ere étoile" data-shoes="5">★</span>
     </div>
     <p>RP = {{quest.nbRp * difficulty}} pts</p>
     <ion-button color="medium" (click)="returnToQuest()">Annuler</ion-button>
