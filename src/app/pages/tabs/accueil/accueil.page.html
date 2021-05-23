@@ -118,11 +118,11 @@
     </ion-card>
     <ion-card color="danger" *ngFor="let quest of selectedMonthlyQuest">
         <ion-card-header>
-            <ng-template [ngIf]="quest.selection.percentage != undefined && quest.selection.percenrtage != 1">
+            <ng-template [ngIf]="quest.selection.percentage != undefined && quest.selection.percentage <= 1">
                 <ion-progress-bar value="{{quest.selection.percentage}}"></ion-progress-bar>
             </ng-template>
             <ion-item color="danger">                
-                <ng-template [ngIf]="quest.selection.percentage == 1">
+                <ng-template [ngIf]="quest.selection.percentage >= 1">
                     <ion-icon class="completion" name="checkmark-circle" slot="start"></ion-icon>
                 </ng-template>
                 <ng-template [ngIf]="quest.type == 1">
