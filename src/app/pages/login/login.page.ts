@@ -22,7 +22,6 @@ export class LoginPage implements OnInit {
     if (this.authService.isLoggedIn()) {
       this.router.navigate(['home/accueil']);
     }
-    this.userData = JSON.parse(localStorage.getItem('userData'));
   }
 
   logIn(email, password) {
@@ -42,8 +41,8 @@ export class LoginPage implements OnInit {
     });
   }
   
-  resetPassword() {
-    this.authService.ResetPassword(this.userData.email);
+  resetPassword(email) {
+    this.authService.ResetPassword(email.value);
     this.toastr.success('Mail envoyé avec succes !', 'Changement de mot de passe ', { timeOut : 5500 }); // Le message reste 5,5 secondes
     this.authService.SignOut();
     

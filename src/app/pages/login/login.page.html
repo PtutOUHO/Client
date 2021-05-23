@@ -2,17 +2,18 @@
   <ion-toolbar class="header">
     <div class="content-image">
       <center>
-        <ion-img expand="full" class="logo"
-          src="assets/icon/logo.png"></ion-img>
+        <ion-img
+          expand="full"
+          class="logo"
+          src="assets/icon/logo.png"
+        ></ion-img>
       </center>
     </div>
   </ion-toolbar>
 </ion-header>
 
 <ion-header>
-  <ion-title class="subtitle">
-    Se connecter
-  </ion-title>
+  <ion-title class="subtitle"> Se connecter </ion-title>
 </ion-header>
 
 <ion-content>
@@ -27,31 +28,33 @@
       <ion-input type="password" #password required></ion-input>
     </ion-item>
 
-      <ion-row>
-        <ion-col>
-          <ion-button
-                  type="submit"
-                  (click)="logIn(email, password)"
-                  expand="block"
-                  color="success">Connexion
-          </ion-button>
-        </ion-col>
-      </ion-row>
+    <ion-row>
+      <ion-col>
+        <ion-button
+          type="submit"
+          (click)="logIn(email, password)"
+          expand="block"
+          color="success"
+          >Connexion
+        </ion-button>
+      </ion-col>
+    </ion-row>
   </form>
   <ion-row>
     <ion-col>
-      <ion-button
-              (click)="goToRegisterPage()"
-              expand="block">S'inscrire
+      <ion-button (click)="goToRegisterPage()" expand="block"
+        >S'inscrire
       </ion-button>
     </ion-col>
   </ion-row>
   <ion-row>
     <ion-col>
       <ion-button
-              color="warning"
-              (click)="resetPassword()"
-              expand="block">Mot de passe oublié ? 
+        type="submit"
+        color="warning"
+        (click)="resetPassword(email)"
+        expand="block"
+        >Mot de passe oublié ?
       </ion-button>
     </ion-col>
   </ion-row>

@@ -1,17 +1,16 @@
-import {Component, OnInit} from '@angular/core';
-import {Router} from '@angular/router';
+import { Component, OnInit } from "@angular/core";
+import { Router } from "@angular/router";
 import { AuthenticationService } from "../../../shared/authentication-service";
-import {HomePage} from '../../../home/home.page';
-import { Quest } from 'src/app/shared/quest';
-import { User } from 'src/app/shared/user';
+import { HomePage } from "../../../home/home.page";
+import { Quest } from "src/app/shared/quest";
+import { User } from "src/app/shared/user";
 @Component({
-  selector: 'app-accueil',
-  templateUrl: './accueil.page.html',
-  styleUrls: ['./accueil.page.scss'],
+  selector: "app-accueil",
+  templateUrl: "./accueil.page.html",
+  styleUrls: ["./accueil.page.scss"],
 })
 export class AccueilPage implements OnInit {
-  public userData: any = new User();
-  uid;
+  public userData: any;
   //Liste globales des quêtes
   selectedQuest: Quest[];
   //Liste des quêtes du front
@@ -20,17 +19,20 @@ export class AccueilPage implements OnInit {
   selectedMonthlyQuest: Quest[] = [];
 
   constructor(
-      public router: Router,
-      public homePage: HomePage,
-      public authService: AuthenticationService
-      ) {
-  }
+    public router: Router,
+    public homePage: HomePage,
+    public authService: AuthenticationService
+  ) {}
 
   ngOnInit() {
-    this.userData = JSON.parse(localStorage.getItem('userData'));
-    this.uid = this.userData.uid;
-    this.getSelectedQuestFromDatabase();
-  } 
+    setTimeout(() => {
+      if (JSON.parse(localStorage.getItem("userData")) != null) {
+        this.userData = JSON.parse(localStorage.getItem("userData"));
+        this.getSelectedQuestFromDatabase();
+      }
+
+    }, 500)
+  }
 
   //Récupérer les quêtes sélectionnées par l'utilisateur et attendre avant de déclencher la suite
   async getSelectedQuestFromDatabase() {
@@ -38,12 +40,16 @@ export class AccueilPage implements OnInit {
     this.selectedDailyQuest = [];
     this.selectedWeeklyQuest = [];
     this.selectedMonthlyQuest = [];
-    let collection = this.authService.afStore.collection('quests', ref => ref.where('userId', '==', this.uid).where('selection.expired', '==', false));
+    let collection = this.authService.afStore.collection("quests", (ref) =>
+      ref
+        .where("userId", "==", this.userData.uid)
+        .where("selection.expired", "==", false)
+    );
     const documentList = await collection.get().toPromise();
-    documentList.docs.forEach(doc => {
+    documentList.docs.forEach((doc) => {
       let quete = doc.data() as Quest;
       this.selectedQuest.push(quete);
-      this.orderSelectedQuestFromPeriod(quete)
+      this.orderSelectedQuestFromPeriod(quete);
     });
     this.ngSuite();
   }
@@ -53,9 +59,7 @@ export class AccueilPage implements OnInit {
     this.checkIfSelectedQuestAreExpired();
   }
 
-  
   orderSelectedQuestFromPeriod(quest: Quest) {
-
     switch (quest.period) {
       case 1:
         this.selectedDailyQuest.push(quest);
@@ -75,19 +79,19 @@ export class AccueilPage implements OnInit {
     this.selectedDailyQuest = [];
     this.selectedWeeklyQuest = [];
     this.selectedMonthlyQuest = [];
-    this.selectedQuest.forEach(quest => {
+    this.selectedQuest.forEach((quest) => {
       this.orderSelectedQuestFromPeriod(quest);
-    })
+    });
   }
 
   checkIfSelectedQuestAreExpired() {
     let index = 0;
     let refresh = false;
-    this.selectedQuest.forEach(quete => {
+    this.selectedQuest.forEach((quete) => {
       if (this.checkDateExpired(quete.selection.expiration_date)) {
         quete.selection.expired = true;
         delete this.selectedQuest[index];
-        this.authService.afStore.collection('quests').doc(quete.id).set(quete, {
+        this.authService.afStore.collection("quests").doc(quete.id).set(quete, {
           merge: true,
         });
         this.giveRewards(quete);
@@ -96,17 +100,19 @@ export class AccueilPage implements OnInit {
         refresh = true;
       }
       index++;
-    })
+    });
     if (refresh) {
-      this.refreshSelectedDisplay()
+      this.refreshSelectedDisplay();
     }
   }
 
   //Attribut les récompenses lors de l'expiration de la quête
   async giveRewards(quete: Quest) {
-    let collection = this.authService.afStore.collection('users', ref => ref.where('uid', '==', this.uid));
+    let collection = this.authService.afStore.collection("users", (ref) =>
+      ref.where("uid", "==", this.userData.uid)
+    );
     const documentList = await collection.get().toPromise();
-    documentList.docs.forEach(user => {
+    documentList.docs.forEach((user) => {
       let userData = user.data() as User;
 
       //Calcul
@@ -126,11 +132,11 @@ export class AccueilPage implements OnInit {
         case 3:
           //Distance
           if (quete.selection.distance_sucess == quete.distance) {
-            let pourcentageTempsGagne = quete.time / (quete.selection.time_sucess * 60);
-            rpToGive = quete.selection.shoes * quete.nbRp * pourcentageTempsGagne;
-
-          }
-          else if (quete.selection.time_sucess == quete.time) {
+            let pourcentageTempsGagne =
+              quete.time / (quete.selection.time_sucess * 60);
+            rpToGive =
+              quete.selection.shoes * quete.nbRp * pourcentageTempsGagne;
+          } else if (quete.selection.time_sucess == quete.time) {
             //Temps gagné
             pourcentage = quete.selection.distance_sucess / quete.distance;
             rpToGive = quete.selection.shoes * quete.nbRp * pourcentage;
@@ -142,49 +148,59 @@ export class AccueilPage implements OnInit {
       quete.selection.percentage = pourcentage;
       quete.selection.nbRp = rpToGive;
 
-      this.authService.afStore.collection('users').doc(this.uid).set(userData, {
-        merge: true,
-      });
+      this.authService.afStore
+        .collection("users")
+        .doc(this.userData.uid)
+        .set(userData, {
+          merge: true,
+        });
 
-      this.authService.afStore.collection('quests').doc(quete.id).set(quete, {
+      this.authService.afStore.collection("quests").doc(quete.id).set(quete, {
         merge: true,
       });
     });
   }
 
-  checkDateExpired(date_expiration: Date): boolean { //JEST
+  checkDateExpired(date_expiration: Date): boolean {
+    //JEST
     let isExpired = this.compareDate(new Date(), date_expiration);
     if (isExpired == 1 || isExpired == 0) {
       return true;
-    }
-    else {
+    } else {
       return false;
     }
   }
 
   public compareDate(date1: Date, date2: Date): number {
-    const d1 = new Date(date1); const d2 = new Date(date2);
+    const d1 = new Date(date1);
+    const d2 = new Date(date2);
 
     const same = d1.getTime() === d2.getTime();
-    if (same) { return 0; }
+    if (same) {
+      return 0;
+    }
 
-    if (d1 > d2) { return 1; }
+    if (d1 > d2) {
+      return 1;
+    }
 
-    if (d1 < d2) { return -1; }
+    if (d1 < d2) {
+      return -1;
+    }
   }
 
   displayMap() {
-    this.router.navigate(['home/map']);
-    this.homePage.title = 'map';
+    this.router.navigate(["home/map"]);
+    this.homePage.title = "map";
   }
 
   displayMapWithDirection() {
-    this.router.navigate(['home/trajet-geo']);
-    this.homePage.title = 'trajet';
+    this.router.navigate(["home/trajet-geo"]);
+    this.homePage.title = "trajet";
   }
 
   displayCourseMode() {
-    this.router.navigate(['course']);
-    this.homePage.title = 'course';
+    this.router.navigate(["course"]);
+    this.homePage.title = "course";
   }
 }
