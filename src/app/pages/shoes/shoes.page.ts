@@ -16,10 +16,12 @@ export class ShoesPage implements OnInit {
   quest: Quest = { userId: null, period: null, type: null, expiration_date: null, nbRp: null, name: null, id: null, description: null, given_date: null, expired: null, };
   uid = JSON.parse(localStorage.getItem('userData')).uid;
   static difficulty: number = 1;
+  difficulty: number = 1;
   constructor(private router: Router, private activatedRouter: ActivatedRoute, private authService: AuthenticationService) {
   }
 
   ngOnInit() {
+    this.calculWhenDifficultyChange()
     const allStars = document.querySelectorAll(".shoes");
 
     allStars.forEach((shoes) => {
@@ -30,6 +32,16 @@ export class ShoesPage implements OnInit {
 
     this.quest_id = this.activatedRouter.snapshot.paramMap.get('quest_id');
     this.getQuestFromDatabase();
+  }
+  async calculWhenDifficultyChange() {
+    var interval =  setInterval(() => {
+      this.difficulty = ShoesPage.difficulty;
+    }, 1000);
+  }
+
+  returnToQuest(){
+    if(confirm("Are you sure you want to abandon your quest ?"))
+      this.router.navigate(['/home/quetes']);
   }
 
   async getQuestFromDatabase() {

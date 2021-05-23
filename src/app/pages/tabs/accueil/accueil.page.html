@@ -30,7 +30,8 @@
             </ion-button>
         </ion-col>
     </ion-row>
-    <ion-title>Liste des quêtes selectionnées</ion-title>
+    <br/>
+    <ion-title>Liste des quêtes selectionnées : </ion-title>
     <ion-card color="success" *ngFor="let quest of selectedDailyQuest">
         <ion-card-header>
             <ion-item color="success">
@@ -59,15 +60,15 @@
                 <p><em>{{quest.description}}</em></p>
                 <br />
                 <ng-template [ngIf]="quest.type == 1 || quest.type == 3 ">
-                    <span>Time = {{quest.time}} min</span>
+                    <span>Time = {{quest.time * quest.selection.shoes}} min</span>
                 </ng-template>
                 <ng-template [ngIf]="quest.type == 3 "><span> /---\ </span></ng-template>
                 <ng-template [ngIf]="quest.type == 2 || quest.type == 3 ">
-                    <span>Distance = {{quest.distance}} km</span>
+                    <span>Distance = {{quest.distance * quest.selection.shoes}} km</span>
                 </ng-template>
             </div>
             <br />
-            <p class="runnerPoint">RP : {{quest.nbRp}}</p>
+            <p class="runnerPoint">RP : {{quest.nbRp * quest.selection.shoes}}</p>
         </ion-card-content>
     </ion-card>
     <ion-card color="secondary" *ngFor="let quest of selectedWeeklyQuest">
@@ -98,15 +99,15 @@
                 <p><em>{{quest.description}}</em></p>
                 <br />
                 <ng-template [ngIf]="quest.type == 1 || quest.type == 3 ">
-                    <span>Time = {{quest.time}} min</span>
+                    <span>Time = {{quest.time * quest.selection.shoes}} min</span>
                 </ng-template>
                 <ng-template [ngIf]="quest.type == 3 "><span> /---\ </span></ng-template>
                 <ng-template [ngIf]="quest.type == 2 || quest.type == 3 ">
-                    <span>Distance = {{quest.distance}} km</span>
+                    <span>Distance = {{quest.distance * quest.selection.shoes}} km</span>
                 </ng-template>
             </div>
             <br />
-            <p class="runnerPoint">RP : {{quest.nbRp}}</p>
+            <p class="runnerPoint">RP : {{quest.nbRp * quest.selection.shoes}}</p>
         </ion-card-content>
     </ion-card>
     <ion-card color="danger" *ngFor="let quest of selectedMonthlyQuest">
@@ -137,15 +138,15 @@
                 <p><em>{{quest.description}}</em></p>
                 <br />
                 <ng-template [ngIf]="quest.type == 1 || quest.type == 3 ">
-                    <span>Time = {{quest.time}} min</span>
+                    <span>Time = {{quest.time * quest.selection.shoes}} min</span>
                 </ng-template>
                 <ng-template [ngIf]="quest.type == 3 "><span> /---\ </span></ng-template>
                 <ng-template [ngIf]="quest.type == 2 || quest.type == 3 ">
-                    <span>Distance = {{quest.distance}} km</span>
+                    <span>Distance = {{quest.distance * quest.selection.shoes}} km</span>
                 </ng-template>
             </div>
             <br />
-            <p class="runnerPoint">RP : {{quest.nbRp}}</p>
+            <p class="runnerPoint">RP : {{quest.nbRp * quest.selection.shoes}}</p>
         </ion-card-content>
     </ion-card>
 </ion-content>
