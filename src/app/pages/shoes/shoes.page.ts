@@ -17,6 +17,7 @@ export class ShoesPage implements OnInit {
   uid = JSON.parse(localStorage.getItem('userData')).uid;
   static difficulty: number = 1;
   difficulty: number = 1;
+  static shoes: number;
   constructor(private router: Router, private activatedRouter: ActivatedRoute, private authService: AuthenticationService) {
   }
 
@@ -34,13 +35,13 @@ export class ShoesPage implements OnInit {
     this.getQuestFromDatabase();
   }
   async calculWhenDifficultyChange() {
-    var interval =  setInterval(() => {
+    var interval = setInterval(() => {
       this.difficulty = ShoesPage.difficulty;
     }, 1000);
   }
 
-  returnToQuest(){
-    if(confirm("Are you sure you want to abandon your quest ?"))
+  returnToQuest() {
+    if (confirm("Are you sure you want to abandon your quest ?"))
       this.router.navigate(['/home/quetes']);
   }
 
@@ -104,13 +105,14 @@ function getPreviousSliblings(e) {
     if (e.nodeType === spanNodeType) {
       siblings = [e, ...siblings];
     }
+    ShoesPage.shoes = siblings.length + 1
   }
-  ShoesPage.difficulty = siblings.length + 1;
   return siblings;
 }
 
 function saveRating(e, css = "checked") {
   removeEventListenersToAllStars();
+  ShoesPage.difficulty = ShoesPage.shoes;
 }
 
 function removeEventListenersToAllStars() {
@@ -125,13 +127,14 @@ function removeEventListenersToAllStars() {
 }
 
 function customCss(e, css = "checked") {
-    const overedStar = e.target;
+  const overedStar = e.target;
 
-    const allStars = document.querySelectorAll(".shoes");
-    allStars.forEach(e => e.classList.remove(css))
-    const previousSiblings = getPreviousSliblings(overedStar);
-    previousSiblings.push(overedStar)
-    previousSiblings.forEach(e => e.classList.add(css));
+  const allStars = document.querySelectorAll(".shoes");
+  allStars.forEach(e => e.classList.remove(css))
+  const previousSiblings = getPreviousSliblings(overedStar);
+  ShoesPage.difficulty = previousSiblings.length + 1;
+  previousSiblings.push(overedStar)
+  previousSiblings.forEach(e => e.classList.add(css));
 }
 
 

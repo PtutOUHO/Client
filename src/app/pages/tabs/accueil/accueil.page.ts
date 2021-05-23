@@ -114,25 +114,25 @@ export class AccueilPage implements OnInit {
       switch (quete.type) {
         case 1:
           //Chrono
-          pourcentage = Math.floor(quete.selection.time_sucess / quete.time * 60);
-          rpToGive = quete.selection.shoes * quete.nbRp * pourcentage / 100;
+          pourcentage = quete.selection.time_sucess / (quete.time * 60);
+          rpToGive = quete.selection.shoes * quete.nbRp * pourcentage;
           break;
         case 2:
           //Distance
-          pourcentage = Math.floor(quete.selection.distance_sucess / quete.distance);
-          rpToGive = quete.selection.shoes * quete.nbRp * pourcentage / 100;
+          pourcentage = quete.selection.distance_sucess / quete.distance;
+          rpToGive = quete.selection.shoes * quete.nbRp * pourcentage;
           break;
         case 3:
           //Distance
           if (quete.selection.distance_sucess == quete.distance) {
-            let pourcentageTempsGagne = Math.floor(quete.time / quete.selection.time_sucess * 60);
-            rpToGive = quete.selection.shoes * quete.nbRp * pourcentageTempsGagne / 100;
+            let pourcentageTempsGagne = quete.time / (quete.selection.time_sucess * 60);
+            rpToGive = quete.selection.shoes * quete.nbRp * pourcentageTempsGagne;
 
           }
           else if (quete.selection.time_sucess == quete.time) {
             //Temps gagné
-            pourcentage = Math.floor(quete.selection.distance_sucess / quete.distance);
-            rpToGive = quete.selection.shoes * quete.nbRp * pourcentage / 100;
+            pourcentage = quete.selection.distance_sucess / quete.distance;
+            rpToGive = quete.selection.shoes * quete.nbRp * pourcentage;
           }
           break;
       }
