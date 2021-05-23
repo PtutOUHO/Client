@@ -17,7 +17,7 @@ export class ShoesPage implements OnInit {
   uid = JSON.parse(localStorage.getItem('userData')).uid;
   static difficulty: number = 1;
   difficulty: number = 1;
-  static shoes: number = 0;
+  static shoes: number = 1;
   constructor(private router: Router, private activatedRouter: ActivatedRoute, private authService: AuthenticationService) {
   }
 
