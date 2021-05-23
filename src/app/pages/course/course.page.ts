@@ -157,22 +157,26 @@ export class CoursePage implements OnInit {
   async calculPercentage() {
     let pourcentage: number;
     this.selectedQuest.forEach(quete => {
-      switch (quete.type) {
-        case 1:
-          //Chrono
-          quete.selection.percentage = quete.selection.time_sucess / (quete.time * 60);
-          break;
-        case 2:
-        case 3:
-          //FootingQuest et Distance
-          quete.selection.percentage = quete.selection.distance_sucess / quete.distance;
-          break;
-      }
+      if (quete.selection.percentage < 1) {
+        switch (quete.type) {
+          case 1:
+            //Chrono
+            quete.selection.percentage = quete.selection.time_sucess / (quete.time * 60);
+            break;
+          case 2:
+          case 3:
+            //FootingQuest et Distance
+            quete.selection.percentage = quete.selection.distance_sucess / quete.distance;
+            break;
+        }
+        if (quete.selection.percentage > 100)
+          quete.selection.percentage = 1;
 
-      //Save
-      this.authService.afStore.collection("quests").doc(quete.id).set(quete, {
-        merge: true,
-      });
+        //Save
+        this.authService.afStore.collection("quests").doc(quete.id).set(quete, {
+          merge: true,
+        });
+      }
     })
   }
 
