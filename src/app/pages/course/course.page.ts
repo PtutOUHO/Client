@@ -71,8 +71,9 @@ export class CoursePage implements OnInit {
     const documentList = await collection.get().toPromise();
     documentList.docs.forEach(doc => {
       let quete = doc.data() as Quest;
-      if (quete.selection.percentage == undefined || quete.selection.percentage < 1)
+      if (quete.selection.percentage == undefined || quete.selection.percentage < 1) {
         this.selectedQuest.push(quete);
+      }
     });
   }
 
@@ -158,6 +159,8 @@ export class CoursePage implements OnInit {
   async calculPercentage() {
     let pourcentage: number;
     this.selectedQuest.forEach(quete => {
+      if (quete.selection.percentage == undefined)
+        quete.selection.percentage = 0
       if (quete.selection.percentage < 1) {
         switch (quete.type) {
           case 1:
