@@ -76,7 +76,7 @@
     </ion-card>
     <ion-card color="secondary" *ngFor="let quest of selectedWeeklyQuest">
         <ion-card-header>
-            <ng-template [ngIf]="quest.selection.percentage != undefined && quest.selection.percentage <= 1">
+            <ng-template [ngIf]="quest.selection.percentage != undefined && quest.selection.percentage < 1">
                 <ion-progress-bar value="{{quest.selection.percentage}}"></ion-progress-bar>
             </ng-template>
             <ion-item color="secondary">                
@@ -118,7 +118,7 @@
     </ion-card>
     <ion-card color="danger" *ngFor="let quest of selectedMonthlyQuest">
         <ion-card-header>
-            <ng-template [ngIf]="quest.selection.percentage != undefined && quest.selection.percentage <= 1">
+            <ng-template [ngIf]="quest.selection.percentage != undefined && quest.selection.percentage < 1">
                 <ion-progress-bar value="{{quest.selection.percentage}}"></ion-progress-bar>
             </ng-template>
             <ion-item color="danger">                
