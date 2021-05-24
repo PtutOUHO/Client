@@ -26,4 +26,8 @@ export class VerifyEmailPage implements OnInit {
       this.router.navigate(["home/accueil"]);
     }
   }
+
+  redirectLogin() {
+    window.location.href = "/login";
+  }
 }

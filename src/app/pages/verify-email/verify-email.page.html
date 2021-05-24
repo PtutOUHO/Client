@@ -36,7 +36,7 @@
         </ion-button>
         <p class=inscription_ps> Une fois votre email vérifié appuyez sur le boutton accueil pour commencer votre aventure ! 
         </p>
-        <ion-button [routerLink]="['/home']" expand="full">Accueil</ion-button>
+        <ion-button (click)="redirectLogin()" expand="full">Accueil</ion-button>
       </ion-col>
     </ion-row>
   </ion-grid>
