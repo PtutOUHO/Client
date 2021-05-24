@@ -212,13 +212,13 @@ export class CoursePage implements OnInit {
           case 1:
             //Chrono
             quete.selection.percentage =
-              quete.selection.time_sucess / (quete.time * 60);
+              quete.selection.time_sucess / (quete.time * 60 * quete.selection.shoes);
             break;
           case 2:
           case 3:
             //FootingQuest et Distance
             quete.selection.percentage =
-              quete.selection.distance_sucess / quete.distance;
+              quete.selection.distance_sucess / quete.distance * quete.selection.shoes;
             break;
         }
         if (quete.selection.percentage > 1) quete.selection.percentage = 1;

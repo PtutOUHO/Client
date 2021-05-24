@@ -123,21 +123,21 @@ export class AccueilPage implements OnInit {
       switch (quete.type) {
         case 1:
           //Chrono
-          pourcentage = quete.selection.time_sucess / (quete.time * 60);
+          pourcentage = quete.selection.time_sucess / (quete.time * 60 * quete.selection.shoes);
           if (pourcentage > 1) pourcentage = 1;
           break;
         case 2:
           //Distance
-          pourcentage = quete.selection.distance_sucess / quete.distance;
+          pourcentage = quete.selection.distance_sucess / quete.distance * quete.selection.shoes;
           if (pourcentage > 1) pourcentage = 1;
           break;
         case 3:
           //Temps gagné
-          if (quete.selection.distance_sucess >= quete.distance) {
-            pourcentage = quete.time / (quete.selection.time_sucess * 60);
-          } else if (quete.selection.time_sucess >= quete.time) {
+          if (quete.selection.distance_sucess >= quete.distance * quete.selection.shoes) {
+            pourcentage = quete.time * quete.selection.shoes * 60 / quete.selection.time_sucess / 100;
+          } else if (quete.selection.time_sucess >= quete.time * quete.selection.shoes) {
             //Distance
-            pourcentage = quete.selection.distance_sucess / quete.distance;
+            pourcentage = quete.selection.distance_sucess / quete.distance * quete.selection.shoes;
             if (pourcentage > 1) pourcentage = 1;
           }
           break;
