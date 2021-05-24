@@ -176,7 +176,6 @@ export class CoursePage implements OnInit {
 
   //Ajouter pour chaque quete le temps donner en parametre en fonction de son type, ainsi que la distance calculé
   addDistanceAndTime(secondToAdd: number) {
-    console.log(1);
     this.selectedQuest.forEach((quest) => {
       //Ajouter le temps
       if (quest.type == 1 || quest.type == 3) {
@@ -198,7 +197,6 @@ export class CoursePage implements OnInit {
 
   //Calculer le pourcentage des quetes en temps réel
   async calculPercentage() {
-    console.log(2);
     let pourcentage: number;
     this.selectedQuest.forEach((quete) => {
       if (quete.selection.percentage == undefined)
