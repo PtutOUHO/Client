@@ -6,6 +6,7 @@ import {
   ViewChild,
 } from "@angular/core";
 import { FormBuilder, FormGroup, Validators } from "@angular/forms";
+import { Router } from "@angular/router";
 import { Geolocation } from "@ionic-native/geolocation/ngx";
 import { AuthenticationService } from "src/app/shared/authentication-service";
 import { Quest } from "src/app/shared/quest";
@@ -48,7 +49,8 @@ export class CoursePage implements OnInit {
   constructor(
     private fb: FormBuilder,
     private geolocation: Geolocation,
-    public authService: AuthenticationService
+    public authService: AuthenticationService,
+    public router: Router
   ) {
     this.createDirectionForm();
   }
@@ -92,7 +94,7 @@ export class CoursePage implements OnInit {
 
   //Mode Course
   //Démarrer le chrono
-  async startCourseMode() {
+  startCourseMode() {
     this.courseMode = true;
     this.interval = setInterval(() => {
       this.timeSecond++;
@@ -117,7 +119,7 @@ export class CoursePage implements OnInit {
     }, 1000);
   }
 
-  async calculDistance() {
+  calculDistance() {
     this.geolocation.getCurrentPosition().then((resp) => {
       this.currentLocation.lat = resp.coords.latitude;
       this.currentLocation.lng = resp.coords.longitude;
@@ -129,33 +131,37 @@ export class CoursePage implements OnInit {
   }
 
   //Mettre en pause le chrono
-  async pauseCourseMode() {
+  pauseCourseMode() {
     this.courseMode = false;
     clearInterval(this.interval);
   }
 
   //Arreter le mode course
-  async stopCourseMode() {
+  stopCourseMode() {
     this.pauseCourseMode();
     //Calculer temps à ajouter depuis la derniere save
     let secondToAdd = this.timeSecond % 30;
-    await this.addDistanceAndTime(secondToAdd);
-    await this.calculPercentage();
+    this.addDistanceAndTime(secondToAdd);
+    this.calculPercentage();
     //Save
-    this.selectedQuest.forEach((quest) => {
-      this.authService.afStore
-        .collection("quests")
-        .doc(quest.id)
-        .set(JSON.parse(JSON.stringify(quest)), {
-          merge: true,
-        })
-        .then(() => {
-          window.location.href = "/home/accueil";
-        });
-    });
+    if (this.selectedQuest.length != 0) {
+      this.selectedQuest.forEach((quest) => {
+        this.authService.afStore
+          .collection("quests")
+          .doc(quest.id)
+          .set(JSON.parse(JSON.stringify(quest)), {
+            merge: true,
+          })
+          .then(() => {
+            window.location.href = "/home/accueil";
+          });
+      });
+    } else {
+      this.router.navigate(["home/accueil"]);
+    }
   }
 
-  async displayTime() {
+  displayTime() {
     this.timeToDisplay = this.convertMillisecondsToDigitalClock(
       this.timeSecond * 1000
     );
@@ -196,7 +202,7 @@ export class CoursePage implements OnInit {
   }
 
   //Calculer le pourcentage des quetes en temps réel
-  async calculPercentage() {
+  calculPercentage() {
     let pourcentage: number;
     this.selectedQuest.forEach((quete) => {
       if (quete.selection.percentage == undefined)
