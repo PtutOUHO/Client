@@ -4,7 +4,7 @@
       <ion-col>
         <ion-item lines="full">
           <ion-label class="text-form">
-            Bienvenue {{ userData.firstname + ' ' + userData.lastname }} sur
+            Bienvenue {{ userData.firstname }} sur
             RunningQuest !
           </ion-label>
         </ion-item>
@@ -86,8 +86,8 @@
     <ion-card-content>
       <div class="content">
         <div class="dateQuest">
-          <span>Début: {{quest.given_date | date : "dd/MM/y" }} ➔ </span>
-          <span>Fin: {{quest.expiration_date | date : "dd/MM/y"}}</span>
+          <span>Début: {{quest.selection.selection_date | date : "dd/MM/y" }} ➔ </span>
+          <span>Fin: {{quest.selection.expiration_date | date : "dd/MM/y"}}</span>
         </div>
         <br />
         <p><em>{{quest.description}}</em></p>

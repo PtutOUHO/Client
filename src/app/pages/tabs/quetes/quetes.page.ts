@@ -117,7 +117,7 @@ export class QuetesPage implements OnInit {
     this.givenQuest.forEach(quete => {
       if (this.checkDateExpired(quete.expiration_date)) {
         quete.expired = true;
-        this.authService.afStore.collection('quests').doc(quete.id).set(quete, {
+        this.authService.afStore.collection('quests').doc(quete.id).set(JSON.parse(JSON.stringify(quete)), {
           merge: true,
         });
         delete this.givenQuest[index];

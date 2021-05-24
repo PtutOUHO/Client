@@ -30,8 +30,7 @@ export class AccueilPage implements OnInit {
         this.userData = JSON.parse(localStorage.getItem("userData"));
         this.getSelectedQuestFromDatabase();
       }
-
-    }, 500)
+    }, 500);
   }
 
   //Récupérer les quêtes sélectionnées par l'utilisateur et attendre avant de déclencher la suite
@@ -91,9 +90,12 @@ export class AccueilPage implements OnInit {
       if (this.checkDateExpired(quete.selection.expiration_date)) {
         quete.selection.expired = true;
         delete this.selectedQuest[index];
-        this.authService.afStore.collection("quests").doc(quete.id).set(quete, {
-          merge: true,
-        });
+        this.authService.afStore
+          .collection("quests")
+          .doc(quete.id)
+          .set(JSON.parse(JSON.stringify(quete)), {
+            merge: true,
+          });
         this.giveRewards(quete);
 
         delete this.selectedQuest[index];
@@ -122,28 +124,26 @@ export class AccueilPage implements OnInit {
         case 1:
           //Chrono
           pourcentage = quete.selection.time_sucess / (quete.time * 60);
-          rpToGive = quete.selection.shoes * quete.nbRp * pourcentage;
+          if (pourcentage > 1) pourcentage = 1;
           break;
         case 2:
           //Distance
           pourcentage = quete.selection.distance_sucess / quete.distance;
-          rpToGive = quete.selection.shoes * quete.nbRp * pourcentage;
+          if (pourcentage > 1) pourcentage = 1;
           break;
         case 3:
-          //Distance
-          if (quete.selection.distance_sucess == quete.distance) {
-            let pourcentageTempsGagne =
-              quete.time / (quete.selection.time_sucess * 60);
-            rpToGive =
-              quete.selection.shoes * quete.nbRp * pourcentageTempsGagne;
-          } else if (quete.selection.time_sucess == quete.time) {
-            //Temps gagné
+          //Temps gagné
+          if (quete.selection.distance_sucess >= quete.distance) {
+            pourcentage = quete.time / (quete.selection.time_sucess * 60);
+          } else if (quete.selection.time_sucess >= quete.time) {
+            //Distance
             pourcentage = quete.selection.distance_sucess / quete.distance;
-            rpToGive = quete.selection.shoes * quete.nbRp * pourcentage;
+            if (pourcentage > 1) pourcentage = 1;
           }
           break;
       }
-      rpToGive = Math.floor(rpToGive);
+      rpToGive = Math.floor(quete.selection.shoes * quete.nbRp * pourcentage);
+      if (userData.nbRp == undefined) userData.nbRp = 0;
       userData.nbRp += rpToGive;
       quete.selection.percentage = pourcentage;
       quete.selection.nbRp = rpToGive;
@@ -155,9 +155,12 @@ export class AccueilPage implements OnInit {
           merge: true,
         });
 
-      this.authService.afStore.collection("quests").doc(quete.id).set(quete, {
-        merge: true,
-      });
+      this.authService.afStore
+        .collection("quests")
+        .doc(quete.id)
+        .set(JSON.parse(JSON.stringify(quete)), {
+          merge: true,
+        });
     });
   }
 

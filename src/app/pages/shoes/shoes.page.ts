@@ -75,7 +75,7 @@ export class ShoesPage implements OnInit {
         break;
     }
     this.quest.selection.expired = false;
-    this.authService.afStore.collection('quests').doc(this.quest.id).set(this.quest, {
+    this.authService.afStore.collection('quests').doc(this.quest.id).set(JSON.parse(JSON.stringify(this.quest)), {
       merge: true,
     }).then(() => {
       window.location.href = "/home/quetes";
