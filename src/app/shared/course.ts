@@ -3,9 +3,9 @@ export class Course {
     name: string;
     description: string;
     given_date: Date;
-    expired: boolean = false;
+    expired = false;
 
-    //Quest constructeur
+    // Quest constructeur
     constructor(
         id: string,
         name: string,

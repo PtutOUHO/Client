@@ -1,7 +1,6 @@
 import {AfterViewInit, Component, ElementRef, OnInit, ViewChild} from '@angular/core';
 import {Geolocation} from '@ionic-native/geolocation/ngx';
 import {Router} from '@angular/router';
-import {HomePage} from '../../home/home.page';
 declare let google;
 
 @Component({

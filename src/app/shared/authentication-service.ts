@@ -1,15 +1,15 @@
-import { Injectable, NgZone } from "@angular/core";
-import { auth } from "firebase/app";
-import { User } from "./user";
-import { Router } from "@angular/router";
-import { AngularFireAuth } from "@angular/fire/auth";
+import { Injectable, NgZone } from '@angular/core';
+import { auth } from 'firebase/app';
+import { User } from './user';
+import { Router } from '@angular/router';
+import { AngularFireAuth } from '@angular/fire/auth';
 import {
   AngularFirestore,
   AngularFirestoreDocument,
-} from "@angular/fire/firestore";
+} from '@angular/fire/firestore';
 
 @Injectable({
-  providedIn: "root",
+  providedIn: 'root',
 })
 export class AuthenticationService {
   userData: any;
@@ -23,11 +23,11 @@ export class AuthenticationService {
     this.ngFireAuth.authState.subscribe((user) => {
       if (user) {
         this.userData = user;
-        localStorage.setItem("user", JSON.stringify(this.userData));
-        JSON.parse(localStorage.getItem("user"));
+        localStorage.setItem('user', JSON.stringify(this.userData));
+        JSON.parse(localStorage.getItem('user'));
       } else {
-        localStorage.setItem("user", null);
-        JSON.parse(localStorage.getItem("user"));
+        localStorage.setItem('user', null);
+        JSON.parse(localStorage.getItem('user'));
       }
     });
   }
@@ -50,7 +50,7 @@ export class AuthenticationService {
   // Email verification when new user register
   SendVerificationMail() {
     return this.ngFireAuth.auth.currentUser.sendEmailVerification().then(() => {
-      this.router.navigate(["verify-email"]);
+      this.router.navigate(['verify-email']);
     });
   }
 
@@ -60,7 +60,7 @@ export class AuthenticationService {
       .sendPasswordResetEmail(passwordResetEmail)
       .then(() => {
         window.alert(
-          "Password reset email has been sent, please check your inbox."
+          'Password reset email has been sent, please check your inbox.'
         );
       })
       .catch((error) => {
@@ -70,13 +70,13 @@ export class AuthenticationService {
 
   // Returns true when user is looged in
   isLoggedIn(): boolean {
-    const user = JSON.parse(localStorage.getItem("user"));
+    const user = JSON.parse(localStorage.getItem('user'));
     return user !== null && user.emailVerified !== false ? true : false;
   }
 
   // Returns true when user's email is verified
   isEmailVerified(): boolean {
-    const user = JSON.parse(localStorage.getItem("user"));
+    const user = JSON.parse(localStorage.getItem('user'));
     return user.emailVerified !== false ? true : false;
   }
 
@@ -91,7 +91,7 @@ export class AuthenticationService {
       .signInWithPopup(provider)
       .then((result) => {
         this.ngZone.run(() => {
-          this.router.navigate(["home"]);
+          this.router.navigate(['home']);
         });
         this.SetUserData(result.user);
       })
@@ -117,7 +117,7 @@ export class AuthenticationService {
     }
 */
 
-  //Méthodes universelles
+  // Méthodes universelles
   SetUser(
     uid,
     email,
@@ -129,14 +129,14 @@ export class AuthenticationService {
     nbRp,
   ) {
     const user: User = {
-      uid: uid,
-      email: email,
-      firstname: firstname,
-      lastname: lastname,
-      pseudo: pseudo,
-      birthdate: birthdate,
-      inscription_date: inscription_date,
-      nbRp: nbRp,
+      uid,
+      email,
+      firstname,
+      lastname,
+      pseudo,
+      birthdate,
+      inscription_date,
+      nbRp,
 
     };
     return this.SetUserData(user);
@@ -154,8 +154,8 @@ export class AuthenticationService {
   // Sign-out
   SignOut() {
     return this.ngFireAuth.auth.signOut().then(() => {
-      localStorage.removeItem("user");
-      this.router.navigate(["login"]);
+      localStorage.removeItem('user');
+      this.router.navigate(['login']);
     });
   }
 }

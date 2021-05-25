@@ -1,19 +1,19 @@
-import { Component, OnInit } from "@angular/core";
-import { Router } from "@angular/router";
-import { AuthenticationService } from "../../../shared/authentication-service";
-import { HomePage } from "../../../home/home.page";
-import { Quest } from "src/app/shared/quest";
-import { User } from "src/app/shared/user";
+import { Component, OnInit } from '@angular/core';
+import { Router } from '@angular/router';
+import { AuthenticationService } from '../../../shared/authentication-service';
+import { HomePage } from '../../../home/home.page';
+import { Quest } from 'src/app/shared/quest';
+import { User } from 'src/app/shared/user';
 @Component({
-  selector: "app-accueil",
-  templateUrl: "./accueil.page.html",
-  styleUrls: ["./accueil.page.scss"],
+  selector: 'app-accueil',
+  templateUrl: './accueil.page.html',
+  styleUrls: ['./accueil.page.scss'],
 })
 export class AccueilPage implements OnInit {
   public userData: any;
-  //Liste globales des quêtes
+  // Liste globales des quêtes
   selectedQuest: Quest[];
-  //Liste des quêtes du front
+  // Liste des quêtes du front
   selectedDailyQuest: Quest[] = [];
   selectedWeeklyQuest: Quest[] = [];
   selectedMonthlyQuest: Quest[] = [];
@@ -26,27 +26,27 @@ export class AccueilPage implements OnInit {
 
   ngOnInit() {
     setTimeout(() => {
-      if (JSON.parse(localStorage.getItem("userData")) != null) {
-        this.userData = JSON.parse(localStorage.getItem("userData"));
+      if (JSON.parse(localStorage.getItem('userData')) != null) {
+        this.userData = JSON.parse(localStorage.getItem('userData'));
         this.getSelectedQuestFromDatabase();
       }
     }, 500);
   }
 
-  //Récupérer les quêtes sélectionnées par l'utilisateur et attendre avant de déclencher la suite
+  // Récupérer les quêtes sélectionnées par l'utilisateur et attendre avant de déclencher la suite
   async getSelectedQuestFromDatabase() {
     this.selectedQuest = [];
     this.selectedDailyQuest = [];
     this.selectedWeeklyQuest = [];
     this.selectedMonthlyQuest = [];
-    let collection = this.authService.afStore.collection("quests", (ref) =>
+    const collection = this.authService.afStore.collection('quests', (ref) =>
       ref
-        .where("userId", "==", this.userData.uid)
-        .where("selection.expired", "==", false)
+        .where('userId', '==', this.userData.uid)
+        .where('selection.expired', '==', false)
     );
     const documentList = await collection.get().toPromise();
     documentList.docs.forEach((doc) => {
-      let quete = doc.data() as Quest;
+      const quete = doc.data() as Quest;
       this.selectedQuest.push(quete);
       this.orderSelectedQuestFromPeriod(quete);
     });
@@ -54,7 +54,7 @@ export class AccueilPage implements OnInit {
   }
 
   ngSuite() {
-    //Vérifies quelles sont les quêtes expirées puis actualise le front s'il y en a
+    // Vérifies quelles sont les quêtes expirées puis actualise le front s'il y en a
     this.checkIfSelectedQuestAreExpired();
   }
 
@@ -91,7 +91,7 @@ export class AccueilPage implements OnInit {
         quete.selection.expired = true;
         delete this.selectedQuest[index];
         this.authService.afStore
-          .collection("quests")
+          .collection('quests')
           .doc(quete.id)
           .set(JSON.parse(JSON.stringify(quete)), {
             merge: true,
@@ -108,55 +108,55 @@ export class AccueilPage implements OnInit {
     }
   }
 
-  //Attribut les récompenses lors de l'expiration de la quête
+  // Attribut les récompenses lors de l'expiration de la quête
   async giveRewards(quete: Quest) {
-    let collection = this.authService.afStore.collection("users", (ref) =>
-      ref.where("uid", "==", this.userData.uid)
+    const collection = this.authService.afStore.collection('users', (ref) =>
+      ref.where('uid', '==', this.userData.uid)
     );
     const documentList = await collection.get().toPromise();
     documentList.docs.forEach((user) => {
-      let userData = user.data() as User;
+      const userData = user.data() as User;
 
-      //Calcul
+      // Calcul
       let pourcentage: number;
       let rpToGive: number;
       switch (quete.type) {
         case 1:
-          //Chrono
+          // Chrono
           pourcentage = quete.selection.time_sucess / (quete.time * 60 * quete.selection.shoes);
-          if (pourcentage > 1) pourcentage = 1;
+          if (pourcentage > 1) { pourcentage = 1; }
           break;
         case 2:
-          //Distance
+          // Distance
           pourcentage = quete.selection.distance_sucess / quete.distance * quete.selection.shoes;
-          if (pourcentage > 1) pourcentage = 1;
+          if (pourcentage > 1) { pourcentage = 1; }
           break;
         case 3:
-          //Temps gagné
+          // Temps gagné
           if (quete.selection.distance_sucess >= quete.distance * quete.selection.shoes) {
             pourcentage = quete.time * quete.selection.shoes * 60 / quete.selection.time_sucess / 100;
           } else if (quete.selection.time_sucess >= quete.time * quete.selection.shoes) {
-            //Distance
+            // Distance
             pourcentage = quete.selection.distance_sucess / quete.distance * quete.selection.shoes;
-            if (pourcentage > 1) pourcentage = 1;
+            if (pourcentage > 1) { pourcentage = 1; }
           }
           break;
       }
       rpToGive = Math.floor(quete.selection.shoes * quete.nbRp * pourcentage);
-      if (userData.nbRp == undefined) userData.nbRp = 0;
+      if (userData.nbRp === undefined) { userData.nbRp = 0; }
       userData.nbRp += rpToGive;
       quete.selection.percentage = pourcentage;
       quete.selection.nbRp = rpToGive;
 
       this.authService.afStore
-        .collection("users")
+        .collection('users')
         .doc(this.userData.uid)
         .set(userData, {
           merge: true,
         });
 
       this.authService.afStore
-        .collection("quests")
+        .collection('quests')
         .doc(quete.id)
         .set(JSON.parse(JSON.stringify(quete)), {
           merge: true,
@@ -165,9 +165,9 @@ export class AccueilPage implements OnInit {
   }
 
   checkDateExpired(date_expiration: Date): boolean {
-    //JEST
-    let isExpired = this.compareDate(new Date(), date_expiration);
-    if (isExpired == 1 || isExpired == 0) {
+    // JEST
+    const isExpired = this.compareDate(new Date(), date_expiration);
+    if (isExpired === 1 || isExpired === 0) {
       return true;
     } else {
       return false;
@@ -193,17 +193,17 @@ export class AccueilPage implements OnInit {
   }
 
   displayMap() {
-    this.router.navigate(["home/map"]);
-    this.homePage.title = "map";
+    this.router.navigate(['home/map']);
+    this.homePage.title = 'map';
   }
 
   displayMapWithDirection() {
-    this.router.navigate(["home/trajet-geo"]);
-    this.homePage.title = "trajet";
+    this.router.navigate(['home/trajet-geo']);
+    this.homePage.title = 'trajet';
   }
 
   displayCourseMode() {
-    this.router.navigate(["course"]);
-    this.homePage.title = "course";
+    this.router.navigate(['course']);
+    this.homePage.title = 'course';
   }
 }

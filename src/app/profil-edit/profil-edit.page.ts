@@ -1,14 +1,14 @@
-import { Component, OnInit } from "@angular/core";
-import { Router } from "@angular/router";
-import { AuthenticationService } from "../shared/authentication-service";
-import { ToastrService } from "ngx-toastr";
-import { AngularFirestore } from "@angular/fire/firestore";
-import { LoadingController } from "@ionic/angular";
+import { Component, OnInit } from '@angular/core';
+import { Router } from '@angular/router';
+import { AuthenticationService } from '../shared/authentication-service';
+import { ToastrService } from 'ngx-toastr';
+import { AngularFirestore } from '@angular/fire/firestore';
+import { LoadingController } from '@ionic/angular';
 
 @Component({
-  selector: "app-profil-edit",
-  templateUrl: "./profil-edit.page.html",
-  styleUrls: ["./profil-edit.page.scss"],
+  selector: 'app-profil-edit',
+  templateUrl: './profil-edit.page.html',
+  styleUrls: ['./profil-edit.page.scss'],
 })
 export class ProfilEditPage implements OnInit {
   userData: any;
@@ -23,14 +23,14 @@ export class ProfilEditPage implements OnInit {
   ) {}
 
   ngOnInit() {
-    this.userData = JSON.parse(localStorage.getItem("userData"));
+    this.userData = JSON.parse(localStorage.getItem('userData'));
     this.userId = this.userData.userId;
   }
 
   nullMessage() {
     this.toastr.error(
-      "Tous les champs ne sont pas remplie",
-      "Demande annulée ! ",
+      'Tous les champs ne sont pas remplie',
+      'Demande annulée ! ',
       { timeOut: 5500 }
     );
   }
@@ -41,23 +41,23 @@ export class ProfilEditPage implements OnInit {
     pseudo: { value: any },
     birthdate: { value: any }
   ) {
-    let args = [nom, prenom, pseudo, birthdate];
+    const args = [nom, prenom, pseudo, birthdate];
     let go = true;
     args.forEach((arg) => {
-      if (arg.value == "") {
+      if (arg.value === '') {
         this.nullMessage();
         go = false;
       }
     });
     if (go) {
       const loading = this.loadingCtrl.create({
-        message: "Modification",
-        spinner: "crescent",
+        message: 'Modification',
+        spinner: 'crescent',
         showBackdrop: true,
       });
 
       this.afs
-        .collection("users")
+        .collection('users')
         .doc(this.userData.uid)
         .set(
           {
@@ -69,13 +69,13 @@ export class ProfilEditPage implements OnInit {
           { merge: true }
         )
         .then(() => {
-          this.toastr.success("Modification Réussite !", "sauvegardé ! ", {
+          this.toastr.success('Modification Réussite !', 'sauvegardé ! ', {
             timeOut: 3000,
           }); // Le message reste 5,5 secondes
-          this.router.navigate(["/home/profil"]);
+          this.router.navigate(['/home/profil']);
         })
         .catch((error) => {
-          this.toastr.error(error.message, "erreur ! ", { timeOut: 5500 }); // Le message reste 5,5 secondes
+          this.toastr.error(error.message, 'erreur ! ', { timeOut: 5500 }); // Le message reste 5,5 secondes
         });
     }
   }
