@@ -190,7 +190,7 @@ export class QuetesPage implements OnInit {
     let questType;
     let questDistance;
     let questTime;
-    const randomType = Math.floor(Math.random() * 3) + 1;
+    let randomType = Math.floor(Math.random() * 3) + 1;
     switch (randomType) {
       case 1: {
         // "ChronoQuest"
@@ -205,7 +205,7 @@ export class QuetesPage implements OnInit {
       case 3: {
         // "FootingQuest"
         questDistance = (Math.floor(Math.random() * 3) + 1) * period;
-        questTime = (Math.floor(Math.random() * 3) + 1) * period;
+        questTime = (Math.floor(Math.random() * 3) + 1) * period * 11;
         break;
       }
       default: {
