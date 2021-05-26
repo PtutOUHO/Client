@@ -1,4 +1,4 @@
-import { VerifyEmailPage } from "./verify-email.page"
+import { VerifyEmailPage } from './verify-email.page';
 
 describe('VerifyEmailPage',  () => {
   let fixture: VerifyEmailPage;
