@@ -14,63 +14,43 @@
 
   <ion-row>
     <ion-col>
-      <ion-button
-        id="map-button"
-        expand="block"
-        type="submit"
-        (click)="displayMap()"
-      >
+      <ion-button id="map-button" expand="block" type="submit" (click)="displayMap()">
         Voir ma position
       </ion-button>
     </ion-col>
   </ion-row>
   <ion-row>
     <ion-col>
-      <ion-button
-        id="trajet-button"
-        expand="block"
-        type="submit"
-        (click)="displayMapWithDirection()"
-      >
+      <ion-button id="trajet-button" expand="block" type="submit" (click)="displayMapWithDirection()">
         Choisir une destination
       </ion-button>
     </ion-col>
   </ion-row>
   <ion-row>
     <ion-col>
-      <ion-button
-        id="course-button"
-        color="success"
-        expand="block"
-        type="submit"
-        (click)="displayCourseMode()"
-      >
+      <ion-button id="course-button" color="success" expand="block" type="submit" (click)="displayCourseMode()">
         Lancer la course
       </ion-button>
     </ion-col>
   </ion-row>
   <br />
+  <ng-template [ngIf]="userData != undefined">
+    <ion-title>Nombre de RP: {{userData.nbRp}} </ion-title>
+  </ng-template>
   <ng-template
-    [ngIf]="userData != undefined"><p>Nombre de RP: {{userData.nbRp}} </p></ng-template>
-    <ng-template
-      [ngIf]="selectedDailyQuest.length != 0 || selectedWeeklyQuest.length != 0 || selectedMonthlyQuest.length != 0"
-      ><ion-title>Liste des quêtes selectionnées : </ion-title></ng-template>
+    [ngIf]="selectedDailyQuest.length != 0 || selectedWeeklyQuest.length != 0 || selectedMonthlyQuest.length != 0">
+    <br/> 
+    <br/>
+    <ion-title>Liste des quêtes selectionnées : </ion-title>
+  </ng-template>
   <ion-card color="success" *ngFor="let quest of selectedDailyQuest">
     <ion-card-header>
-      <ng-template
-        [ngIf]="quest.selection.percentage != undefined && quest.selection.percentage <= 1"
-      >
-        <ion-progress-bar
-          value="{{quest.selection.percentage}}"
-        ></ion-progress-bar>
+      <ng-template [ngIf]="quest.selection.percentage != undefined && quest.selection.percentage <= 1">
+        <ion-progress-bar value="{{quest.selection.percentage}}"></ion-progress-bar>
       </ng-template>
       <ion-item color="success">
         <ng-template [ngIf]="quest.selection.percentage >= 1">
-          <ion-icon
-            class="completion"
-            name="checkmark-circle"
-            slot="start"
-          ></ion-icon>
+          <ion-icon class="completion" name="checkmark-circle" slot="start"></ion-icon>
         </ng-template>
         <ng-template [ngIf]="quest.type == 1">
           <ion-icon color="dark" name="time-outline" slot="start"></ion-icon>
@@ -96,9 +76,7 @@
         <ng-template [ngIf]="quest.type == 1 || quest.type == 3 ">
           <span>Time = {{quest.time * quest.selection.shoes}} min</span>
         </ng-template>
-        <ng-template [ngIf]="quest.type == 3 "
-          ><span> /---\ </span></ng-template
-        >
+        <ng-template [ngIf]="quest.type == 3 "><span> /---\ </span></ng-template>
         <ng-template [ngIf]="quest.type == 2 || quest.type == 3 ">
           <span>Distance = {{quest.distance * quest.selection.shoes}} km</span>
         </ng-template>
@@ -109,20 +87,12 @@
   </ion-card>
   <ion-card color="secondary" *ngFor="let quest of selectedWeeklyQuest">
     <ion-card-header>
-      <ng-template
-        [ngIf]="quest.selection.percentage != undefined && quest.selection.percentage < 1"
-      >
-        <ion-progress-bar
-          value="{{quest.selection.percentage}}"
-        ></ion-progress-bar>
+      <ng-template [ngIf]="quest.selection.percentage != undefined && quest.selection.percentage < 1">
+        <ion-progress-bar value="{{quest.selection.percentage}}"></ion-progress-bar>
       </ng-template>
       <ion-item color="secondary">
         <ng-template [ngIf]="quest.selection.percentage >= 1">
-          <ion-icon
-            class="completion"
-            name="checkmark-circle"
-            slot="start"
-          ></ion-icon>
+          <ion-icon class="completion" name="checkmark-circle" slot="start"></ion-icon>
         </ng-template>
         <ng-template [ngIf]="quest.type == 1">
           <ion-icon color="dark" name="time-outline" slot="start"></ion-icon>
@@ -148,9 +118,7 @@
         <ng-template [ngIf]="quest.type == 1 || quest.type == 3 ">
           <span>Time = {{quest.time * quest.selection.shoes}} min</span>
         </ng-template>
-        <ng-template [ngIf]="quest.type == 3 "
-          ><span> /---\ </span></ng-template
-        >
+        <ng-template [ngIf]="quest.type == 3 "><span> /---\ </span></ng-template>
         <ng-template [ngIf]="quest.type == 2 || quest.type == 3 ">
           <span>Distance = {{quest.distance * quest.selection.shoes}} km</span>
         </ng-template>
@@ -161,20 +129,12 @@
   </ion-card>
   <ion-card color="danger" *ngFor="let quest of selectedMonthlyQuest">
     <ion-card-header>
-      <ng-template
-        [ngIf]="quest.selection.percentage != undefined && quest.selection.percentage < 1"
-      >
-        <ion-progress-bar
-          value="{{quest.selection.percentage}}"
-        ></ion-progress-bar>
+      <ng-template [ngIf]="quest.selection.percentage != undefined && quest.selection.percentage < 1">
+        <ion-progress-bar value="{{quest.selection.percentage}}"></ion-progress-bar>
       </ng-template>
       <ion-item color="danger">
         <ng-template [ngIf]="quest.selection.percentage >= 1">
-          <ion-icon
-            class="completion"
-            name="checkmark-circle"
-            slot="start"
-          ></ion-icon>
+          <ion-icon class="completion" name="checkmark-circle" slot="start"></ion-icon>
         </ng-template>
         <ng-template [ngIf]="quest.type == 1">
           <ion-icon color="dark" name="time-outline" slot="start"></ion-icon>
@@ -200,9 +160,7 @@
         <ng-template [ngIf]="quest.type == 1 || quest.type == 3 ">
           <span>Time = {{quest.time * quest.selection.shoes}} min</span>
         </ng-template>
-        <ng-template [ngIf]="quest.type == 3 "
-          ><span> /---\ </span></ng-template
-        >
+        <ng-template [ngIf]="quest.type == 3 "><span> /---\ </span></ng-template>
         <ng-template [ngIf]="quest.type == 2 || quest.type == 3 ">
           <span>Distance = {{quest.distance * quest.selection.shoes}} km</span>
         </ng-template>
