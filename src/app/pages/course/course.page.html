@@ -13,7 +13,7 @@
   </ion-toolbar>
 </ion-header>
 <ion-content>
-
+  <!-- Rechercher une destination -->
   <form [formGroup]="directionForm" (ngSubmit)="calculateAndDisplayRoute(directionForm.value)">
     <ion-item>
       <ion-label position="floating">Destination</ion-label>
@@ -21,29 +21,29 @@
     </ion-item>
     <ion-button expand="full" type="submit" [disabled]="!directionForm.valid">Trouver direction</ion-button>
   </form>
-
+  <!-- Affichage de la map-->
   <div #mapElement class="map"></div>
-
+  <!-- Chronomètre-->
   <div class="chrono">
     <p>{{timeToDisplay.clock}}</p>
   </div>
-
+  <!-- Bouton Play -->
   <ng-template [ngIf]="courseMode == false">
     <div class="start" (click)="startCourseMode()">
       <ion-icon name="play"></ion-icon>
     </div>
   </ng-template>
-
+  <!-- Bouton Pause -->
   <ng-template [ngIf]="courseMode == true">
     <div class="pause" (click)="pauseCourseMode()">
       <ion-icon name="pause" slot="start"></ion-icon>
     </div>
   </ng-template>
-
+  <!-- Bouton Stop -->
   <div class="stop" (click)="stopCourseMode()">
     <ion-icon name="square"></ion-icon>
   </div>
-
+  <!-- Affichage des quêtes sélectionnées -->
   <div class="quest">
     <ion-card *ngFor="let quest of selectedQuest" class="questelement">
       <div class="element">
