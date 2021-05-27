@@ -51,9 +51,10 @@
   </ion-row>
   <br />
   <ng-template
-    [ngIf]="selectedDailyQuest.length != 0 || selectedWeeklyQuest.length != 0 || selectedMonthlyQuest.length != 0"
-    ><ion-title>Liste des quêtes selectionnées : </ion-title></ng-template
-  >
+    [ngIf]="userData != undefined"><p>Nombre de RP: {{userData.nbRp}} </p></ng-template>
+    <ng-template
+      [ngIf]="selectedDailyQuest.length != 0 || selectedWeeklyQuest.length != 0 || selectedMonthlyQuest.length != 0"
+      ><ion-title>Liste des quêtes selectionnées : </ion-title></ng-template>
   <ion-card color="success" *ngFor="let quest of selectedDailyQuest">
     <ion-card-header>
       <ng-template
