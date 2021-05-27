@@ -1,5 +1,4 @@
-import { QuetesPage } from "./quetes.page"
-import {VerifyEmailPage} from '../../verify-email/verify-email.page';
+import { QuetesPage } from "./quetes.page";
 
 describe('QuetesPage',  () => {
     let fixture: QuetesPage;
