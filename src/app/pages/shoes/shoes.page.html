@@ -22,7 +22,7 @@
   </ion-card>
   <ion-card class="rating">
     <ion-card>
-      <ion-card-header>
+      <ion-card-header class="head">
         <ion-item>
           <ng-template [ngIf]="quest.type == 1">
             <ion-icon color="dark" name="time-outline" slot="start"></ion-icon>
@@ -33,7 +33,7 @@
           <ng-template [ngIf]="quest.type == 3">
             <ion-icon color="dark" name="infinite" slot="start"></ion-icon>
           </ng-template>
-          <ion-card-title>{{quest.name}}</ion-card-title>
+          <ion-card-title class = "nomQuetes">{{quest.name}}</ion-card-title>
         </ion-item>
       </ion-card-header>
       <ion-card-content>
