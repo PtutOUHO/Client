@@ -4,11 +4,21 @@
 	text-align: center;
 }
 
-.container-btn-map {
-	margin-right: auto;
-	margin-left: auto;
+.container-button {
 	margin-top: 1em;
-	width: 50%;
+}
+
+.NumbersRP {
+	font-family: "DotGothic16", sans-serif;
+	font-size: 16px;
+	text-align: center;
+}
+
+.ListQuest {
+	font-family: "DotGothic16", sans-serif;
+	margin-bottom: 1em;
+	font-size: 16px;
+	text-align: center;
 }
 
 .dateQuest {
@@ -17,6 +27,10 @@
 
 .content,
 ion-card-title {
+	text-align: center;
+}
+
+.ion-inherit-color {
 	text-align: center;
 }
 
